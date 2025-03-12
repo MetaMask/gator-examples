@@ -8,13 +8,12 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-import { generatePackageManagerConfigs, install, PackageManager, replaceAuthTokenWithPlaceholder } from "./lib/package-manager";
+import { generatePackageManagerConfigs, install, PackageManager } from "./lib/package-manager";
 import { prompts } from "./lib/prompts";
 import { displayIntro } from "./lib/intro";
 
 export async function main() {
   displayIntro();
-  console.log("ENV", process.env.NPM_AUTH_TOKEN);
   const answers = await inquirer.prompt(prompts);
 
   const spinner = ora("Creating your project...").start();
@@ -65,6 +64,12 @@ export async function main() {
       await fs.writeJson(pkgJsonPath, pkgJson, { spaces: 2 });
     }
 
+    // This is not required once the SDK made public
+    await generatePackageManagerConfigs(
+      targetDir,
+      answers.packageManager as PackageManager
+    );
+
     process.chdir(targetDir);
 
     try {
@@ -96,8 +101,6 @@ export async function main() {
 
       spinner.succeed(chalk.green(`Project structure created at ${targetDir}`));
       return;
-    } finally {
-    //  await replaceAuthTokenWithPlaceholder(targetDir, answers.packageManager);
     }
 
     spinner.succeed(
