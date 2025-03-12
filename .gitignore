@@ -1,0 +1,78 @@
+# Turborepo
+.turbo
+.env
+.env.*
+!.env.example
+
+# Dependencies
+node_modules
+.pnp
+.pnp.js
+
+# Build outputs
+dist
+build
+out
+.next
+.nuxt
+.output
+
+# Cache
+.cache
+tsconfig.tsbuildinfo
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Testing
+coverage
+.nyc_output
+
+# Editor directories and files
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+
+# Yarn
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
+
+# Turborepo specific
+.turbo-cache/
+
+# Local Netlify folder
+.netlify
+
+# Vercel
+.vercel
+
+# Next.js
+.next/
+out/
+next-env.d.ts
+
+# Misc
+*.pem
+.DS_Store
+*.tgz
+.eslintcache

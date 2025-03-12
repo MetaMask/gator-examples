@@ -1,0 +1,49 @@
+{
+  "name": "create-gator-app",
+  "version": "1.0.0",
+  "private": false,
+  "description": "CLI tool to create new MetaMask Delegator applications",
+  "main": "dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "create-gator-app": "./dist/index.js"
+  },
+  "files": [
+    "dist",
+    "templates"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsup --watch --onSuccess \"node dist/index.js\"",
+    "lint": "eslint src/",
+    "clean": "rm -rf dist",
+    "type-check": "tsc --noEmit",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "prepare": "npm run build"
+  },
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "cross-spawn": "^7.0.6",
+    "dotenv": "^16.4.7",
+    "fs-extra": "^10.1.0",
+    "inquirer": "^8.2.4",
+    "ora": "^5.4.1"
+  },
+  "devDependencies": {
+    "@jest/globals": "^29.7.0",
+    "@types/cross-spawn": "^6.0.6",
+    "@types/fs-extra": "^9.0.13",
+    "@types/inquirer": "^8.2.4",
+    "@types/jest": "^29.5.12",
+    "@types/node": "^18.11.18",
+    "eslint": "^8.38.0",
+    "eslint-config-custom": "*",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.2",
+    "tsconfig": "*",
+    "tsup": "^6.7.0",
+    "typescript": "^4.9.4"
+  },
+  "packageManager": "pnpm@9.15.4"
+}
