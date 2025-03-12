@@ -6,7 +6,7 @@ Note: this template is also designed to complement the [documentation](https://d
 
 ## Dependency Setup
 
-> Note that the package `@metamask-private/delegator-core-viem` is currently published as a private package.. Please get in touch with the team for access at hellogators@consensys.io.
+> Note that the package `@metamask-private/delegator-core-viem` is a private package. When using this template through the `create-gator-app` CLI, a hardcoded npm token in the CLI will be automatically used to install this private package. For local development of the CLI itself, you'll need to create a `config.ts` file with `export const NPM_AUTH_TOKEN = "your-npm-auth-token";`. If you're setting up this project manually, please get in touch with the team for access at hellogators@consensys.io.
 
 Once configured, you'll be able to install the dependencies (both private and public) via the following:
 
