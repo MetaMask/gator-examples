@@ -1,15 +1,21 @@
 "use client";
 
-import { injected, useConnect } from "wagmi";
+import { useConnect } from "wagmi";
 
 export default function ConnectButton() {
-  const { connect } = useConnect();
+  const { connect, connectors } = useConnect();
+
   return (
-    <button
-      className="button"
-      onClick={() => connect({ connector: injected() })}
-    >
-      Connect
-    </button>
+    <div className="button-container">
+      {connectors.map((connector) => (
+        <button
+          className="button"
+          onClick={() => connect({ connector })}
+          key={connector.id}
+        >
+          Connect with {connector.name}
+        </button>
+      ))}
+    </div>
   );
 }

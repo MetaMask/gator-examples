@@ -5,7 +5,11 @@ import path from "path";
 import ora from "ora";
 import chalk from "chalk";
 
-import { generatePackageManagerConfigs, install, PackageManager } from "./lib/package-manager";
+import {
+  generatePackageManagerConfigs,
+  install,
+  PackageManager,
+} from "./lib/package-manager";
 import { prompts } from "./lib/prompts";
 import { displayIntro } from "./lib/intro";
 import { installTemplate } from "./lib/installTemplate";
@@ -46,8 +50,47 @@ export async function main() {
     }
 
     spinner.text = "Copying template files...";
-    const templatePath = path.join(__dirname, "../templates", answers.template);
-    installTemplate(templatePath, targetDir);
+    const templatePath = path.join(
+      __dirname,
+      "../../templates",
+      answers.template
+    );
+    
+    installTemplate(templatePath, targetDir, answers.useEmbeddedWallet);
+
+    if (answers.useEmbeddedWallet) {
+      spinner.text = "Configuring Web3Auth...";
+      const connectorTemplatePath = path.join(
+        __dirname,
+        "../../templates",
+        "web3auth",
+        "Web3AuthConnector.ts"
+      );
+      const connectorPath = path.join(
+        targetDir,
+        "src",
+        "connectors",
+        "Web3AuthConnector.ts"
+      );
+
+      await fs.copy(connectorTemplatePath, connectorPath);
+
+      const providerTemplatePath = path.join(
+        __dirname,
+        "../../templates",
+        "web3auth",
+        "AppProvider.tsx"
+      );
+
+      const providerPath = path.join(
+        targetDir,
+        "src",
+        "providers",
+        "AppProvider.tsx"
+      );
+
+      await fs.copy(providerTemplatePath, providerPath);
+    }
 
     spinner.text = "Setting up package configuration...";
     await generatePackageManagerConfigs(
@@ -59,6 +102,15 @@ export async function main() {
     if (fs.existsSync(pkgJsonPath)) {
       const pkgJson = await fs.readJson(pkgJsonPath);
       pkgJson.name = answers.projectName;
+      if (answers.useEmbeddedWallet) {
+        pkgJson.dependencies = {
+          ...pkgJson.dependencies,
+          "@web3auth/ethereum-provider": "^9.7.0",
+          "@web3auth/modal": "^9.7.0",
+          "@web3auth/web3auth-wagmi-connector": "^7.0.0",
+        };
+      }
+
       await fs.writeJson(pkgJsonPath, pkgJson, { spaces: 2 });
     }
 
@@ -73,7 +125,6 @@ export async function main() {
     try {
       spinner.text = `Installing dependencies with ${answers.packageManager}...`;
       await install(answers.packageManager);
-
     } catch (installError: unknown) {
       spinner.warn(
         chalk.yellow(

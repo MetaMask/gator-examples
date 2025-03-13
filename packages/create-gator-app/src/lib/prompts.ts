@@ -1,9 +1,12 @@
 import { TEMPLATES } from "./templates";
 import { PackageManager } from "./package-manager";
 
-const packageManagerChoices = (Object.keys(
-  { npm: null, yarn: null, pnpm: null } as Record<PackageManager, null>
-) as PackageManager[]).map((pm) => ({
+const packageManagerChoices = (
+  Object.keys({ npm: null, yarn: null, pnpm: null } as Record<
+    PackageManager,
+    null
+  >) as PackageManager[]
+).map((pm) => ({
   name: pm,
   value: pm,
 }));
@@ -17,7 +20,7 @@ export const prompts = [
     validate: (input: string) => {
       if (/^[a-zA-Z0-9-_]+$/.test(input)) return true;
       return "Project name may only include letters, numbers, underscores and hashes.";
-    }
+    },
   },
   {
     type: "list",
@@ -30,5 +33,11 @@ export const prompts = [
     name: "template",
     message: "Pick a template:",
     choices: TEMPLATES,
-  }
+  },
+  {
+    type: "confirm",
+    name: "useEmbeddedWallet",
+    message: "Do you want to use an embedded wallet?",
+    default: true,
+  },
 ];

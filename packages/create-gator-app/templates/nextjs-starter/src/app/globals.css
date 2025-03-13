@@ -57,6 +57,11 @@ a {
   transform: scale(0.95);
 } 
 
+.button-container {
+  display: flex;
+  gap: 8px;
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;

@@ -1,6 +1,10 @@
 import fs from "fs-extra";
 
-export const installTemplate = (templatePath: string, targetDir: string) => {
+export const installTemplate = (
+  templatePath: string,
+  targetDir: string,
+  useEmbeddedWallet: boolean
+) => {
   const filesToCreate = fs.readdirSync(templatePath);
 
   filesToCreate.forEach((file) => {
@@ -13,6 +17,9 @@ export const installTemplate = (templatePath: string, targetDir: string) => {
 
       if (file === ".env.example") {
         file = ".env";
+        if (useEmbeddedWallet) {
+          contents = contents + "\nNEXT_PUBLIC_WEB3AUTH_CLIENT_ID=YOUR_WEB3AUTH_CLIENT_ID_FOR_SAPPHIRE_DEVNET";
+        }
       }
 
       const writePath = `${targetDir}/${file}`;
@@ -20,7 +27,11 @@ export const installTemplate = (templatePath: string, targetDir: string) => {
     } else if (stats.isDirectory()) {
       fs.mkdirSync(`${targetDir}/${file}`);
 
-      installTemplate(`${templatePath}/${file}`, `${targetDir}/${file}`);
+      installTemplate(
+        `${templatePath}/${file}`,
+        `${targetDir}/${file}`,
+        useEmbeddedWallet
+      );
     }
   });
 };
