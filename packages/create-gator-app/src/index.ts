@@ -4,13 +4,11 @@ import fs from "fs-extra";
 import path from "path";
 import ora from "ora";
 import chalk from "chalk";
-import dotenv from "dotenv";
-
-dotenv.config();
 
 import { generatePackageManagerConfigs, install, PackageManager } from "./lib/package-manager";
 import { prompts } from "./lib/prompts";
 import { displayIntro } from "./lib/intro";
+import { installTemplate } from "./lib/installTemplate";
 
 export async function main() {
   displayIntro();
@@ -49,7 +47,7 @@ export async function main() {
 
     spinner.text = "Copying template files...";
     const templatePath = path.join(__dirname, "../templates", answers.template);
-    await fs.copy(templatePath, targetDir);
+    installTemplate(templatePath, targetDir);
 
     spinner.text = "Setting up package configuration...";
     await generatePackageManagerConfigs(
