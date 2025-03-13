@@ -1,33 +1,36 @@
-# Hello Gator 🐊
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-Easily get up-to-speed with (and integrate) the MetaMask Delegation Toolkit with this demonstration. It includes examples for all the core elements including Delegator Account (ERC-4337) creation, sending User Operations, and the Delegation lifecycle. Example code is provided utilising the Delegator Smart Account.
+## Getting Started
 
-Note: this template is also designed to complement the [documentation](https://docs.gator.metamask.io).
+First, run the development server:
 
-## Dependency Setup
-
-> Note that the package `@metamask-private/delegator-core-viem` is a private package. When using this template through the `create-gator-app` CLI, a hardcoded npm token in the CLI will be automatically used to install this private package. For local development of the CLI itself, you'll need to create a `config.ts` file with `export const NPM_AUTH_TOKEN = "your-npm-auth-token";`. If you're setting up this project manually, please get in touch with the team for access at hellogators@consensys.io.
-
-Once configured, you'll be able to install the dependencies (both private and public) via the following:
-
-```sh
-yarn install
-```
-
-## Configuration
-
-Configuration is provided via environment variables, you may create a `.env` file in the root of Hello Gator, including the configuration parameters defined in `.env.example`.
-
-Refer to the [documentation](https://docs.gator.metamask.io) for further information on configuration.
-
-## Running
-
-Start development environment:
-
-```sh
+```bash
+npm run dev
+# or
 yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-## Support
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-Feel free to open an issue or contact the team directly at [hellogators@consensys.io](mailto:hellogators@consensys.io).
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+
+## Learn More
+
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
