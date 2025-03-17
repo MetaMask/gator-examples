@@ -11,6 +11,17 @@ const packageManagerChoices = (
   value: pm,
 }));
 
+const web3AuthNetworkChoices = [
+  {
+    name: "Sapphire Devnet",
+    value: "sapphire_devnet",
+  },
+  {
+    name: "Sapphire Mainnet",
+    value: "sapphire_mainnet",
+  },
+];
+
 export const prompts = [
   {
     type: "input",
@@ -39,5 +50,13 @@ export const prompts = [
     name: "useEmbeddedWallet",
     message: "Do you want to use an embedded wallet?",
     default: true,
+  },
+  {
+    type: "list",
+    name: "web3AuthNetwork",
+    message: "Which Web3Auth network do you want to use?",
+    choices: web3AuthNetworkChoices,
+    when: (answers: any) => answers.useEmbeddedWallet,
+    default: "sapphire_devnet",
   },
 ];

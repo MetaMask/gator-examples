@@ -1,7 +1,7 @@
 "use client";
 
 import { Web3AuthConnector } from "@web3auth/web3auth-wagmi-connector";
-import { Web3Auth } from "@web3auth/modal";
+import { Web3Auth,WEB3AUTH_NETWORK_TYPE } from "@web3auth/modal";
 import { EthereumPrivateKeyProvider } from "@web3auth/ethereum-provider";
 import { CHAIN_NAMESPACES, WEB3AUTH_NETWORK } from "@web3auth/base";
 import { Chain } from "wagmi/chains";
@@ -24,7 +24,7 @@ export default function web3AuthConnector(chains: Chain[]) {
   const web3AuthInstance = new Web3Auth({
     clientId: process.env.NEXT_PUBLIC_WEB3AUTH_CLIENT_ID,
     privateKeyProvider,
-    web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_DEVNET,
+    web3AuthNetwork: process.env.NEXT_PUBLIC_WEB3AUTH_NETWORK as WEB3AUTH_NETWORK_TYPE,
   });
 
   return Web3AuthConnector({

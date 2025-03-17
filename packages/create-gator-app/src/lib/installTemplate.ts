@@ -3,7 +3,8 @@ import fs from "fs-extra";
 export const installTemplate = (
   templatePath: string,
   targetDir: string,
-  useEmbeddedWallet: boolean
+  useEmbeddedWallet: boolean,
+  web3AuthNetwork: string
 ) => {
   const filesToCreate = fs.readdirSync(templatePath);
 
@@ -18,7 +19,11 @@ export const installTemplate = (
       if (file === ".env.example") {
         file = ".env";
         if (useEmbeddedWallet) {
-          contents = contents + "\nNEXT_PUBLIC_WEB3AUTH_CLIENT_ID=YOUR_WEB3AUTH_CLIENT_ID_FOR_SAPPHIRE_DEVNET";
+          contents =
+            contents +
+            "\nNEXT_PUBLIC_WEB3AUTH_CLIENT_ID=YOUR_WEB3AUTH_CLIENT_ID_FOR_SAPPHIRE_DEVNET" +
+            "\nNEXT_PUBLIC_WEB3AUTH_NETWORK=" +
+            web3AuthNetwork;
         }
       }
 
@@ -30,7 +35,8 @@ export const installTemplate = (
       installTemplate(
         `${templatePath}/${file}`,
         `${targetDir}/${file}`,
-        useEmbeddedWallet
+        useEmbeddedWallet,
+        web3AuthNetwork
       );
     }
   });
