@@ -13,7 +13,7 @@
     "@web3auth/base": "^8.12.2",
     "@web3auth/ethereum-provider": "^8.12.3",
     "@web3auth/modal": "^8.12.3",
-    "next": "14.2.10",
+    "next": "14.2.21",
     "permissionless": "^0.2.10",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
