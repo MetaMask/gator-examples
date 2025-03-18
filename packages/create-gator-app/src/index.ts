@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import inquirer from "inquirer";
+import inquirer, { Answers } from "inquirer";
 import fs from "fs-extra";
 import path from "path";
 import ora from "ora";
@@ -13,10 +13,17 @@ import {
 import { prompts } from "./lib/prompts";
 import { displayIntro } from "./lib/intro";
 import { installTemplate } from "./lib/installTemplate";
+import { web3AuthPrompts } from "./lib/web3authPrompts";
 
 export async function main() {
   displayIntro();
   const answers = await inquirer.prompt(prompts);
+  let web3AuthAnswers: Answers | undefined;
+
+  // If the user wants to use Embedded Wallet, prompt them for the Web3Auth configuration
+  if (answers.useEmbeddedWallet) {
+    web3AuthAnswers = await inquirer.prompt(web3AuthPrompts);
+  }
 
   const spinner = ora("Creating your project...").start();
 
@@ -55,8 +62,13 @@ export async function main() {
       "../../templates",
       answers.template
     );
-    
-    installTemplate(templatePath, targetDir, answers.useEmbeddedWallet, answers.web3AuthNetwork);
+
+    installTemplate(
+      templatePath,
+      targetDir,
+      answers.useEmbeddedWallet,
+      web3AuthAnswers?.web3AuthNetwork
+    );
 
     if (answers.useEmbeddedWallet) {
       spinner.text = "Configuring Web3Auth...";
