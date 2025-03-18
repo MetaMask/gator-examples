@@ -2,16 +2,15 @@
 
 import useDelegateSmartAccount from "@/hooks/useDelegateSmartAccount";
 import useDelegatorSmartAccount from "@/hooks/useDelegatorSmartAccount";
+import { useStepContext } from "@/hooks/useStepContext";
 import useStorageClient from "@/hooks/useStorageClient";
-import { AppContext } from "@/providers/AppProvider";
 import { prepareRootDelegation } from "@/utils/delegationUtils";
-import { useContext } from "react";
 
 export default function CreateDelegationButton() {
   const { smartAccount } = useDelegatorSmartAccount();
   const { storeDelegation } = useStorageClient();
   const { smartAccount: delegateSmartAccount } = useDelegateSmartAccount();
-  const { setStep } = useContext(AppContext);
+  const { changeStep } = useStepContext();
 
   const handleCreateDelegation = async () => {
     if (!smartAccount || !delegateSmartAccount) return;
@@ -32,7 +31,7 @@ export default function CreateDelegationButton() {
 
     console.log(signedDelegation);
     storeDelegation(signedDelegation);
-    setStep(5);
+    changeStep(5);
   };
 
   return (

@@ -1,17 +1,17 @@
 "use client";
 
-import { AppContext } from "@/providers/AppProvider";
 import {
   Implementation,
   MetaMaskSmartAccount,
   toMetaMaskSmartAccount,
 } from "@metamask-private/delegator-core-viem";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { privateKeyToAccount } from "viem/accounts";
 import { usePublicClient } from "wagmi";
+import { useGatorContext } from "@/hooks/useGatorContext";
 
 export default function useDelegateSmartAccount() {
-  const { delegateWallet, generateDelegateWallet } = useContext(AppContext);
+  const { delegateWallet } = useGatorContext();
   const publicClient = usePublicClient();
 
   const [smartAccount, setSmartAccount] =

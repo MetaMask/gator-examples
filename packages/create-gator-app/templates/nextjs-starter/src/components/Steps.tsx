@@ -1,19 +1,18 @@
 "use client";
-import { useState, useEffect, useContext } from "react";
-import { step } from "viem/chains";
-import ConnectButton from "./ConnectButton";
-import CreateDelegateButton from "./CreateDelegateButton";
-import CreateDelegationButton from "./CreateDelegationButton";
-import DeployDelegatorButton from "./DeployDelegatorButton";
-import RedeemDelegationButton from "./RedeemDelegationButton";
+import { useEffect } from "react";
+import ConnectButton from "@/components/ConnectButton";
+import CreateDelegateButton from "@/components/CreateDelegateButton";
+import CreateDelegationButton from "@/components/CreateDelegationButton";
+import DeployDelegatorButton from "@/components/DeployDelegatorButton";
+import RedeemDelegationButton from "@/components/RedeemDelegationButton";
 import useDelegateSmartAccount from "@/hooks/useDelegateSmartAccount";
 import useDelegatorSmartAccount from "@/hooks/useDelegatorSmartAccount";
 import useStorageClient from "@/hooks/useStorageClient";
 import { useAccount } from "wagmi";
-import { AppContext } from "@/providers/AppProvider";
+import { useStepContext } from "@/hooks/useStepContext";
 
 export default function Steps() {
-  const { step, setStep } = useContext(AppContext);
+  const { step, changeStep } = useStepContext();
   const { isConnected } = useAccount();
   const { smartAccount } = useDelegatorSmartAccount();
   const { smartAccount: delegateSmartAccount } = useDelegateSmartAccount();
@@ -21,16 +20,16 @@ export default function Steps() {
 
   useEffect(() => {
     if (!isConnected) {
-      setStep(1);
+      changeStep(1);
     }
 
     if (isConnected && smartAccount && !delegateSmartAccount) {
       smartAccount.isDeployed().then((isDeployed) => {
         if (!isDeployed) {
-          setStep(2);
+          changeStep(2);
         }
         if (isDeployed) {
-          setStep(3);
+          changeStep(3);
         }
       });
     }
@@ -38,9 +37,9 @@ export default function Steps() {
     if (isConnected && smartAccount && delegateSmartAccount) {
       const delegation = getDelegation(delegateSmartAccount.address);
       if (!delegation) {
-        setStep(4);
+        changeStep(4);
       } else {
-        setStep(5);
+        changeStep(5);
       }
     }
   }, [isConnected, smartAccount, delegateSmartAccount]);

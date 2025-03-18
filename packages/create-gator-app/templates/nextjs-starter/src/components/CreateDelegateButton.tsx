@@ -1,10 +1,9 @@
 "use client";
 
-import { AppContext } from "@/providers/AppProvider";
-import { useContext } from "react";
+import { useGatorContext } from "@/hooks/useGatorContext";
 
 export default function CreateDelegateButton() {
-  const { generateDelegateWallet } = useContext(AppContext);
+  const { generateDelegateWallet } = useGatorContext();
 
   return (
     <button className="button" onClick={generateDelegateWallet}>
