@@ -1,21 +1,22 @@
 "use client";
 
+import { usePimlicoServices } from "@/hooks/usePimlicoServices";
 import useDelegateSmartAccount from "@/hooks/useDelegateSmartAccount";
 import useStorageClient from "@/hooks/useStorageClient";
 import { prepareRedeemDelegationData } from "@/utils/delegationUtils";
-import { pimlicoClient } from "@/utils/pimlicoUtils";
-import { bundlerClient, paymasterClient } from "@/utils/viemUtils";
 import { getDeleGatorEnvironment } from "@metamask-private/delegator-core-viem";
 import { useState } from "react";
 import { Hex } from "viem";
-import { sepolia } from "viem/chains";
+import { useChainId } from "wagmi";
 
 export default function RedeemDelegationButton() {
   const { smartAccount } = useDelegateSmartAccount();
   const [loading, setLoading] = useState(false);
   const [transactionHash, setTransactionHash] = useState<Hex | null>(null);
-  const chain = sepolia;
   const { getDelegation } = useStorageClient();
+  const { bundlerClient, paymasterClient, pimlicoClient } =
+    usePimlicoServices();
+  const chainId = useChainId();
 
   const handleRedeemDelegation = async () => {
     if (!smartAccount) return;
@@ -29,13 +30,13 @@ export default function RedeemDelegationButton() {
     }
 
     const redeemData = prepareRedeemDelegationData(delegation);
-    const { fast: fee } = await pimlicoClient.getUserOperationGasPrice();
+    const { fast: fee } = await pimlicoClient!.getUserOperationGasPrice();
 
-    const userOperationHash = await bundlerClient.sendUserOperation({
+    const userOperationHash = await bundlerClient!.sendUserOperation({
       account: smartAccount,
       calls: [
         {
-          to: getDeleGatorEnvironment(chain.id).DelegationManager,
+          to: getDeleGatorEnvironment(chainId).DelegationManager,
           data: redeemData,
         },
       ],
@@ -43,7 +44,7 @@ export default function RedeemDelegationButton() {
       paymaster: paymasterClient,
     });
 
-    const { receipt } = await bundlerClient.waitForUserOperationReceipt({
+    const { receipt } = await bundlerClient!.waitForUserOperationReceipt({
       hash: userOperationHash,
     });
 

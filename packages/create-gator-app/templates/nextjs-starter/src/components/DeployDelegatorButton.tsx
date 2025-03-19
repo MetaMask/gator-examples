@@ -1,23 +1,24 @@
 "use client";
 
 import useDelegatorSmartAccount from "@/hooks/useDelegatorSmartAccount";
-import { AppContext } from "@/providers/AppProvider";
-import { pimlicoClient } from "@/utils/pimlicoUtils";
-import { bundlerClient, paymasterClient } from "@/utils/viemUtils";
-import { useContext, useState } from "react";
+import { useStepContext } from "@/hooks/useStepContext";
+import { usePimlicoServices } from "@/hooks/usePimlicoServices";
+import { useState } from "react";
 import { zeroAddress } from "viem";
 
 export default function DeployDelegatorButton() {
   const [loading, setLoading] = useState(false);
   const { smartAccount } = useDelegatorSmartAccount();
-  const { setStep } = useContext(AppContext);
+  const { changeStep } = useStepContext();
+  const { bundlerClient, paymasterClient, pimlicoClient } =
+    usePimlicoServices();
 
   const handleDeployDelegator = async () => {
     if (!smartAccount) return;
     setLoading(true);
-    const { fast: fee } = await pimlicoClient.getUserOperationGasPrice();
+    const { fast: fee } = await pimlicoClient!.getUserOperationGasPrice();
 
-    const userOperationHash = await bundlerClient.sendUserOperation({
+    const userOperationHash = await bundlerClient!.sendUserOperation({
       account: smartAccount,
       calls: [
         {
@@ -28,13 +29,13 @@ export default function DeployDelegatorButton() {
       ...fee,
     });
 
-    const { receipt } = await bundlerClient.waitForUserOperationReceipt({
+    const { receipt } = await bundlerClient!.waitForUserOperationReceipt({
       hash: userOperationHash,
     });
 
     console.log(receipt);
     setLoading(false);
-    setStep(3);
+    changeStep(3);
   };
 
   return (

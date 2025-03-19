@@ -9,7 +9,7 @@ import { metaMask } from "wagmi/connectors";
 import { GatorProvider } from "@/providers/GatorProvider";
 import { StepProvider } from "@/providers/StepProvider";
 
-export const connectors = [metaMask()];
+export const connectors = [metaMask(), web3AuthConnector(sepolia)];
 
 const queryClient = new QueryClient();
 
