@@ -9,12 +9,14 @@ import { metaMask } from "wagmi/connectors";
 import { GatorProvider } from "@/providers/GatorProvider";
 import { StepProvider } from "@/providers/StepProvider";
 
-export const connectors = [metaMask(), web3AuthConnector(sepolia)];
+const chains = [sepolia];
+
+export const connectors = [metaMask(), web3AuthConnector(chains)];
 
 const queryClient = new QueryClient();
 
 export const wagmiConfig = createConfig({
-  chains: [sepolia],
+  chains,
   connectors,
   multiInjectedProviderDiscovery: false,
   transports: {

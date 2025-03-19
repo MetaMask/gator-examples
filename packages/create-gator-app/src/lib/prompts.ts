@@ -1,5 +1,6 @@
 import { TEMPLATES } from "./templates";
 import { PackageManager } from "./package-manager";
+import { FRAMEWORKS } from "./frameworks";
 
 const packageManagerChoices = (
   Object.keys({ npm: null, yarn: null, pnpm: null } as Record<
@@ -21,6 +22,12 @@ export const prompts = [
       if (/^[a-zA-Z0-9-_]+$/.test(input)) return true;
       return "Project name may only include letters, numbers, underscores and hashes.";
     },
+  },
+  {
+    type: "list",
+    name: "framework",
+    message: "Please choose a framework:",
+    choices: FRAMEWORKS,
   },
   {
     type: "list",

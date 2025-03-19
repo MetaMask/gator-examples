@@ -60,6 +60,7 @@ export async function main() {
     const templatePath = path.join(
       __dirname,
       "../../templates",
+      answers.framework,
       answers.template
     );
 
@@ -75,6 +76,7 @@ export async function main() {
       const connectorTemplatePath = path.join(
         __dirname,
         "../../templates",
+        answers.framework,
         "web3auth",
         "Web3AuthConnector.ts"
       );
@@ -90,6 +92,7 @@ export async function main() {
       const providerTemplatePath = path.join(
         __dirname,
         "../../templates",
+        answers.framework,
         "web3auth",
         "AppProvider.tsx"
       );

@@ -4,7 +4,7 @@ import { spawn } from 'cross-spawn';
 export const TEMPLATES = [
     {
       name: "Basic Delegator app with NextJS",
-      value: "nextjs-starter",
+      value: "starter",
       description: "A basic Next.js template with App Router",
     }
   ];
