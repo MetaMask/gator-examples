@@ -1,4 +1,5 @@
 import fs from "fs-extra";
+import { resolveEnv } from "./resolve-env";
 
 export const installTemplate = (
   templatePath: string,
@@ -6,9 +7,10 @@ export const installTemplate = (
   useEmbeddedWallet: boolean,
   web3AuthNetwork: string
 ) => {
-  const filesToCreate = fs.readdirSync(templatePath);
+  const templateFiles = fs.readdirSync(templatePath);
 
-  filesToCreate.forEach((file) => {
+  // Iterate over all files in the template directory
+  for (let file of templateFiles) {
     const origFilePath = `${templatePath}/${file}`;
 
     const stats = fs.statSync(origFilePath);
@@ -18,13 +20,7 @@ export const installTemplate = (
 
       if (file === ".env.example") {
         file = ".env";
-        if (useEmbeddedWallet) {
-          contents =
-            contents +
-            "\nNEXT_PUBLIC_WEB3AUTH_CLIENT_ID=YOUR_WEB3AUTH_CLIENT_ID_FOR_SAPPHIRE_DEVNET" +
-            "\nNEXT_PUBLIC_WEB3AUTH_NETWORK=" +
-            web3AuthNetwork;
-        }
+        contents = resolveEnv(contents, useEmbeddedWallet, web3AuthNetwork);
       }
 
       const writePath = `${targetDir}/${file}`;
@@ -32,6 +28,7 @@ export const installTemplate = (
     } else if (stats.isDirectory()) {
       fs.mkdirSync(`${targetDir}/${file}`);
 
+      // Recursively install the template for the subdirectory
       installTemplate(
         `${templatePath}/${file}`,
         `${targetDir}/${file}`,
@@ -39,5 +36,5 @@ export const installTemplate = (
         web3AuthNetwork
       );
     }
-  });
+  }
 };

@@ -84,4 +84,4 @@ export function displayIntro(): void {
     console.log(chalk.cyan("• Delegation and redelegation capabilities"));
     console.log(chalk.cyan("• Counterfactual account initialization\n"));
   }
-} 
+}

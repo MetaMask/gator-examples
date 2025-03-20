@@ -4,25 +4,25 @@ import fs from "fs-extra";
 import path from "path";
 import ora from "ora";
 import chalk from "chalk";
-
-import {
-  generatePackageManagerConfigs,
-  install,
-  PackageManager,
-} from "./lib/package-manager";
-import { prompts } from "./lib/prompts";
-import { displayIntro } from "./lib/intro";
-import { installTemplate } from "./lib/installTemplate";
-import { web3AuthPrompts } from "./lib/web3authPrompts";
+import { generatePackageManagerConfigs } from "./lib/helpers/create-package-manager-config";
+import { installTemplate } from "./lib/helpers/install-template";
+import { displayIntro } from "./lib/helpers/intro";
+import { WEB3AUTH_PROMPTS } from "./lib/prompts/web3auth";
+import { PackageManager } from "./lib/types/package-manager";
+import { BASE_PROMPTS } from "./lib/prompts/base";
+import { configureWeb3Auth } from "./lib/helpers/configure-web3auth";
+import { configurePackageJson } from "./lib/helpers/configure-package-json";
+import { installDependencies } from "./lib/helpers/install-dependencies";
+import { displayOutro } from "./lib/helpers/outro";
 
 export async function main() {
   displayIntro();
-  const answers = await inquirer.prompt(prompts);
+  const answers = await inquirer.prompt(BASE_PROMPTS);
   let web3AuthAnswers: Answers | undefined;
 
   // If the user wants to use Embedded Wallet, prompt them for the Web3Auth configuration
   if (answers.useEmbeddedWallet) {
-    web3AuthAnswers = await inquirer.prompt(web3AuthPrompts);
+    web3AuthAnswers = await inquirer.prompt(WEB3AUTH_PROMPTS);
   }
 
   const spinner = ora("Creating your project...").start();
@@ -30,6 +30,7 @@ export async function main() {
   try {
     const targetDir = path.join(process.cwd(), answers.projectName);
 
+    // Check if the directory already exists
     if (fs.existsSync(targetDir)) {
       spinner.stop();
       const { overwrite } = await inquirer.prompt([
@@ -73,61 +74,11 @@ export async function main() {
 
     if (answers.useEmbeddedWallet) {
       spinner.text = "Configuring Web3Auth...";
-      const connectorTemplatePath = path.join(
-        __dirname,
-        "../../templates",
-        answers.framework,
-        "web3auth",
-        "Web3AuthConnector.ts"
-      );
-      const connectorPath = path.join(
-        targetDir,
-        "src",
-        "connectors",
-        "Web3AuthConnector.ts"
-      );
-
-      await fs.copy(connectorTemplatePath, connectorPath);
-
-      const providerTemplatePath = path.join(
-        __dirname,
-        "../../templates",
-        answers.framework,
-        "web3auth",
-        "AppProvider.tsx"
-      );
-
-      const providerPath = path.join(
-        targetDir,
-        "src",
-        "providers",
-        "AppProvider.tsx"
-      );
-
-      await fs.copy(providerTemplatePath, providerPath);
+      await configureWeb3Auth(answers, targetDir);
     }
 
     spinner.text = "Setting up package configuration...";
-    await generatePackageManagerConfigs(
-      targetDir,
-      answers.packageManager as PackageManager
-    );
-
-    const pkgJsonPath = path.join(targetDir, "package.json");
-    if (fs.existsSync(pkgJsonPath)) {
-      const pkgJson = await fs.readJson(pkgJsonPath);
-      pkgJson.name = answers.projectName;
-      if (answers.useEmbeddedWallet) {
-        pkgJson.dependencies = {
-          ...pkgJson.dependencies,
-          "@web3auth/ethereum-provider": "^9.7.0",
-          "@web3auth/modal": "^9.7.0",
-          "@web3auth/web3auth-wagmi-connector": "^7.0.0",
-        };
-      }
-
-      await fs.writeJson(pkgJsonPath, pkgJson, { spaces: 2 });
-    }
+    await configurePackageJson(targetDir, answers);
 
     // This is not required once the SDK made public
     await generatePackageManagerConfigs(
@@ -139,7 +90,7 @@ export async function main() {
 
     try {
       spinner.text = `Installing dependencies with ${answers.packageManager}...`;
-      await install(answers.packageManager);
+      await installDependencies(answers.packageManager);
     } catch (installError: unknown) {
       spinner.warn(
         chalk.yellow(
@@ -166,26 +117,10 @@ export async function main() {
       spinner.succeed(chalk.green(`Project structure created at ${targetDir}`));
       return;
     }
-
     spinner.succeed(
       chalk.green(`Project created successfully at ${targetDir}`)
     );
-
-    console.log(chalk.cyan("\n🚀 Next steps:"));
-    console.log(chalk.white(`  1. cd ${answers.projectName}`));
-    console.log(chalk.white(`  2. ${answers.packageManager} dev`));
-
-    console.log(chalk.cyan("\n📚 Documentation:"));
-    console.log(
-      chalk.white(
-        "  • Learn more about Delegation toolkit: https://docs.gator.metamask.io/"
-      )
-    );
-    console.log(
-      chalk.white("  • Explore example code in the /examples directory")
-    );
-
-    console.log(chalk.green("\n🦊 Happy building with Delegation toolkit! 🦊"));
+    displayOutro(answers.packageManager, answers);
   } catch (error) {
     spinner.fail("Failed to create project");
     console.error(
