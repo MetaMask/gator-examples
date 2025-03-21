@@ -1,11 +1,11 @@
 import fs from "fs-extra";
-import { resolveEnv } from "./resolve-env";
+import { configureENV } from "./configure-env";
+import { Answers } from "inquirer";
 
 export const installTemplate = (
   templatePath: string,
   targetDir: string,
-  useEmbeddedWallet: boolean,
-  web3AuthNetwork: string
+  answers: Answers
 ) => {
   const templateFiles = fs.readdirSync(templatePath);
 
@@ -20,7 +20,7 @@ export const installTemplate = (
 
       if (file === ".env.example") {
         file = ".env";
-        contents = resolveEnv(contents, useEmbeddedWallet, web3AuthNetwork);
+        contents = configureENV(contents, answers);
       }
 
       const writePath = `${targetDir}/${file}`;
@@ -32,8 +32,7 @@ export const installTemplate = (
       installTemplate(
         `${templatePath}/${file}`,
         `${targetDir}/${file}`,
-        useEmbeddedWallet,
-        web3AuthNetwork
+        answers
       );
     }
   }
