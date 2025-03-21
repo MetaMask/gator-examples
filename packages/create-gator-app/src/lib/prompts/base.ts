@@ -51,7 +51,7 @@ export const BASE_PROMPTS = [
   {
     type: "confirm",
     name: "useEmbeddedWallet",
-    message: "Do you want to use an embedded wallet?",
+    message: "Do you want to use Web3Auth embedded wallet?",
     default: true,
   },
 ];
