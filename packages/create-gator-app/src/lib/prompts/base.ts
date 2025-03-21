@@ -1,6 +1,10 @@
-import { FRAMEWORKS_OPTIONS } from "../choices/framework";
+import { Answers } from "inquirer";
+import { FRAMEWORK_OPTIONS } from "../choices/framework";
 import { PACKAGE_MANAGER_OPTIONS } from "../choices/package-manager";
-import { TEMPLATE_OPTIONS } from "../choices/templates";
+import {
+  NEXTJS_TEMPLATE_OPTIONS,
+  VITE_REACT_TEMPLATE_OPTIONS,
+} from "../choices/templates";
 import { validateProjectName } from "../helpers/validators";
 
 export const BASE_PROMPTS = [
@@ -18,7 +22,7 @@ export const BASE_PROMPTS = [
     type: "list",
     name: "framework",
     message: "Please choose a framework:",
-    choices: FRAMEWORKS_OPTIONS,
+    choices: FRAMEWORK_OPTIONS,
   },
   {
     type: "list",
@@ -30,7 +34,19 @@ export const BASE_PROMPTS = [
     type: "list",
     name: "template",
     message: "Pick a template:",
-    choices: TEMPLATE_OPTIONS,
+    choices: NEXTJS_TEMPLATE_OPTIONS,
+    when: (answers: Answers) => {
+      return answers.framework === "nextjs";
+    },
+  },
+  {
+    type: "list",
+    name: "template",
+    message: "Pick a template:",
+    choices: VITE_REACT_TEMPLATE_OPTIONS,
+    when: (answers: Answers) => {
+      return answers.framework === "vite-react";
+    },
   },
   {
     type: "confirm",
