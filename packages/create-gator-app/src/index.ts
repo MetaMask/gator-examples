@@ -65,7 +65,10 @@ export async function main() {
       answers.template
     );
 
-    installTemplate(templatePath, targetDir, answers);
+    installTemplate(templatePath, targetDir, {
+      ...answers,
+      ...web3AuthAnswers,
+    });
 
     if (answers.useEmbeddedWallet) {
       spinner.text = "Configuring Web3Auth...";
