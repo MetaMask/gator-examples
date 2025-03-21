@@ -4,7 +4,8 @@
   "description": "CLI tool to create Gator examples",
   "main": "dist/index.js",
   "scripts": {
-    "dev": "turbo run dev"
+    "dev": "turbo run dev",
+    "build": "turbo run build"
   },
   "dependencies": {
     "turbo": "^2.4.4"

@@ -1,26 +1,36 @@
 #!/usr/bin/env node
-import inquirer from "inquirer";
+import inquirer, { Answers } from "inquirer";
 import fs from "fs-extra";
 import path from "path";
 import ora from "ora";
 import chalk from "chalk";
-import dotenv from "dotenv";
-
-dotenv.config();
-
-import { generatePackageManagerConfigs, install, PackageManager } from "./lib/package-manager";
-import { prompts } from "./lib/prompts";
-import { displayIntro } from "./lib/intro";
+import { generatePackageManagerConfigs } from "./lib/helpers/create-package-manager-config";
+import { installTemplate } from "./lib/helpers/install-template";
+import { displayIntro } from "./lib/helpers/intro";
+import { WEB3AUTH_PROMPTS } from "./lib/prompts/web3auth";
+import { PackageManager } from "./lib/types/package-manager";
+import { BASE_PROMPTS } from "./lib/prompts/base";
+import { configureWeb3Auth } from "./lib/helpers/configure-web3auth";
+import { configurePackageJson } from "./lib/helpers/configure-package-json";
+import { installDependencies } from "./lib/helpers/install-dependencies";
+import { displayOutro } from "./lib/helpers/outro";
 
 export async function main() {
   displayIntro();
-  const answers = await inquirer.prompt(prompts);
+  const answers = await inquirer.prompt(BASE_PROMPTS);
+  let web3AuthAnswers: Answers | undefined;
+
+  // If the user wants to use Embedded Wallet, prompt them for the Web3Auth configuration
+  if (answers.useEmbeddedWallet) {
+    web3AuthAnswers = await inquirer.prompt(WEB3AUTH_PROMPTS);
+  }
 
   const spinner = ora("Creating your project...").start();
 
   try {
     const targetDir = path.join(process.cwd(), answers.projectName);
 
+    // Check if the directory already exists
     if (fs.existsSync(targetDir)) {
       spinner.stop();
       const { overwrite } = await inquirer.prompt([
@@ -48,21 +58,27 @@ export async function main() {
     }
 
     spinner.text = "Copying template files...";
-    const templatePath = path.join(__dirname, "../templates", answers.template);
-    await fs.copy(templatePath, targetDir);
-
-    spinner.text = "Setting up package configuration...";
-    await generatePackageManagerConfigs(
-      targetDir,
-      answers.packageManager as PackageManager
+    const templatePath = path.join(
+      __dirname,
+      "../../templates",
+      answers.framework,
+      answers.template
     );
 
-    const pkgJsonPath = path.join(targetDir, "package.json");
-    if (fs.existsSync(pkgJsonPath)) {
-      const pkgJson = await fs.readJson(pkgJsonPath);
-      pkgJson.name = answers.projectName;
-      await fs.writeJson(pkgJsonPath, pkgJson, { spaces: 2 });
+    installTemplate(
+      templatePath,
+      targetDir,
+      answers.useEmbeddedWallet,
+      web3AuthAnswers?.web3AuthNetwork
+    );
+
+    if (answers.useEmbeddedWallet) {
+      spinner.text = "Configuring Web3Auth...";
+      await configureWeb3Auth(answers, targetDir);
     }
+
+    spinner.text = "Setting up package configuration...";
+    await configurePackageJson(targetDir, answers);
 
     // This is not required once the SDK made public
     await generatePackageManagerConfigs(
@@ -74,8 +90,7 @@ export async function main() {
 
     try {
       spinner.text = `Installing dependencies with ${answers.packageManager}...`;
-      await install(answers.packageManager);
-
+      await installDependencies(answers.packageManager);
     } catch (installError: unknown) {
       spinner.warn(
         chalk.yellow(
@@ -102,26 +117,10 @@ export async function main() {
       spinner.succeed(chalk.green(`Project structure created at ${targetDir}`));
       return;
     }
-
     spinner.succeed(
       chalk.green(`Project created successfully at ${targetDir}`)
     );
-
-    console.log(chalk.cyan("\n🚀 Next steps:"));
-    console.log(chalk.white(`  1. cd ${answers.projectName}`));
-    console.log(chalk.white(`  2. ${answers.packageManager} dev`));
-
-    console.log(chalk.cyan("\n📚 Documentation:"));
-    console.log(
-      chalk.white(
-        "  • Learn more about Delegation toolkit: https://docs.gator.metamask.io/"
-      )
-    );
-    console.log(
-      chalk.white("  • Explore example code in the /examples directory")
-    );
-
-    console.log(chalk.green("\n🦊 Happy building with Delegation toolkit! 🦊"));
+    displayOutro(answers.packageManager, answers);
   } catch (error) {
     spinner.fail("Failed to create project");
     console.error(

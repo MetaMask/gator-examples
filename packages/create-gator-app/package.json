@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "private": false,
   "description": "CLI tool to create new MetaMask Delegator applications",
-  "main": "dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "dist/src/index.js",
+  "types": "./dist/src/index.d.ts",
   "bin": {
-    "create-gator-app": "./dist/index.js"
+    "create-gator-app": "./dist/src/index.js"
   },
   "files": [
     "dist",
@@ -14,7 +14,7 @@
   ],
   "scripts": {
     "build": "tsc",
-    "dev": "tsup --watch --onSuccess \"node dist/index.js\"",
+    "dev": "tsup --watch --onSuccess \"node dist/src/index.js\"",
     "lint": "eslint src/",
     "clean": "rm -rf dist",
     "type-check": "tsc --noEmit",
@@ -25,7 +25,6 @@
   "dependencies": {
     "chalk": "^4.1.2",
     "cross-spawn": "^7.0.6",
-    "dotenv": "^16.4.7",
     "fs-extra": "^10.1.0",
     "inquirer": "^8.2.4",
     "ora": "^5.4.1"
