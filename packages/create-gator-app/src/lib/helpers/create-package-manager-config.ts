@@ -16,16 +16,23 @@ export async function generatePackageManagerConfigs(
   @metamask-private:registry=https://registry.npmjs.org/`
       );
     case "yarn":
-      return await fs.writeFile(
+      await fs.writeFile(
         path.join(targetDir, ".yarnrc.yml"),
-        `npmRegistries:
-    //registry.npmjs.org:
-      npmAuthToken: ${NPM_AUTH_TOKEN}
+        `
+nodeLinker: node-modules
+npmRegistries:
+  //registry.npmjs.org:
+    npmAuthToken: ${NPM_AUTH_TOKEN}
   
-  npmScopes:
-    metamask-private:
-      npmRegistryServer: "https://registry.npmjs.org"
-      npmAuthToken: ${NPM_AUTH_TOKEN}`
+npmScopes:
+  metamask-private:
+    npmRegistryServer: "https://registry.npmjs.org"
+    npmAuthToken: ${NPM_AUTH_TOKEN}
+      `
+      );
+      
+      return await fs.createFile(
+        path.join(targetDir, "yarn.lock")
       );
     default:
       throw new Error(`Unsupported package manager: ${packageManager}`);
