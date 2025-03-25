@@ -19,7 +19,7 @@ export default function Footer() {
         Docs
       </a>
       <a
-        href="https://github.com/gator-metamask/gator"
+        href="https://github.com/metamask/gator-examples"
         target="_blank"
         rel="noopener noreferrer"
       >
