@@ -1,25 +1,17 @@
 import path from "path";
 import fs from "fs-extra";
-import { Answers } from "inquirer";
+import GatorAppConfiguration from "../types/gator-app-configuration";
 
 export const configureWeb3Auth = async (
-  answers: Answers,
-  targetDir: string
+  gatorAppConfiguration: GatorAppConfiguration
 ) => {
-  const web3authDirectory = path.join(
-    __dirname,
-    "../../../../templates",
-    answers.framework,
-    "web3auth"
-  );
-
   const connectorTemplatePath = path.join(
-    web3authDirectory,
+    gatorAppConfiguration.web3AuthTemplatePath!,
     "Web3AuthConnector.ts"
   );
 
   const connectorPath = path.join(
-    targetDir,
+    gatorAppConfiguration.targetDir,
     "src",
     "connectors",
     "Web3AuthConnector.ts"
@@ -27,10 +19,13 @@ export const configureWeb3Auth = async (
 
   await fs.copy(connectorTemplatePath, connectorPath);
 
-  const providerTemplatePath = path.join(web3authDirectory, "AppProvider.tsx");
+  const providerTemplatePath = path.join(
+    gatorAppConfiguration.web3AuthTemplatePath!,
+    "AppProvider.tsx"
+  );
 
   const providerPath = path.join(
-    targetDir,
+    gatorAppConfiguration.targetDir,
     "src",
     "providers",
     "AppProvider.tsx"
@@ -38,7 +33,7 @@ export const configureWeb3Auth = async (
 
   await fs.copy(providerTemplatePath, providerPath);
 
-  const isPolyfillRequired = answers.framework === "vite-react";
+  const isPolyfillRequired = gatorAppConfiguration.framework === "vite-react";
 
   // If the project is using vite-react, we need to copy the index.html file
   // from the web3auth template to the target directory
@@ -46,8 +41,14 @@ export const configureWeb3Auth = async (
   // This is because vite-react requires a polyfill for the Buffer and process
   // variables, which are not available in the browser.
   if (isPolyfillRequired) {
-    const indexHTMLTemplate = path.join(web3authDirectory, "index.html");
-    const indexHtmlPath = path.join(targetDir, "index.html");
+    const indexHTMLTemplate = path.join(
+      gatorAppConfiguration.web3AuthTemplatePath!,
+      "index.html"
+    );
+    const indexHtmlPath = path.join(
+      gatorAppConfiguration.targetDir,
+      "index.html"
+    );
     await fs.copy(indexHTMLTemplate, indexHtmlPath);
   }
 };
