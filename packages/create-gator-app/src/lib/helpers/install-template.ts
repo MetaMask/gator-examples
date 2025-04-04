@@ -1,11 +1,11 @@
 import fs from "fs-extra";
 import { configureENV } from "./configure-env";
-import { Answers } from "inquirer";
+import GatorAppConfiguration from "../types/gator-app-configuration";
 
 export const installTemplate = (
   templatePath: string,
   targetDir: string,
-  answers: Answers
+  gatorAppConfiguration: GatorAppConfiguration
 ) => {
   const templateFiles = fs.readdirSync(templatePath);
 
@@ -20,7 +20,7 @@ export const installTemplate = (
 
       if (file === ".env.example") {
         file = ".env";
-        contents = configureENV(contents, answers);
+        contents = configureENV(contents, gatorAppConfiguration);
       }
 
       const writePath = `${targetDir}/${file}`;
@@ -32,7 +32,7 @@ export const installTemplate = (
       installTemplate(
         `${templatePath}/${file}`,
         `${targetDir}/${file}`,
-        answers
+        gatorAppConfiguration
       );
     }
   }

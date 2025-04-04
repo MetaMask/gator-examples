@@ -48,10 +48,4 @@ export const BASE_PROMPTS = [
       return answers.framework === "vite-react";
     },
   },
-  {
-    type: "confirm",
-    name: "useEmbeddedWallet",
-    message: "Do you want to use Web3Auth embedded wallet?",
-    default: true,
-  },
 ];

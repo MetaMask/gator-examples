@@ -8,36 +8,66 @@ import { generatePackageManagerConfigs } from "./lib/helpers/create-package-mana
 import { installTemplate } from "./lib/helpers/install-template";
 import { displayIntro } from "./lib/helpers/intro";
 import { WEB3AUTH_PROMPTS } from "./lib/prompts/web3auth";
-import { PackageManager } from "./lib/types/package-manager";
 import { BASE_PROMPTS } from "./lib/prompts/base";
 import { configureWeb3Auth } from "./lib/helpers/configure-web3auth";
 import { configurePackageJson } from "./lib/helpers/configure-package-json";
 import { installDependencies } from "./lib/helpers/install-dependencies";
 import { displayOutro } from "./lib/helpers/outro";
+import { createCommand } from "./lib/helpers/commands";
+import { Command, OptionValues } from "commander";
+import GatorAppConfiguration from "./lib/types/gator-app-configuration";
 
 export async function main() {
+  const command: Command = createCommand();
+  const flags: OptionValues = command.parse(process.argv).opts();
+
   displayIntro();
   const answers = await inquirer.prompt(BASE_PROMPTS);
   let web3AuthAnswers: Answers | undefined;
 
   // If the user wants to use Embedded Wallet, prompt them for the Web3Auth configuration
-  if (answers.useEmbeddedWallet) {
+  if (flags.useWeb3auth) {
     web3AuthAnswers = await inquirer.prompt(WEB3AUTH_PROMPTS);
   }
+
+  const targetDir = path.join(process.cwd(), answers.projectName);
+  const templatePath = path.join(
+    __dirname,
+    "../../templates",
+    answers.framework,
+    answers.template
+  );
+
+  const web3authTemplatePath = path.join(
+    __dirname,
+    "../../templates",
+    answers.framework,
+    "web3auth"
+  );
+
+  const gatorAppConfiguration: GatorAppConfiguration = {
+    projectName: answers.projectName,
+    targetDir: targetDir,
+    templatePath: templatePath,
+    web3AuthTemplatePath: web3authTemplatePath,
+    useWeb3auth: flags.useWeb3auth,
+    framework: answers.framework,
+    packageManager: answers.packageManager,
+    template: answers.template,
+    web3AuthNetwork: web3AuthAnswers?.web3AuthNetwork,
+  };
 
   const spinner = ora("Creating your project...").start();
 
   try {
-    const targetDir = path.join(process.cwd(), answers.projectName);
-
     // Check if the directory already exists
-    if (fs.existsSync(targetDir)) {
+    if (fs.existsSync(gatorAppConfiguration.targetDir)) {
       spinner.stop();
       const { overwrite } = await inquirer.prompt([
         {
           type: "confirm",
           name: "overwrite",
-          message: `Directory ${answers.projectName} already exists. Do you want to overwrite it?`,
+          message: `Directory ${gatorAppConfiguration.projectName} already exists. Do you want to overwrite it?`,
           default: false,
         },
       ]);
@@ -52,43 +82,31 @@ export async function main() {
       }
 
       spinner.start("Cleaning existing directory...");
-      await fs.emptyDir(targetDir);
+      await fs.emptyDir(gatorAppConfiguration.targetDir);
     } else {
-      fs.mkdirSync(targetDir, { recursive: true });
+      fs.mkdirSync(gatorAppConfiguration.targetDir, { recursive: true });
     }
 
     spinner.text = "Copying template files...";
-    const templatePath = path.join(
-      __dirname,
-      "../../templates",
-      answers.framework,
-      answers.template
-    );
 
-    installTemplate(templatePath, targetDir, {
-      ...answers,
-      ...web3AuthAnswers,
-    });
+    installTemplate(templatePath, targetDir, gatorAppConfiguration);
 
-    if (answers.useEmbeddedWallet) {
+    if (gatorAppConfiguration.useWeb3auth) {
       spinner.text = "Configuring Web3Auth...";
-      await configureWeb3Auth(answers, targetDir);
+      await configureWeb3Auth(gatorAppConfiguration);
     }
 
     spinner.text = "Setting up package configuration...";
-    await configurePackageJson(targetDir, answers);
+    await configurePackageJson(gatorAppConfiguration);
 
     // This is not required once the SDK made public
-    await generatePackageManagerConfigs(
-      targetDir,
-      answers.packageManager as PackageManager
-    );
+    await generatePackageManagerConfigs(gatorAppConfiguration);
 
     process.chdir(targetDir);
 
     try {
-      spinner.text = `Installing dependencies with ${answers.packageManager}...`;
-      await installDependencies(answers.packageManager);
+      spinner.text = `Installing dependencies with ${gatorAppConfiguration.packageManager}...`;
+      await installDependencies(gatorAppConfiguration.packageManager);
     } catch (installError: unknown) {
       spinner.warn(
         chalk.yellow(
@@ -105,10 +123,10 @@ export async function main() {
         )
       );
       console.log("\nYou can try installing dependencies manually:");
-      console.log(`cd ${answers.projectName}`);
+      console.log(`cd ${gatorAppConfiguration.projectName}`);
       console.log(
-        `  ${answers.packageManager} ${
-          answers.packageManager === "yarn" ? "" : "install"
+        `  ${gatorAppConfiguration.packageManager} ${
+          gatorAppConfiguration.packageManager === "yarn" ? "" : "install"
         }`
       );
 
@@ -118,7 +136,7 @@ export async function main() {
     spinner.succeed(
       chalk.green(`Project created successfully at ${targetDir}`)
     );
-    displayOutro(answers.packageManager, answers);
+    displayOutro(gatorAppConfiguration);
   } catch (error) {
     spinner.fail("Failed to create project");
     console.error(

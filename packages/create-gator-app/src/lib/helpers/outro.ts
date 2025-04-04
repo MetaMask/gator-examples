@@ -1,14 +1,18 @@
 import chalk from "chalk";
-import { Answers } from "inquirer";
+import GatorAppConfiguration from "../types/gator-app-configuration";
 
-export const displayOutro = (packageManager: string, answers: Answers) => {
+export const displayOutro = (gatorAppConfiguration: GatorAppConfiguration) => {
   console.log(chalk.cyan("\n🚀 Next steps:"));
-  console.log(chalk.white(`  1. cd ${answers.projectName}`));
+  console.log(chalk.white(`  1. cd ${gatorAppConfiguration.projectName}`));
   console.log(chalk.white(`  2. Update the .env file variables`));
-  if (packageManager === "npm") {
-    console.log(chalk.white(`  3. ${packageManager} run dev`));
+  if (gatorAppConfiguration.packageManager === "npm") {
+    console.log(
+      chalk.white(`  3. ${gatorAppConfiguration.packageManager} run dev`)
+    );
   } else {
-    console.log(chalk.white(`  3. ${packageManager} dev`));
+    console.log(
+      chalk.white(`  3. ${gatorAppConfiguration.packageManager} dev`)
+    );
   }
 
   console.log(chalk.cyan("\n📚 Documentation:"));
