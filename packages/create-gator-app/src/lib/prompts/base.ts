@@ -20,15 +20,15 @@ export const BASE_PROMPTS = [
   },
   {
     type: "list",
-    name: "framework",
-    message: "Please choose a framework:",
-    choices: FRAMEWORK_OPTIONS,
-  },
-  {
-    type: "list",
     name: "packageManager",
     message: "Which package manager would you like to use?",
     choices: PACKAGE_MANAGER_OPTIONS,
+  },
+  {
+    type: "list",
+    name: "framework",
+    message: "Please choose a framework:",
+    choices: FRAMEWORK_OPTIONS,
   },
   {
     type: "list",
