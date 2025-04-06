@@ -3,7 +3,6 @@ import chalk from "chalk";
 export function displayIntro(): void {
   console.log(
     chalk.green(`                                                
-                                                           
                  ##***=====*%%                             
                 #%*--=*##**#@#%                            
             *##*=*-----%%##****%%                          
@@ -31,29 +30,9 @@ export function displayIntro(): void {
      %#*****#@@@@@@@%%%%@*==-==*%%%@@@@**                  
      %#****%@@@@@@@@%%%%%@#=--*%%%%%@@%===#                
          **%@@@@@@@@%%%%%%%@@@%%%%%@@@@%+=*                
-                          %%%%%%     @                     
-                                                           
+                          %%%%%%     @                                                    
                                                               
-                 MᴇᴛᴀMᴀsᴋ Dᴇʟᴇɢᴀᴛɪᴏɴ Tᴏᴏʟᴋɪᴛ                      
-                         
-                         `)
-  );
-
-  console.log(chalk.yellow.bold("\n⚠️  PRIVATE ALPHA WARNING ⚠️"));
-  console.log(
-    chalk.yellow(
-      "This product is in private alpha and uses private packages like @metamask-private/delegator-core-viem"
-    )
-  );
-  console.log(
-    chalk.yellow(
-      "A temporary NPM token will be provided by the CLI for installation."
-    )
-  );
-  console.log(
-    chalk.yellow(
-      "After installation, this token will be replaced with a placeholder in your .npmrc file.\n"
-    )
+          MᴇᴛᴀMᴀsᴋ Dᴇʟᴇɢᴀᴛɪᴏɴ Tᴏᴏʟᴋɪᴛ`)
   );
 
   try {
