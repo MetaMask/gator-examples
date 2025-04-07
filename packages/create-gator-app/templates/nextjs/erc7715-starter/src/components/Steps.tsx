@@ -67,22 +67,25 @@ export default function Steps() {
         </div>
       )}
       {step === 2 && (
-       <div className="space-y-6">
-       <div className="bg-gray-800 rounded-lg p-6 shadow-lg border border-gray-700">
-         <p className="text-gray-300 mb-4">
-           Grant permissions to the session account created in the previous step. This will prompt the user to:
-         </p>
-         <ol className="text-gray-300 list-decimal list-inside space-y-2">
-           <li>
-             Install two MetaMask snaps that handle ERC7715 permissions (if not already installed)
-           </li>
-           <li>Grant permissions to the session account</li>
-         </ol>
-         <p className="text-gray-300 mt-4">
-           You can safely store the response for later redemption by the session account. In this example, we will save the response in local storage.
-         </p>
-       </div>
-     </div>
+        <div className="space-y-6">
+          <div className="bg-gray-800 rounded-lg p-6 shadow-lg border border-gray-700">
+            <p className="text-gray-300 mb-4">
+              Grant permissions to the session account created in the previous
+              step. This will prompt the user to:
+            </p>
+            <ol className="text-gray-300 list-decimal list-inside space-y-2">
+              <li>
+                Install two MetaMask snaps that handle ERC7715 permissions (if
+                not already installed)
+              </li>
+              <li>Grant permissions to the session account</li>
+            </ol>
+            <p className="text-gray-300 mt-4">
+              You can safely store the response for later redemption by the
+              session account. In this example, we will save the response in
+              local storage.
+            </p>
+          </div>
           <GrantPermissionsButton />
         </div>
       )}
