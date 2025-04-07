@@ -53,6 +53,8 @@ export async function main() {
     packageManager: answers.packageManager,
     template: answers.template,
     web3AuthNetwork: web3AuthAnswers?.web3AuthNetwork,
+    llmRules: flags.llmRules || answers.llmRules || false,
+    ideType: answers.ideType,
   };
 
   const spinner = ora("Creating your project...").start();

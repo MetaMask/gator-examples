@@ -1,4 +1,3 @@
-import Image from "next/image";
 export default function Hero() {
   return (
     <div className="text-center space-y-6 my-12">
@@ -7,13 +6,6 @@ export default function Hero() {
           Hello
           Gator
         </span>
-        <Image 
-          src="/gator.png" 
-          alt="Gator" 
-          width={50} 
-          height={50} 
-          className="inline-block"
-        />
       </h1>
       <div className="text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto">
         ERC-7715 NextJS Starter

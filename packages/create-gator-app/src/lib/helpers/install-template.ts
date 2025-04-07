@@ -1,16 +1,22 @@
 import fs from "fs-extra";
+import path from "path";
 import { configureENV } from "./configure-env";
 import GatorAppConfiguration from "../types/gator-app-configuration";
+import { copyLLMRulesFiles } from "./copy-llm-rules";
+
+interface TemplateResult {
+  success: boolean;
+  message: string;
+}
 
 export const installTemplate = async (
   templatePath: string,
   targetDir: string,
   gatorAppConfiguration: GatorAppConfiguration
-): Promise<{ success: boolean; message: string }> => {
+): Promise<TemplateResult> => {
   try {
     const templateFiles = fs.readdirSync(templatePath);
 
-    // Iterate over all files in the template directory
     for (let file of templateFiles) {
       const origFilePath = `${templatePath}/${file}`;
 
@@ -27,9 +33,16 @@ export const installTemplate = async (
         const writePath = `${targetDir}/${file}`;
         fs.writeFileSync(writePath, contents, "utf8");
       } else if (stats.isDirectory()) {
+        if (file === "llmRules") {
+          if (gatorAppConfiguration.llmRules) {
+            const ideType = gatorAppConfiguration.ideType || "Both";
+            copyLLMRulesFiles(templatePath, targetDir, ideType);
+          }
+          continue;
+        }
+
         fs.mkdirSync(`${targetDir}/${file}`);
 
-        // Recursively install the template for the subdirectory
         await installTemplate(
           `${templatePath}/${file}`,
           `${targetDir}/${file}`,
@@ -37,12 +50,14 @@ export const installTemplate = async (
         );
       }
     }
-    
+
     return { success: true, message: "Template installed successfully" };
   } catch (error) {
-    return { 
-      success: false, 
-      message: `Failed to install template: ${error instanceof Error ? error.message : String(error)}` 
+    return {
+      success: false,
+      message: `Failed to install template: ${
+        error instanceof Error ? error.message : String(error)
+      }`,
     };
   }
 };

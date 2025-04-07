@@ -45,10 +45,7 @@ export function displayIntro(): void {
 │ The MetaMask Delegation Toolkit enables developers to       │
 │ create frictionless experiences with granular permission    │
 │ sharing. It provides instant onboarding, new web3           │
-│ experiences, and uninterrupted user journeys. The toolkit   │
-│ includes the Delegation Framework – customizable smart      │
-│ contracts for implementing custom permission control in     │
-│ dapps.                                                      │
+│ experiences, and uninterrupted user journeys.               │
 └─────────────────────────────────────────────────────────────┘`)
   );
 }
