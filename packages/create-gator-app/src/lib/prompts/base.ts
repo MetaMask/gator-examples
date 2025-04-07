@@ -44,7 +44,7 @@ export const BASE_PROMPTS = [
     type: "confirm",
     name: "llmRules",
     message:
-      "Would you like to copy IDE rules for Cursor or Windsurf to provide better context to the AI?",
+      "Would you like to have cursor rules to provide better context to the AI?",
     default: true,
     when: async (answers: Answers) => {
       const templatePath = path.join(
@@ -61,7 +61,7 @@ export const BASE_PROMPTS = [
     type: "list",
     name: "ideType",
     message: "Which IDE's LLM rules would you like to copy?",
-    choices: ["Cursor", "Windsurf"],
+    choices: ["Cursor"],
     when: (answers: Answers) => {
       return answers.llmRules === true;
     },
