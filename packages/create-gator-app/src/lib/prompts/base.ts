@@ -44,7 +44,7 @@ export const BASE_PROMPTS = [
     type: "confirm",
     name: "llmRules",
     message:
-      "Would you like to have cursor rules to provide better context to the AI?",
+      "Would you like to have IDE rules (Cursor, Windsurf) to provide better context to the AI?",
     default: true,
     when: async (answers: Answers) => {
       const templatePath = path.join(
