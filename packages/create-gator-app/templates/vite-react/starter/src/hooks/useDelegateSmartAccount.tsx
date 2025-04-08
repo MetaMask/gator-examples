@@ -12,8 +12,9 @@ export default function useDelegateSmartAccount() {
   const { delegateWallet } = useGatorContext();
   const publicClient = usePublicClient();
 
-  const [smartAccount, setSmartAccount] =
-    useState<MetaMaskSmartAccount<Implementation> | null>(null);
+  const [smartAccount, setSmartAccount] = useState<MetaMaskSmartAccount | null>(
+    null
+  );
 
   useEffect(() => {
     console.log(delegateWallet);
