@@ -10,6 +10,7 @@ import { WEB3AUTH_PROMPTS } from "./lib/prompts/web3auth";
 import { BASE_PROMPTS } from "./lib/prompts/base";
 import { configureWeb3Auth } from "./lib/helpers/configure-web3auth";
 import { installDependencies } from "./lib/helpers/install-dependencies";
+import { configurePackageJson } from "./lib/helpers/configure-package-json";
 import { displayOutro } from "./lib/helpers/outro";
 import { createCommand } from "./lib/helpers/commands";
 import { Command, OptionValues } from "commander";
@@ -89,19 +90,26 @@ export async function main() {
 
     spinner.text = "Copying template files...";
 
-    const templateResult = await installTemplate(templatePath, targetDir, gatorAppConfiguration);
-    
+    const templateResult = await installTemplate(
+      templatePath,
+      targetDir,
+      gatorAppConfiguration
+    );
+
     if (!templateResult.success) {
       spinner.fail(templateResult.message);
       process.exit(1);
     }
-    
+
     spinner.succeed("Template files copied successfully");
 
     if (gatorAppConfiguration.useWeb3auth) {
       spinner.text = "Configuring Web3Auth...";
       await configureWeb3Auth(gatorAppConfiguration);
     }
+
+    spinner.text = "Setting up package configuration...";
+    await configurePackageJson(gatorAppConfiguration);
 
     process.chdir(targetDir);
 
@@ -141,7 +149,9 @@ export async function main() {
           }`
         );
 
-        spinner.succeed(chalk.green(`Project structure created at ${targetDir}`));
+        spinner.succeed(
+          chalk.green(`Project structure created at ${targetDir}`)
+        );
         return;
       }
     } else {
@@ -154,7 +164,7 @@ export async function main() {
         }`
       );
     }
-    
+
     spinner.succeed(
       chalk.green(`Project created successfully at ${targetDir}`)
     );
