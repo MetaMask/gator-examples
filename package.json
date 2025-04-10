@@ -3,9 +3,13 @@
   "version": "1.0.0",
   "description": "CLI tool to create Gator examples",
   "main": "dist/index.js",
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "dev": "turbo run dev",
-    "build": "turbo run build --cache-dir=.turbo --filter=./packages/create-gator-app"
+    "build": "turbo run build --cache-dir=.turbo --filter=./packages/create-gator-app",
+    "lint": "turbo lint"
   },
   "dependencies": {
     "turbo": "^2.4.4"
