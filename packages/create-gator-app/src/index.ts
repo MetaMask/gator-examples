@@ -56,6 +56,7 @@ export async function main() {
     web3AuthNetwork: web3AuthAnswers?.web3AuthNetwork,
     llmRules: flags.llmRules || answers.llmRules || false,
     ideType: answers.ideType,
+    skipInstall: flags.skipInstall,
   };
 
   const spinner = ora("Creating your project...").start();
@@ -113,16 +114,7 @@ export async function main() {
 
     process.chdir(targetDir);
 
-    const { installDeps } = await inquirer.prompt([
-      {
-        type: "confirm",
-        name: "installDeps",
-        message: "Do you want to install dependencies now?",
-        default: true,
-      },
-    ]);
-
-    if (installDeps) {
+    if (!gatorAppConfiguration.skipInstall) {
       try {
         spinner.text = `Installing dependencies with ${gatorAppConfiguration.packageManager}...`;
         await installDependencies(gatorAppConfiguration.packageManager);

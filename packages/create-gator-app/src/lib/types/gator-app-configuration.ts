@@ -13,6 +13,7 @@ interface GatorAppConfiguration {
   template: string;
   llmRules?: boolean;
   ideType?: "Cursor" | "Windsurf" | "Both";
+  skipInstall: boolean;
 }
 
 export default GatorAppConfiguration;

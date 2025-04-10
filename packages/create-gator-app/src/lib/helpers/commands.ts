@@ -12,5 +12,6 @@ export const createCommand = (): Command => {
     .option(
       "--use-web3auth",
       "Use Web3Auth Embedded Wallet as a signer for delegator"
-    );
+    )
+    .option("--skip-install", "Skip the installation of dependencies");
 };
