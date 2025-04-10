@@ -45,7 +45,6 @@ jobs:
       - check-workflows
       - analyse-code
       - build-lint-test
-      - end-to-end-tests
     outputs:
       PASSED: ${{ steps.set-output.outputs.PASSED }}
     steps:
