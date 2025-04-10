@@ -33,25 +33,25 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'pnpm'
+          cache: 'yarn'
 
       - name: Install npm dependencies
-        run: pnpm install
+        run: yarn install
 
       - name: Move to CLI directory
         run: cd packages/create-gator-app
 
       - name: Run build
-        run: pnpm build
+        run: yarn build
 
       - name: Run lint
-        run: pnpm lint
+        run: yarn lint
 
       - name: Run all tests
-        run: pnpm test
+        run: yarn test
 
       - name: Validate changelogs
-        run: pnpm changelog:validate
+        run: yarn changelog:validate
       
       - name: Require clean working directory
         shell: bash
