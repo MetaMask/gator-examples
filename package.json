@@ -10,9 +10,7 @@
   "scripts": {
     "dev": "turbo run dev",
     "build": "turbo run build --cache-dir=.turbo --filter=./packages/create-gator-app",
-    "lint": "turbo lint",
-    "changelog:update": "turbo run changelog:update",
-    "changelog:validate": "turbo run changelog:validate"
+    "lint": "turbo lint"
   },
   "dependencies": {
     "eslint": "^9.24.0",
