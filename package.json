@@ -5,8 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "dev": "turbo run dev",
-    "build:cli": "turbo run build --filter=./packages/create-gator-app",
-    "build": "turbo run build"
+    "build": "turbo run build --cache-dir=.turbo --filter=./packages/create-gator-app"
   },
   "dependencies": {
     "turbo": "^2.4.4"
