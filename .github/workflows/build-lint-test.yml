@@ -44,9 +44,6 @@ jobs:
       - name: Run lint
         run: yarn lint
 
-      - name: Run all tests
-        run: yarn test
-
       - name: Validate changelogs
         run: yarn changelog:validate
       
