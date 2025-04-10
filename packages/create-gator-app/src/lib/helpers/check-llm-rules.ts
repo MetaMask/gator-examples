@@ -9,7 +9,6 @@ export const checkLLMRulesExist = (templatePath: string): boolean => {
 
     return llmRulesDirExists;
   } catch (error) {
-    console.error("Error checking for LLM rules:", error);
     return false;
   }
 };

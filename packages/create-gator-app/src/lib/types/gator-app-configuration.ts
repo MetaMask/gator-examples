@@ -11,8 +11,9 @@ interface GatorAppConfiguration {
   packageManager: PackageManager;
   web3AuthNetwork?: string;
   template: string;
-  llmRules?: boolean;
-  ideType?: "Cursor" | "Windsurf" | "Both";
+  addLLMRules: boolean;
+  areLLMRulesAvailable: boolean;
+  ideType: "Cursor" | "Windsurf" | "Both";
   skipInstall: boolean;
 }
 

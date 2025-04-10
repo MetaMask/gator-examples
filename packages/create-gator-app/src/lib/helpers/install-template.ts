@@ -34,7 +34,10 @@ export const installTemplate = async (
         fs.writeFileSync(writePath, contents, "utf8");
       } else if (stats.isDirectory()) {
         if (file === "llmRules") {
-          if (gatorAppConfiguration.llmRules) {
+          if (
+            gatorAppConfiguration.addLLMRules &&
+            gatorAppConfiguration.areLLMRulesAvailable
+          ) {
             const ideType = gatorAppConfiguration.ideType || "Both";
             copyLLMRulesFiles(templatePath, targetDir, ideType);
           }

@@ -15,6 +15,8 @@ import { displayOutro } from "./lib/helpers/outro";
 import { createCommand } from "./lib/helpers/commands";
 import { Command, OptionValues } from "commander";
 import GatorAppConfiguration from "./lib/types/gator-app-configuration";
+import { checkLLMRulesExist } from "./lib/helpers/check-llm-rules";
+import { LLM_PROMPTS } from "./lib/prompts/llm";
 
 export async function main() {
   const command: Command = createCommand();
@@ -23,10 +25,15 @@ export async function main() {
   displayIntro();
   const answers = await inquirer.prompt(BASE_PROMPTS);
   let web3AuthAnswers: Answers | undefined;
+  let llmAnswers: Answers | undefined;
 
   // If the user wants to use Embedded Wallet, prompt them for the Web3Auth configuration
   if (flags.useWeb3auth) {
     web3AuthAnswers = await inquirer.prompt(WEB3AUTH_PROMPTS);
+  }
+
+  if (flags.addLlmRules) {
+    llmAnswers = await inquirer.prompt(LLM_PROMPTS);
   }
 
   const targetDir = path.join(process.cwd(), answers.projectName);
@@ -44,6 +51,8 @@ export async function main() {
     "web3auth"
   );
 
+  console.log("LLM RULES:", checkLLMRulesExist(templatePath));
+
   const gatorAppConfiguration: GatorAppConfiguration = {
     projectName: answers.projectName,
     targetDir: targetDir,
@@ -54,8 +63,9 @@ export async function main() {
     packageManager: answers.packageManager,
     template: answers.template,
     web3AuthNetwork: web3AuthAnswers?.web3AuthNetwork,
-    llmRules: flags.llmRules || answers.llmRules || false,
-    ideType: answers.ideType,
+    addLLMRules: flags.addLlmRules,
+    areLLMRulesAvailable: checkLLMRulesExist(templatePath),
+    ideType: llmAnswers?.ideType,
     skipInstall: flags.skipInstall,
   };
 
@@ -103,6 +113,17 @@ export async function main() {
     }
 
     spinner.succeed("Template files copied successfully");
+
+    if (
+      gatorAppConfiguration.addLLMRules &&
+      !gatorAppConfiguration.areLLMRulesAvailable
+    ) {
+      console.log(
+        chalk.yellow(
+          "\nLLM rules were not added as they are unavailable for this template."
+        )
+      );
+    }
 
     if (gatorAppConfiguration.useWeb3auth) {
       spinner.text = "Configuring Web3Auth...";

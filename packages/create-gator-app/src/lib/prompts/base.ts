@@ -6,8 +6,6 @@ import {
   VITE_REACT_TEMPLATE_OPTIONS,
 } from "../choices/templates";
 import { validateProjectName } from "../helpers/validators";
-import { checkLLMRulesExist } from "../helpers/check-llm-rules";
-import path from "path";
 
 export const BASE_PROMPTS = [
   {
@@ -39,31 +37,5 @@ export const BASE_PROMPTS = [
     message: "Pick a package manager:",
     choices: PACKAGE_MANAGER_OPTIONS,
     default: "npm",
-  },
-  {
-    type: "confirm",
-    name: "llmRules",
-    message:
-      "Would you like to have IDE rules (Cursor, Windsurf) to provide better context to the AI?",
-    default: true,
-    when: async (answers: Answers) => {
-      const templatePath = path.join(
-        __dirname,
-        "../../../templates",
-        answers.framework,
-        answers.template
-      );
-      
-      return checkLLMRulesExist(templatePath);
-    },
-  },
-  {
-    type: "list",
-    name: "ideType",
-    message: "Which IDE's LLM rules would you like to copy?",
-    choices: ["Cursor"],
-    when: (answers: Answers) => {
-      return answers.llmRules === true;
-    },
   },
 ];

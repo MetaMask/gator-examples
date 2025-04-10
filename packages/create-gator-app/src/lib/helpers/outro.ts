@@ -22,7 +22,7 @@ export const displayOutro = (gatorAppConfiguration: GatorAppConfiguration) => {
     )
   );
   
-  if (gatorAppConfiguration.llmRules && gatorAppConfiguration.ideType) {
+  if (gatorAppConfiguration.addLLMRules && gatorAppConfiguration.ideType) {
     console.log(chalk.cyan("\n🤖 LLM Context:"));
     let ideMessage = "";
     
