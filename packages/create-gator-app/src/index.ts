@@ -114,17 +114,6 @@ export async function main() {
 
     spinner.succeed("Template files copied successfully");
 
-    if (
-      gatorAppConfiguration.addLLMRules &&
-      !gatorAppConfiguration.areLLMRulesAvailable
-    ) {
-      console.log(
-        chalk.yellow(
-          "\nLLM rules were not added as they are unavailable for this template."
-        )
-      );
-    }
-
     if (gatorAppConfiguration.useWeb3auth) {
       spinner.text = "Configuring Web3Auth...";
       await configureWeb3Auth(gatorAppConfiguration);

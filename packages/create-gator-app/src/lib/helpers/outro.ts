@@ -22,7 +22,7 @@ export const displayOutro = (gatorAppConfiguration: GatorAppConfiguration) => {
     )
   );
   
-  if (gatorAppConfiguration.addLLMRules && gatorAppConfiguration.ideType) {
+  if (gatorAppConfiguration.addLLMRules) {
     console.log(chalk.cyan("\n🤖 LLM Context:"));
     let ideMessage = "";
     
@@ -34,11 +34,19 @@ export const displayOutro = (gatorAppConfiguration: GatorAppConfiguration) => {
       ideMessage = "Cursor and Windsurf";
     }
     
-    console.log(
-      chalk.white(
-        `  • LLM rules files for ${ideMessage} have been copied from the template for better context`
-      )
-    );
+    if(gatorAppConfiguration.areLLMRulesAvailable) {
+      console.log(
+        chalk.white(
+          `  • LLM rules files for ${ideMessage} have been copied from the template for better context`
+        )
+      );
+    } else {
+      console.log(
+        chalk.yellow(
+          `  • LLM rules were not added for ${ideMessage} because they are not available for this template`
+        )
+      );
+    }
   }
   
   console.log(chalk.green("\n🦊 Happy building with Delegation toolkit! 🦊"));
