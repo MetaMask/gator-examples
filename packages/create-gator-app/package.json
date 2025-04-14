@@ -1,14 +1,22 @@
 {
   "name": "create-gator-app",
-  "version": "0.1",
+  "version": "0.1.0",
   "description": "CLI tool to create new MetaMask Delegator applications",
   "main": "dist/src/index.js",
   "types": "./dist/src/index.d.ts",
   "bin": "./dist/src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MetaMask/gator-examples.git"
+  },
   "files": [
     "dist",
     "templates"
   ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "scripts": {
     "build": "tsc && cp -r templates dist/",
     "dev": "tsc --watch --onSuccess \"cp -r templates dist/ && node dist/src/index.js\"",
@@ -17,7 +25,9 @@
     "type-check": "tsc --noEmit",
     "test": "jest",
     "test:watch": "jest --watch",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "changelog:update": "../../scripts/update-changelog.sh create-gator-app",
+    "changelog:validate": "../../scripts/validate-changelog.sh create-gator-app"
   },
   "dependencies": {
     "chalk": "^4.1.2",
@@ -29,6 +39,7 @@
   },
   "devDependencies": {
     "@jest/globals": "^29.7.0",
+    "@metamask/auto-changelog": "^5.0.1",
     "@types/cross-spawn": "^6.0.6",
     "@types/fs-extra": "^9.0.13",
     "@types/inquirer": "^8.2.4",
