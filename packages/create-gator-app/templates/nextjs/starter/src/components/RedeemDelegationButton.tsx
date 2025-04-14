@@ -1,6 +1,6 @@
 "use client";
 
-import { useAccountAbstractionUtils } from "@/hooks/useAccountAbstractionUtils";
+import { usePimlicoServices } from "@/hooks/usePimlicoServices";
 import useDelegateSmartAccount from "@/hooks/useDelegateSmartAccount";
 import useStorageClient from "@/hooks/useStorageClient";
 import { prepareRedeemDelegationData } from "@/utils/delegationUtils";
@@ -16,7 +16,7 @@ export default function RedeemDelegationButton() {
   const chain = sepolia;
   const { getDelegation } = useStorageClient();
   const { bundlerClient, paymasterClient, pimlicoClient } =
-    useAccountAbstractionUtils();
+  usePimlicoServices();
 
   const handleRedeemDelegation = async () => {
     if (!smartAccount) return;
