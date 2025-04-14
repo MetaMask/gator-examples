@@ -74,8 +74,8 @@ After setting up your `BundlerClient`, extend it with `erc7710BundlerActions`, a
 For example:
 
 ```typescript
-import { toMetaMaskSmartAccount } from "@metamask-private/delegator-core-viem";
-import { erc7710BundlerActions } from "@metamask-private/delegator-core-viem/experimental";
+import { toMetaMaskSmartAccount } from "@metamask/delegation-toolkit";
+import { erc7710BundlerActions } from "@metamask/delegation-toolkit/experimental";
 import { http, createBundlerClient, createPublicClient, parseEther } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
 import { lineaSepolia as chain } from "viem/chains";
@@ -83,7 +83,7 @@ import { lineaSepolia as chain } from "viem/chains";
 import {
   Implementation,
   toMetaMaskSmartAccount,
-} from "@metamask-private/delegator-core-viem";
+} from "@metamask/delegation-toolkit";
 
 const transport = http();
 const publicClient = createClient({ transport, chain });
@@ -146,7 +146,7 @@ After creating your `WalletClient`, extend it with `erc7710WalletActions`.
 For example:
 
 ```typescript
-import { erc7710WalletActions } from "@metamask-private/delegator-core-viem/experimental";
+import { erc7710WalletActions } from "@metamask/delegation-toolkit/experimental";
 import { http, createWalletClient, parseEther } from "viem";
 import { privateKeyToAccount, generatePrivateKey } from "viem/accounts";
 import { lineaSepolia as chain } from "viem/chains";

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { createClient, custom } from "viem";
 import { sepolia } from "viem/chains";
-import { erc7715ProviderActions } from "@metamask-private/delegator-core-viem/experimental";
+import { erc7715ProviderActions } from "@metamask/delegation-toolkit/experimental";
 import { useSessionAccount } from "@/providers/SessionAccountProvider";
 import { usePermissions } from "@/providers/PermissionProvider";
 import { Loader2, CheckCircle } from "lucide-react";
