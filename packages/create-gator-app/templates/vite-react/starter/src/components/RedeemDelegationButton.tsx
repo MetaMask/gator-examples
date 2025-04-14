@@ -2,17 +2,14 @@ import { useAccountAbstractionUtils } from "@/hooks/useAccountAbstractionUtils";
 import useDelegateSmartAccount from "@/hooks/useDelegateSmartAccount";
 import useStorageClient from "@/hooks/useStorageClient";
 import { prepareRedeemDelegationData } from "@/utils/delegationUtils";
-import { getDeleGatorEnvironment } from "@metamask-private/delegator-core-viem";
 import { useState } from "react";
 import { Hex } from "viem";
-import { sepolia } from "viem/chains";
 
 
 export default function RedeemDelegationButton() {
   const { smartAccount } = useDelegateSmartAccount();
   const [loading, setLoading] = useState(false);
   const [transactionHash, setTransactionHash] = useState<Hex | null>(null);
-  const chain = sepolia;
   const { getDelegation } = useStorageClient();
   const { bundlerClient, paymasterClient, pimlicoClient } =
     useAccountAbstractionUtils();
@@ -35,7 +32,7 @@ export default function RedeemDelegationButton() {
       account: smartAccount,
       calls: [
         {
-          to: getDeleGatorEnvironment(chain.id).DelegationManager,
+          to: smartAccount.environment.DelegationManager,
           data: redeemData,
         },
       ],

@@ -8,6 +8,7 @@ import { zeroAddress } from "viem";
 
 export default function DeployDelegatorButton() {
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const { smartAccount } = useDelegatorSmartAccount();
   const { changeStep } = useStepContext();
   const { bundlerClient, paymasterClient, pimlicoClient } =
@@ -39,8 +40,11 @@ export default function DeployDelegatorButton() {
   };
 
   return (
-    <button className="button" onClick={handleDeployDelegator}>
-      {loading ? "Deploying..." : "Deploy Delegator Account"}
-    </button>
+    <>
+      <button className="button" onClick={handleDeployDelegator}>
+        {loading ? "Deploying..." : "Deploy Delegator Account"}
+      </button>
+      {error && <div className="error">{error}</div>}
+    </>
   );
 }

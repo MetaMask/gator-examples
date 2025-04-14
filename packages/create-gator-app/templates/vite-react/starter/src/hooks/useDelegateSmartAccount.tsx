@@ -2,7 +2,7 @@ import {
   Implementation,
   MetaMaskSmartAccount,
   toMetaMaskSmartAccount,
-} from "@metamask-private/delegator-core-viem";
+} from "@metamask/delegation-toolkit";
 import { useEffect, useState } from "react";
 import { privateKeyToAccount } from "viem/accounts";
 import { usePublicClient } from "wagmi";
@@ -12,8 +12,9 @@ export default function useDelegateSmartAccount() {
   const { delegateWallet } = useGatorContext();
   const publicClient = usePublicClient();
 
-  const [smartAccount, setSmartAccount] =
-    useState<MetaMaskSmartAccount<Implementation> | null>(null);
+  const [smartAccount, setSmartAccount] = useState<MetaMaskSmartAccount | null>(
+    null
+  );
 
   useEffect(() => {
     console.log(delegateWallet);

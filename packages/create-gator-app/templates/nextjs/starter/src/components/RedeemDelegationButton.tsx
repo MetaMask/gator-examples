@@ -4,10 +4,8 @@ import { usePimlicoServices } from "@/hooks/usePimlicoServices";
 import useDelegateSmartAccount from "@/hooks/useDelegateSmartAccount";
 import useStorageClient from "@/hooks/useStorageClient";
 import { prepareRedeemDelegationData } from "@/utils/delegationUtils";
-import { getDeleGatorEnvironment } from "@metamask-private/delegator-core-viem";
 import { useState } from "react";
 import { Hex } from "viem";
-import { useChainId } from "wagmi";
 
 export default function RedeemDelegationButton() {
   const { smartAccount } = useDelegateSmartAccount();
@@ -16,7 +14,6 @@ export default function RedeemDelegationButton() {
   const { getDelegation } = useStorageClient();
   const { bundlerClient, paymasterClient, pimlicoClient } =
     usePimlicoServices();
-  const chainId = useChainId();
 
   const handleRedeemDelegation = async () => {
     if (!smartAccount) return;
@@ -36,7 +33,7 @@ export default function RedeemDelegationButton() {
       account: smartAccount,
       calls: [
         {
-          to: getDeleGatorEnvironment(chainId).DelegationManager,
+          to: smartAccount.environment.DelegationManager,
           data: redeemData,
         },
       ],
