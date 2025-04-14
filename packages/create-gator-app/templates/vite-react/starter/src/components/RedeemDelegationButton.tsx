@@ -2,7 +2,7 @@ import { useAccountAbstractionUtils } from "@/hooks/useAccountAbstractionUtils";
 import useDelegateSmartAccount from "@/hooks/useDelegateSmartAccount";
 import useStorageClient from "@/hooks/useStorageClient";
 import { prepareRedeemDelegationData } from "@/utils/delegationUtils";
-import { getDeleGatorEnvironment } from "@metamask-private/delegator-core-viem";
+import { getDeleGatorEnvironment } from "@metamask/delegation-toolkit";
 import { useState } from "react";
 import { Hex } from "viem";
 import { sepolia } from "viem/chains";

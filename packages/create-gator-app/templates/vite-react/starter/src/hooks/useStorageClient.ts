@@ -1,7 +1,7 @@
-import { DelegationStruct } from "@metamask-private/delegator-core-viem";
+import { Delegation } from "@metamask/delegation-toolkit";
 
 export default function useStorageClient() {
-  function storeDelegation(delegation: DelegationStruct) {
+  function storeDelegation(delegation: Delegation) {
     localStorage.setItem(
       delegation.delegate,
       JSON.stringify(delegation, (_, value) =>
@@ -10,7 +10,7 @@ export default function useStorageClient() {
     );
   }
 
-  function getDelegation(delegate: string): DelegationStruct | null {
+  function getDelegation(delegate: string): Delegation | null {
     const delegation = localStorage.getItem(delegate);
     if (!delegation) {
       return null;
