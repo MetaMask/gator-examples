@@ -13,11 +13,11 @@ export function prepareRootDelegation(
   delegator: MetaMaskSmartAccount,
   delegate: Address
 ): Delegation {
-  // The following caveat is a simple example of a caveat that limits
+  // The following caveat enforcer is a simple example that limits
   // the number of executions the delegate can perform on the delegator's
   // behalf.
 
-  // You can add more caveats to the delegation as needed to restrict
+  // You can add more caveat enforcers to the delegation as needed to restrict
   // the delegate's actions. Checkout delegation-toolkit docs for more
   // information on restricting delegate's actions.
 
