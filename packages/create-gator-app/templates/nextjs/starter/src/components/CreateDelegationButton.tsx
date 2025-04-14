@@ -16,7 +16,7 @@ export default function CreateDelegationButton() {
     if (!smartAccount || !delegateSmartAccount) return;
     console.log(smartAccount.address, delegateSmartAccount.address);
     const delegation = prepareRootDelegation(
-      smartAccount.address,
+      smartAccount,
       delegateSmartAccount.address
     );
 
