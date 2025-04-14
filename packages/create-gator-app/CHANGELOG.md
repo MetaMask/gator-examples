@@ -7,7 +7,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.1.0]
-
-[Unreleased]: https://github.com/MetaMask/gator-examples.git/compare/create-gator-app@0.1.0...HEAD
-[0.1.0]: https://github.com/MetaMask/gator-examples.git/releases/tag/create-gator-app@0.1.0
+[Unreleased]: https://github.com/MetaMask/gator-examples/
