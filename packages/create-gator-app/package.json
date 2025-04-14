@@ -1,5 +1,5 @@
 {
-  "name": "create-gator-app",
+  "name": "@metamask/create-gator-app",
   "version": "0.0.0",
   "license": "(MIT-0 OR Apache-2.0)",
   "description": "CLI tool to create new MetaMask Delegator applications",
