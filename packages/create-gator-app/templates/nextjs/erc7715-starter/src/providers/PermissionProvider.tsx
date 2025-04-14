@@ -7,7 +7,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import { GrantPermissionsReturnType } from "@metamask-private/delegator-core-viem/experimental";
+import { GrantPermissionsReturnType } from "@metamask/delegation-toolkit/experimental";
 import { Address } from "viem";
 
 export type Permission = NonNullable<GrantPermissionsReturnType>[number];
