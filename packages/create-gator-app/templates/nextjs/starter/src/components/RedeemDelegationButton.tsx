@@ -16,7 +16,7 @@ export default function RedeemDelegationButton() {
   const chain = sepolia;
   const { getDelegation } = useStorageClient();
   const { bundlerClient, paymasterClient, pimlicoClient } =
-  usePimlicoServices();
+    usePimlicoServices();
 
   const handleRedeemDelegation = async () => {
     if (!smartAccount) return;
@@ -36,7 +36,7 @@ export default function RedeemDelegationButton() {
       account: smartAccount,
       calls: [
         {
-          to: getDeleGatorEnvironment(chain.id).DelegationManager,
+          to: smartAccount.environment.DelegationManager,
           data: redeemData,
         },
       ],
