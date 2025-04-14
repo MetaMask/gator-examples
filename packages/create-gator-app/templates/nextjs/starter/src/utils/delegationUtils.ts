@@ -1,27 +1,31 @@
 import {
+  createDelegation,
   createExecution,
-  createRootDelegation,
+  Delegation,
   DelegationFramework,
-  DelegationStruct,
   SINGLE_DEFAULT_MODE,
-} from "@metamask-private/delegator-core-viem";
+} from "@metamask/delegation-toolkit";
 import { Address, Hex } from "viem";
 
 export function prepareRootDelegation(
   delegator: Address,
   delegate: Address
-): DelegationStruct {
+): Delegation {
   console.log(delegate, delegator);
-  return createRootDelegation(delegate, delegator, []);
+  return createDelegation({
+    to: delegate,
+    from: delegator,
+    caveats: [],
+  });
 }
 
-export function prepareRedeemDelegationData(delegation: DelegationStruct): Hex {
+export function prepareRedeemDelegationData(delegation: Delegation): Hex {
   const execution = createExecution();
-  const data = DelegationFramework.encode.redeemDelegations(
-    [[delegation]],
-    [SINGLE_DEFAULT_MODE],
-    [[execution]]
-  );
+  const data = DelegationFramework.encode.redeemDelegations({
+    delegations: [[delegation]],
+    modes: [SINGLE_DEFAULT_MODE],
+    executions: [[execution]],
+  });
 
   return data;
 }

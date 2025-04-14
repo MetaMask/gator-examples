@@ -4,18 +4,19 @@ import {
   Implementation,
   MetaMaskSmartAccount,
   toMetaMaskSmartAccount,
-} from "@metamask-private/delegator-core-viem";
+} from "@metamask/delegation-toolkit";
 import { useEffect, useState } from "react";
 import { useAccount, usePublicClient, useWalletClient } from "wagmi";
 
 export default function useDelegatorSmartAccount(): {
-  smartAccount: MetaMaskSmartAccount<Implementation> | null;
+  smartAccount: MetaMaskSmartAccount | null;
 } {
   const { address } = useAccount();
   const publicClient = usePublicClient();
   const { data: walletClient } = useWalletClient();
-  const [smartAccount, setSmartAccount] =
-    useState<MetaMaskSmartAccount<Implementation> | null>(null);
+  const [smartAccount, setSmartAccount] = useState<MetaMaskSmartAccount | null>(
+    null
+  );
 
   useEffect(() => {
     if (!address || !walletClient || !publicClient) return;
