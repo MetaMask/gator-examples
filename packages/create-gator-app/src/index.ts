@@ -4,14 +4,13 @@ import fs from "fs-extra";
 import path from "path";
 import ora from "ora";
 import chalk from "chalk";
-import { generatePackageManagerConfigs } from "./lib/helpers/create-package-manager-config";
 import { installTemplate } from "./lib/helpers/install-template";
 import { displayIntro } from "./lib/helpers/intro";
 import { WEB3AUTH_PROMPTS } from "./lib/prompts/web3auth";
 import { BASE_PROMPTS } from "./lib/prompts/base";
 import { configureWeb3Auth } from "./lib/helpers/configure-web3auth";
-import { configurePackageJson } from "./lib/helpers/configure-package-json";
 import { installDependencies } from "./lib/helpers/install-dependencies";
+import { configurePackageJson } from "./lib/helpers/configure-package-json";
 import { displayOutro } from "./lib/helpers/outro";
 import { createCommand } from "./lib/helpers/commands";
 import { Command, OptionValues } from "commander";
@@ -55,6 +54,8 @@ export async function main() {
     packageManager: answers.packageManager,
     template: answers.template,
     web3AuthNetwork: web3AuthAnswers?.web3AuthNetwork,
+    llmRules: flags.llmRules || answers.llmRules || false,
+    ideType: answers.ideType,
   };
 
   const spinner = ora("Creating your project...").start();
@@ -89,7 +90,18 @@ export async function main() {
 
     spinner.text = "Copying template files...";
 
-    installTemplate(templatePath, targetDir, gatorAppConfiguration);
+    const templateResult = await installTemplate(
+      templatePath,
+      targetDir,
+      gatorAppConfiguration
+    );
+
+    if (!templateResult.success) {
+      spinner.fail(templateResult.message);
+      process.exit(1);
+    }
+
+    spinner.succeed("Template files copied successfully");
 
     if (gatorAppConfiguration.useWeb3auth) {
       spinner.text = "Configuring Web3Auth...";
@@ -99,40 +111,60 @@ export async function main() {
     spinner.text = "Setting up package configuration...";
     await configurePackageJson(gatorAppConfiguration);
 
-    // This is not required once the SDK made public
-    await generatePackageManagerConfigs(gatorAppConfiguration);
-
     process.chdir(targetDir);
 
-    try {
-      spinner.text = `Installing dependencies with ${gatorAppConfiguration.packageManager}...`;
-      await installDependencies(gatorAppConfiguration.packageManager);
-    } catch (installError: unknown) {
-      spinner.warn(
-        chalk.yellow(
-          "Dependencies installation failed, but your project was created."
-        )
-      );
-      console.error(
-        chalk.red(
-          `\nInstallation error: ${
-            installError instanceof Error
-              ? installError.message
-              : String(installError)
+    const { installDeps } = await inquirer.prompt([
+      {
+        type: "confirm",
+        name: "installDeps",
+        message: "Do you want to install dependencies now?",
+        default: true,
+      },
+    ]);
+
+    if (installDeps) {
+      try {
+        spinner.text = `Installing dependencies with ${gatorAppConfiguration.packageManager}...`;
+        await installDependencies(gatorAppConfiguration.packageManager);
+      } catch (installError: unknown) {
+        spinner.warn(
+          chalk.yellow(
+            "Dependencies installation failed, but your project was created."
+          )
+        );
+        console.error(
+          chalk.red(
+            `\nInstallation error: ${
+              installError instanceof Error
+                ? installError.message
+                : String(installError)
+            }`
+          )
+        );
+        console.log("\nYou can try installing dependencies manually:");
+        console.log(`cd ${gatorAppConfiguration.projectName}`);
+        console.log(
+          `  ${gatorAppConfiguration.packageManager} ${
+            gatorAppConfiguration.packageManager === "yarn" ? "" : "install"
           }`
-        )
-      );
-      console.log("\nYou can try installing dependencies manually:");
+        );
+
+        spinner.succeed(
+          chalk.green(`Project structure created at ${targetDir}`)
+        );
+        return;
+      }
+    } else {
+      spinner.info(chalk.blue("Skipping dependency installation."));
+      console.log("\nYou can install dependencies manually later:");
       console.log(`cd ${gatorAppConfiguration.projectName}`);
       console.log(
         `  ${gatorAppConfiguration.packageManager} ${
           gatorAppConfiguration.packageManager === "yarn" ? "" : "install"
         }`
       );
-
-      spinner.succeed(chalk.green(`Project structure created at ${targetDir}`));
-      return;
     }
+
     spinner.succeed(
       chalk.green(`Project created successfully at ${targetDir}`)
     );
