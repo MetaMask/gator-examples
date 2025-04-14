@@ -4,7 +4,7 @@ import {
   Implementation,
   MetaMaskSmartAccount,
   toMetaMaskSmartAccount,
-} from "@metamask-private/delegator-core-viem";
+} from "@metamask/delegation-toolkit";
 import { createContext, useCallback, useState, useContext, useEffect } from "react";
 import { generatePrivateKey, privateKeyToAccount } from "viem/accounts";
 import { publicClient } from "@/services/publicClient";
