@@ -1,6 +1,6 @@
 {
   "name": "create-gator-app",
-  "version": "1.0.0",
+  "version": "0.1.0-alpha-1",
   "license": "(MIT-0 OR Apache-2.0)",
   "description": "CLI tool to create new MetaMask Delegator applications",
   "main": "dist/src/index.js",
