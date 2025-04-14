@@ -4,6 +4,11 @@ export const NEXTJS_TEMPLATE_OPTIONS = [
     value: "starter",
     description: "A basic Next.js template with App Router",
   },
+  {
+    name: "Experimental: Basic Gator app to try out ERC7715 Permissions",
+    value: "erc7715-starter",
+    description: "Experimental: A basic Gator app to try out ERC7715 Permissions",
+  },
 ];
 
 export const VITE_REACT_TEMPLATE_OPTIONS = [

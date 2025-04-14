@@ -28,9 +28,6 @@ After answering these prompts, the CLI will:
 1. Create a new directory with your project name
 2. Copy the template files
 3. Install dependencies
-4. Set up the project configuration
-
-> **Note about Private Packages**: The templates include `@metamask-private/delegator-core-viem`, which is a private package. The CLI uses an NPM authentication token stored in `config.ts` (for development) or hardcoded in the published package to access this private package during installation. End users don't need to configure anything manually when using the published CLI.
 
 Once completed, you can navigate to your project directory and start the development server:
 
@@ -72,23 +69,17 @@ To work on `create-gator-app` locally:
    cd packages/create-gator-app
    ```
 
-4. Create a `config.ts` file in the root of the package with your NPM authentication token:
-   ```typescript
-   export const NPM_AUTH_TOKEN = "your-npm-auth-token";
-   ```
-   This token is required to access the private package `@metamask-private/delegator-core-viem` during development.
-
-5. Build the package:
+4. Build the package:
    ```bash
    pnpm build
    ```
 
-6. Link the package globally to test it:
+5. Link the package globally to test it:
    ```bash
    npm link
    ```
 
-7. Run the CLI:
+6. Run the CLI:
    ```bash
    create-gator-app
    ```
