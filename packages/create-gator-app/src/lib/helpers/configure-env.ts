@@ -4,7 +4,7 @@ export const configureENV = (
   content: string,
   gatorAppConfiguration: GatorAppConfiguration
 ) => {
-  if (gatorAppConfiguration.useWeb3auth) {
+  if (gatorAppConfiguration.addWeb3auth && gatorAppConfiguration.isWebAuthSupported) {
     const web3AuthNetwork = gatorAppConfiguration.web3AuthNetwork!;
     if (gatorAppConfiguration.framework === "nextjs") {
       content += `

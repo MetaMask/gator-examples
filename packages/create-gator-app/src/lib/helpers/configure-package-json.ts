@@ -5,12 +5,18 @@ import GatorAppConfiguration from "../types/gator-app-configuration";
 export const configurePackageJson = async (
   gatorAppConfiguration: GatorAppConfiguration
 ) => {
-  const packageJsonPath = path.join(gatorAppConfiguration.targetDir, "package.json");
+  const packageJsonPath = path.join(
+    gatorAppConfiguration.targetDir,
+    "package.json"
+  );
   // If the package.json file exists, update the name and dependencies
   if (fs.existsSync(packageJsonPath)) {
     const pkgJson = await fs.readJson(packageJsonPath);
     pkgJson.name = gatorAppConfiguration.projectName;
-    if (gatorAppConfiguration.useWeb3auth) {
+    if (
+      gatorAppConfiguration.addWeb3auth &&
+      gatorAppConfiguration.isWebAuthSupported
+    ) {
       pkgJson.dependencies = {
         ...pkgJson.dependencies,
         "@web3auth/ethereum-provider": "^9.7.0",

@@ -6,7 +6,8 @@ interface GatorAppConfiguration {
   targetDir: string;
   templatePath: string;
   web3AuthTemplatePath?: string;
-  useWeb3auth: boolean;
+  addWeb3auth: boolean;
+  isWebAuthSupported: boolean;
   framework: Framework;
   packageManager: PackageManager;
   web3AuthNetwork?: string;

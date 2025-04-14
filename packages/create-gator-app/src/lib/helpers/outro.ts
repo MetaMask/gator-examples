@@ -14,13 +14,6 @@ export const displayOutro = (gatorAppConfiguration: GatorAppConfiguration) => {
       chalk.white(`  3. ${gatorAppConfiguration.packageManager} dev`)
     );
   }
-
-  console.log(chalk.cyan("\n📚 Documentation:"));
-  console.log(
-    chalk.white(
-      "  • Learn more about Delegation toolkit: https://docs.gator.metamask.io/"
-    )
-  );
   
   if (gatorAppConfiguration.addLLMRules) {
     console.log(chalk.cyan("\n🤖 LLM Context:"));
@@ -48,6 +41,31 @@ export const displayOutro = (gatorAppConfiguration: GatorAppConfiguration) => {
       );
     }
   }
+
+  if (gatorAppConfiguration.addWeb3auth) {
+    console.log(chalk.cyan("\n🛠 Web3Auth:"));
+
+    if(gatorAppConfiguration.isWebAuthSupported) {
+      console.log(
+        chalk.white(
+          "  • Web3Auth has been added to the project"
+        )
+      );
+    } else {
+      console.log(
+        chalk.yellow(
+          "  • Web3Auth was not added to the project because it is not supported for this template"
+        )
+      );
+    }
+  }
+
+  console.log(chalk.cyan("\n📚 Documentation:"));
+  console.log(
+    chalk.white(
+      "  • Learn more about Delegation toolkit: https://docs.gator.metamask.io/"
+    )
+  );
   
   console.log(chalk.green("\n🦊 Happy building with Delegation toolkit! 🦊"));
 };

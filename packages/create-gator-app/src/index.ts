@@ -17,6 +17,7 @@ import { Command, OptionValues } from "commander";
 import GatorAppConfiguration from "./lib/types/gator-app-configuration";
 import { checkLLMRulesExist } from "./lib/helpers/check-llm-rules";
 import { LLM_PROMPTS } from "./lib/prompts/llm";
+import { isWebAuthSupported } from "./lib/helpers/check-web3auth-support";
 
 export async function main() {
   const command: Command = createCommand();
@@ -26,15 +27,6 @@ export async function main() {
   const answers = await inquirer.prompt(BASE_PROMPTS);
   let web3AuthAnswers: Answers | undefined;
   let llmAnswers: Answers | undefined;
-
-  // If the user wants to use Embedded Wallet, prompt them for the Web3Auth configuration
-  if (flags.useWeb3auth) {
-    web3AuthAnswers = await inquirer.prompt(WEB3AUTH_PROMPTS);
-  }
-
-  if (flags.addLlmRules) {
-    llmAnswers = await inquirer.prompt(LLM_PROMPTS);
-  }
 
   const targetDir = path.join(process.cwd(), answers.projectName);
   const templatePath = path.join(
@@ -51,14 +43,26 @@ export async function main() {
     "web3auth"
   );
 
-  console.log("LLM RULES:", checkLLMRulesExist(templatePath));
+  const isWeb3AuthSupportAvailable = isWebAuthSupported(answers.template);
+  const isLLMSupportAvailable = checkLLMRulesExist(templatePath);
+
+  // If the user wants to use Embedded Wallet, prompt them for the
+  // Web3Auth configuration
+  if (flags.addWeb3auth && isWeb3AuthSupportAvailable) {
+    web3AuthAnswers = await inquirer.prompt(WEB3AUTH_PROMPTS);
+  }
+
+  // If the user wants to use LLM rules, prompt them for the LLM configuration
+  if (flags.addLlmRules && isLLMSupportAvailable) {
+    llmAnswers = await inquirer.prompt(LLM_PROMPTS);
+  }
 
   const gatorAppConfiguration: GatorAppConfiguration = {
     projectName: answers.projectName,
     targetDir: targetDir,
     templatePath: templatePath,
     web3AuthTemplatePath: web3authTemplatePath,
-    useWeb3auth: flags.useWeb3auth,
+    addWeb3auth: flags.addWeb3auth,
     framework: answers.framework,
     packageManager: answers.packageManager,
     template: answers.template,
@@ -67,6 +71,7 @@ export async function main() {
     areLLMRulesAvailable: checkLLMRulesExist(templatePath),
     ideType: llmAnswers?.ideType,
     skipInstall: flags.skipInstall,
+    isWebAuthSupported: isWebAuthSupported(answers.template),
   };
 
   const spinner = ora("Creating your project...").start();
@@ -114,7 +119,10 @@ export async function main() {
 
     spinner.succeed("Template files copied successfully");
 
-    if (gatorAppConfiguration.useWeb3auth) {
+    if (
+      gatorAppConfiguration.addWeb3auth &&
+      gatorAppConfiguration.isWebAuthSupported
+    ) {
       spinner.text = "Configuring Web3Auth...";
       await configureWeb3Auth(gatorAppConfiguration);
     }
