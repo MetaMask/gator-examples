@@ -4,7 +4,7 @@ import {
   Delegation,
   DelegationFramework,
   SINGLE_DEFAULT_MODE,
-} from "@metamask-private/delegator-core-viem";
+} from "@metamask/delegation-toolkit";
 import { Address, Hex } from "viem";
 
 export function prepareRootDelegation(

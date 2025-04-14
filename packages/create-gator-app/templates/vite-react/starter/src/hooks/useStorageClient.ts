@@ -1,4 +1,4 @@
-import { Delegation } from "@metamask-private/delegator-core-viem";
+import { Delegation } from "@metamask/delegation-toolkit";
 
 export default function useStorageClient() {
   function storeDelegation(delegation: Delegation) {
