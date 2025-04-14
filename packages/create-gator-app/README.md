@@ -41,117 +41,8 @@ npm run dev  # or yarn dev, pnpm dev
 Currently, the following templates are available:
 
 - **nextjs-starter**: A basic Next.js template with App Router, configured for MetaMask Delegator integration
-
-## Development
-
-### Prerequisites
-
-- Node.js (v14 or higher)
-- npm, yarn, or pnpm
-
-### Local Development
-
-To work on `create-gator-app` locally:
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/chin-flags/gator-examples.git
-   cd gator-examples
-   ```
-
-2. Install dependencies:
-   ```bash
-   pnpm install
-   ```
-
-3. Navigate to the package directory:
-   ```bash
-   cd packages/create-gator-app
-   ```
-
-4. Build the package:
-   ```bash
-   pnpm build
-   ```
-
-5. Link the package globally to test it:
-   ```bash
-   npm link
-   ```
-
-6. Run the CLI:
-   ```bash
-   create-gator-app
-   ```
-
-For development with auto-reloading:
-```bash
-pnpm dev
-```
-
-### Running Tests
-
-```bash
-pnpm test
-```
-
-To run tests in watch mode:
-```bash
-pnpm test:watch
-```
-
-## Contributing
-
-### Adding a New Template
-
-To add a new template to `create-gator-app`:
-
-1. Create a new directory in the `templates` folder with your template name:
-   ```bash
-   mkdir -p templates/your-template-name
-   ```
-
-2. Add all necessary files for your template. At minimum, include:
-   - `package.json` with all required dependencies
-   - Basic project structure
-   - Configuration files (e.g., `.env.example`, `tsconfig.json`, etc.)
-   - A README.md explaining the template
-
-3. Update the `TEMPLATES` array in `src/lib/templates.ts` to include your new template:
-   ```typescript
-   export const TEMPLATES = [
-     // ... existing templates
-     {
-       name: "Your Template Display Name",
-       value: "your-template-name",
-       description: "A brief description of your template",
-     }
-   ];
-   ```
-
-4. If your template requires special installation steps, update the installation logic in `src/lib/templates.ts` or create a new function for your template.
-
-5. Test your template by building the CLI and creating a new project with your template.
-
-### Template Best Practices
-
-When creating a template:
-
-1. Keep dependencies up-to-date
-2. Include comprehensive documentation
-3. Follow security best practices
-4. Provide example code that demonstrates MetaMask Delegator functionality
-5. Include proper TypeScript types
-6. Add appropriate ESLint and Prettier configurations
-7. Include a `.env.example` file with required environment variables
-
-### Submitting Changes
-
-1. Fork the repository
-2. Create a new branch for your changes
-3. Make your changes
-4. Run tests to ensure everything works
-5. Submit a pull request
+- **vite-react-starter**: A basic ReactJS template configured for MetaMask Delegator integration
+- **nextjs-ERC-7715-starter**: A basic Next.js tempalte with App Router, configured for ERC-7715 actions with Delgation Toolkit
 
 ## License
 
@@ -159,5 +50,4 @@ When creating a template:
 
 ## Related Projects
 
-- [MetaMask Delegation Toolkit](https://docs.gator.metamask.io/)
-- [MetaMask SDK](https://docs.metamask.io/sdk/)
+- [MetaMask Delegation Toolkit Docs](https://docs.gator.metamask.io/)

@@ -30,10 +30,10 @@ To run an example:
 cd examples/example-name
 
 # Install dependencies
-npm install
+yarn
 
 # Start the development server
-npm run dev
+yarn run dev
 ```
 
 ## create-gator-app
@@ -44,7 +44,7 @@ The `create-gator-app` package is a CLI tool that helps you bootstrap a new proj
 
 ```bash
 # Using npx
-npx create-gator-app
+npx create-gator-app@latest
 
 # Or install globally
 npm install -g create-gator-app
@@ -56,7 +56,8 @@ create-gator-app
 ### Prerequisites
 
 - Node.js (v22 or later)
-- npm or yarn
+- Yarn (required for create-gator-app development)
+- npm or yarn (for examples)
 
 ### Setup
 
@@ -65,11 +66,11 @@ create-gator-app
 git clone https://github.com/chin-flags/gator-examples
 cd gator-examples
 
-# Install dependencies
-npm install
+# Install dependencies using yarn (required for create-gator-app)
+yarn install
 
 # Build all packages
-npm run build
+yarn build
 ```
 
 ## Contributing
