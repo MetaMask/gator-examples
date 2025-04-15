@@ -1,10 +1,10 @@
-import GatorAppConfiguration from "../types/gator-app-configuration";
+import IGatorAppOptions from "../types/gator-app-options";
 
 export const configureENV = (
   content: string,
-  gatorAppConfiguration: GatorAppConfiguration
+  gatorAppConfiguration: IGatorAppOptions
 ) => {
-  if (gatorAppConfiguration.addWeb3auth && gatorAppConfiguration.isWebAuthSupported) {
+  if (gatorAppConfiguration.addWeb3auth && gatorAppConfiguration.isWeb3AuthSupported) {
     const web3AuthNetwork = gatorAppConfiguration.web3AuthNetwork!;
     if (gatorAppConfiguration.framework === "nextjs") {
       content += `

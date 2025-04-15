@@ -1,9 +1,9 @@
 import fs from "fs-extra";
 import path from "path";
-import GatorAppConfiguration from "../types/gator-app-configuration";
+import IGatorAppOptions from "../types/gator-app-options";
 
 export const configurePackageJson = async (
-  gatorAppConfiguration: GatorAppConfiguration
+  gatorAppConfiguration: IGatorAppOptions
 ) => {
   const packageJsonPath = path.join(
     gatorAppConfiguration.targetDir,
@@ -15,7 +15,7 @@ export const configurePackageJson = async (
     pkgJson.name = gatorAppConfiguration.projectName;
     if (
       gatorAppConfiguration.addWeb3auth &&
-      gatorAppConfiguration.isWebAuthSupported
+      gatorAppConfiguration.isWeb3AuthSupported
     ) {
       pkgJson.dependencies = {
         ...pkgJson.dependencies,

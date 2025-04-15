@@ -1,7 +1,7 @@
 import chalk from "chalk";
-import GatorAppConfiguration from "../types/gator-app-configuration";
+import IGatorAppOptions from "../types/gator-app-options";
 
-export const displayOutro = (gatorAppConfiguration: GatorAppConfiguration) => {
+export const displayOutro = (gatorAppConfiguration: IGatorAppOptions) => {
   console.log(chalk.cyan("\n🚀 Next steps:"));
   console.log(chalk.white(`  1. cd ${gatorAppConfiguration.projectName}`));
   console.log(chalk.white(`  2. Update the .env file variables`));
@@ -45,7 +45,7 @@ export const displayOutro = (gatorAppConfiguration: GatorAppConfiguration) => {
   if (gatorAppConfiguration.addWeb3auth) {
     console.log(chalk.cyan("\n🛠 Web3Auth:"));
 
-    if(gatorAppConfiguration.isWebAuthSupported) {
+    if(gatorAppConfiguration.isWeb3AuthSupported) {
       console.log(
         chalk.white(
           "  • Web3Auth has been added to the project"

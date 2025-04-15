@@ -1,7 +1,7 @@
 import fs from "fs-extra";
 import path from "path";
 import { configureENV } from "./configure-env";
-import GatorAppConfiguration from "../types/gator-app-configuration";
+import IGatorAppOptions from "../types/gator-app-options";
 import { copyLLMRulesFiles } from "./copy-llm-rules";
 
 interface TemplateResult {
@@ -12,7 +12,7 @@ interface TemplateResult {
 export const installTemplate = async (
   templatePath: string,
   targetDir: string,
-  gatorAppConfiguration: GatorAppConfiguration
+  gatorAppConfiguration: IGatorAppOptions
 ): Promise<TemplateResult> => {
   try {
     const templateFiles = fs.readdirSync(templatePath);
