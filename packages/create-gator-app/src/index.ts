@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 import inquirer, { Answers } from "inquirer";
 import chalk from "chalk";
-import ora from "ora";
 import { Command, OptionValues } from "commander";
 import { createCommand } from "./lib/helpers/commands";
 import { displayIntro } from "./lib/helpers/intro";
@@ -12,17 +11,19 @@ import { LLM_PROMPTS } from "./lib/prompts/llm";
 import { GatorAppConfig } from "./lib/gator-app-config";
 import { CreateGatorApp } from "./lib/create-gator-app";
 import { GatorAppError } from "./lib/types/gator-app-error";
+import { isWeb3AuthSupported } from "./lib/helpers/check-web3auth-support";
+import { checkLLMRulesExist } from "./lib/helpers/check-llm-rules";
 
 async function promptUser(flags: OptionValues) {
   const answers = await inquirer.prompt(BASE_PROMPTS);
   let web3AuthAnswers: Answers | undefined;
   let llmAnswers: Answers | undefined;
 
-  if (flags.addWeb3auth) {
+  if (flags.addWeb3auth && isWeb3AuthSupported(answers.template)) {
     web3AuthAnswers = await inquirer.prompt(WEB3AUTH_PROMPTS);
   }
 
-  if (flags.addLlmRules) {
+  if (flags.addLlmRules && checkLLMRulesExist(answers.template)) {
     llmAnswers = await inquirer.prompt(LLM_PROMPTS);
   }
 
@@ -34,11 +35,8 @@ export async function main() {
   const flags: OptionValues = command.parse(process.argv).opts();
 
   displayIntro();
-  const spinner = ora("Creating your project...").start();
-
   try {
     const { answers, web3AuthAnswers, llmAnswers } = await promptUser(flags);
-    
     const gatorAppConfig = new GatorAppConfig(
       answers,
       web3AuthAnswers,
@@ -51,7 +49,6 @@ export async function main() {
 
     displayOutro(gatorAppConfig.getOptions());
   } catch (error) {
-    spinner.fail("Failed to create project");
     if (error instanceof GatorAppError) {
       console.error(chalk.red(`\nError: ${error.message}`));
     } else {
