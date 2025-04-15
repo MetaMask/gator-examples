@@ -10,9 +10,11 @@ import {
 import { configurePackageJson } from "./helpers/configure-package-json";
 import { ErrorCodes, BuilderError } from "./types/builder-error";
 import { BuilderConfig } from "./config";
+import ora from "ora";
 
 export class Builder {
   private builderConfig: BuilderConfig;
+  private spinner: ora.Ora;
 
   constructor(private options: IBuilderOptions) {
     this.builderConfig = new BuilderConfig({
@@ -25,18 +27,24 @@ export class Builder {
       undefined,
       { addWeb3auth: this.options.addWeb3auth }
     );
+    this.spinner = ora("Creating your project...");
   }
 
   async createProject(): Promise<void> {
+    this.spinner.start();
     await this.handleExistingDirectory();
     await this.copyTemplateFiles();
     await this.configureWeb3Auth();
     await this.configurePackage();
     await this.installDependencies();
+    this.spinner.succeed(
+      chalk.green(`Project structure created at ${this.options.targetDir}`)
+    );
   }
 
   private async handleExistingDirectory(): Promise<void> {
     if (fs.existsSync(this.options.targetDir)) {
+      this.spinner.stop();
       const { overwrite } = await inquirer.prompt([
         {
           type: "confirm",
@@ -52,7 +60,7 @@ export class Builder {
           ErrorCodes.PROJECT_EXISTS
         );
       }
-
+      this.spinner.start("Cleaning existing directory...");
       await fs.emptyDir(this.options.targetDir);
     } else {
       fs.mkdirSync(this.options.targetDir, { recursive: true });
@@ -60,6 +68,7 @@ export class Builder {
   }
 
   private async copyTemplateFiles(): Promise<void> {
+    this.spinner.text = "Copying template files...";
     const templateResult = await installTemplate(
       this.options.templatePath,
       this.options.targetDir,
@@ -67,39 +76,48 @@ export class Builder {
     );
 
     if (!templateResult.success) {
+      this.spinner.fail(templateResult.message);
       throw new BuilderError(
         templateResult.message,
         ErrorCodes.TEMPLATE_COPY_FAILED
       );
     }
+    this.spinner.succeed("Template files copied successfully");
   }
 
   private async configureWeb3Auth(): Promise<void> {
-
     if (this.builderConfig.shouldAddWeb3AuthConfig()) {
+      this.spinner.start("Configuring Web3Auth...");
       try {
         await configureWeb3Auth(this.options);
+        this.spinner.succeed("Web3Auth configured successfully");
       } catch (error) {
+        this.spinner.fail("Web3Auth configuration failed");
         throw BuilderError.fromError(error, ErrorCodes.WEB3AUTH_CONFIG_FAILED);
       }
     }
   }
 
   private async configurePackage(): Promise<void> {
+    this.spinner.start("Configuring package.json...");
     try {
       await configurePackageJson(this.builderConfig);
+      this.spinner.succeed("package.json configured successfully");
     } catch (error) {
+      this.spinner.fail("package.json configuration failed");
       throw BuilderError.fromError(error, ErrorCodes.PACKAGE_CONFIG_FAILED);
     }
   }
 
   private async installDependencies(): Promise<void> {
     if (!this.options.skipInstall) {
+      this.spinner.start("Installing dependencies...");
       try {
         process.chdir(this.options.targetDir);
         await installDependencies(this.options.packageManager);
+        this.spinner.succeed("Dependencies installed successfully");
       } catch (error) {
-        console.warn(
+        this.spinner.warn(
           chalk.yellow(
             "Dependencies installation failed, but your project was created."
           )
