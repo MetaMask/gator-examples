@@ -2,7 +2,7 @@
 
 import { usePermissions } from "@/providers/PermissionProvider";
 import { Trash2 } from "lucide-react";
-import { formatEther } from "viem";
+import { formatEther, maxUint256 } from "viem";
 
 export default function PermissionInfo() {
   const { permission, removePermission } = usePermissions();
@@ -58,7 +58,7 @@ export default function PermissionInfo() {
               </div>
             </div>
             <div className="mt-3">
-              <p className="text-gray-400 mb-1">Permission Data:</p>
+              <p className="text-gray-400 mb-1">Permission Data: (formatted)</p>
               <pre className="bg-gray-900 p-3 rounded text-xs max-h-80 text-gray-300 overflow-x-auto">
                 {JSON.stringify(formatPermissionData(permission), null, 2)}
               </pre>
@@ -79,19 +79,23 @@ function formatPermissionData(
     const formattedData: Record<string, unknown> = {};
 
     for (const [key, value] of Object.entries(data)) {
-      if (
-        typeof value === "string" &&
-        (value.startsWith("0x") || /^[0-9a-fA-F]+$/.test(value))
-      ) {
-        if (value.length > 10) {
-          try {
-            formattedData[key] = formatEther(BigInt(value));
-          } catch {
-            formattedData[key] = parseInt(value, 16).toString();
-          }
+      if (["initialAmount", "amountPerSecond", "maxAmount"].includes(key)) {
+        // format as ether
+        const valueBigInt = BigInt(value as string);
+
+        if (valueBigInt === maxUint256) {
+          formattedData[key] = "Unlimited";
         } else {
-          formattedData[key] = parseInt(value, 16).toString();
+          try {
+            formattedData[key] = formatEther(valueBigInt);
+          } catch {
+            formattedData[key] = valueBigInt.toString();
+          }
         }
+      } else if (Array.isArray(value)) {
+        formattedData[key] = value.map((item) => {
+          return formatPermissionData(item as Record<string, unknown>);
+        });
       } else if (typeof value === "object" && value !== null) {
         formattedData[key] = formatPermissionData(
           value as Record<string, unknown>
@@ -106,4 +110,3 @@ function formatPermissionData(
 
   return data;
 }
-

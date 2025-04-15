@@ -12,27 +12,27 @@ export default function DeployDelegatorButton() {
   const { smartAccount } = useDelegatorSmartAccount();
   const { changeStep } = useStepContext();
   const { bundlerClient, paymasterClient, pimlicoClient } =
-  usePimlicoServices();
+    usePimlicoServices();
 
   const handleDeployDelegator = async () => {
     if (!smartAccount) return;
     setLoading(true);
     const { fast: fee } = await pimlicoClient!.getUserOperationGasPrice();
 
-      const userOperationHash = await bundlerClient!.sendUserOperation({
-        account: smartAccount,
-        calls: [
-          {
-            to: zeroAddress,
-          },
-        ],
-        paymaster: paymasterClient,
-        ...fee,
-      });
+    const userOperationHash = await bundlerClient!.sendUserOperation({
+      account: smartAccount,
+      calls: [
+        {
+          to: zeroAddress,
+        },
+      ],
+      paymaster: paymasterClient,
+      ...fee,
+    });
 
-      const { receipt } = await bundlerClient!.waitForUserOperationReceipt({
-        hash: userOperationHash,
-      });
+    const { receipt } = await bundlerClient!.waitForUserOperationReceipt({
+      hash: userOperationHash,
+    });
 
     console.log(receipt);
     setLoading(false);
@@ -46,6 +46,5 @@ export default function DeployDelegatorButton() {
       </button>
       {error && <div className="error">{error}</div>}
     </>
-
   );
 }

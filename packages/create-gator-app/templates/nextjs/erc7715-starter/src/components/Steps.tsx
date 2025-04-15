@@ -96,9 +96,12 @@ export default function Steps() {
               The session account (redeemer) submits a user operation that
               executes the permission granted by the user
             </p>
-            <p className="text-gray-300 mb-4">
-              Make sure to have enough tokens in your smart account
-            </p>
+            <div className="flex items-center gap-2 bg-yellow-900/30 border border-yellow-700 rounded-md p-3 mb-4 mt-4">
+              <span className="text-yellow-400">⚠️</span>
+              <p className="text-yellow-200">
+                Make sure to have enough tokens in your smart account
+              </p>
+            </div>
           </div>
           <RedeemPermissionButton />
         </div>
