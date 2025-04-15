@@ -40,13 +40,7 @@ export default function GrantPermissionsButton() {
     try {
       const client = createClient({
         transport: custom(window.ethereum),
-      }).extend(
-        erc7715ProviderActions({
-          // TODO: remove this once the snaps are deployed
-          kernelSnapId: "local:http://localhost:8080",
-          providerSnapId: "local:http://localhost:8081",
-        })
-      );
+      }).extend(erc7715ProviderActions());
 
       const currentTime = Math.floor(Date.now() / 1000);
       const oneDayInSeconds = 24 * 60 * 60;
@@ -74,7 +68,6 @@ export default function GrantPermissionsButton() {
           },
         },
       ]);
-
       savePermission(permissions[0]);
     } catch (error) {
       console.error("Error granting permissions:", error);
@@ -90,7 +83,9 @@ export default function GrantPermissionsButton() {
         onClick={handleGrantPermissions}
         disabled={isLoading}
       >
-        <span>{isLoading ? "Granting Permissions..." : "Grant Permissions"}</span>
+        <span>
+          {isLoading ? "Granting Permissions..." : "Grant Permissions"}
+        </span>
         {isLoading ? (
           <Loader2 className="h-5 w-5 animate-spin" />
         ) : (
