@@ -10,12 +10,12 @@ if (!pimlicoKey) {
 
 /**
  * A configured bundler client for ERC-7710 account abstraction operations.
- * Uses Pimlico's bundler service on Linea Sepolia testnet (chain ID: 59144).
+ * Uses Pimlico's bundler service on the specified chain.
  * Extends the base bundler client with ERC-7710 specific actions.
  */
 export const bundlerClient = createBundlerClient({
   transport: http(
     `https://api.pimlico.io/v2/${config.chain.id}/rpc?apikey=${pimlicoKey}`
   ),
-  paymaster: true
+  paymaster: true,
 }).extend(erc7710BundlerActions());
