@@ -1,7 +1,7 @@
 import { Framework } from "./framework";
 import { PackageManager } from "./package-manager";
 
-interface IGatorAppOptions {
+interface IBuilderOptions {
   projectName: string;
   targetDir: string;
   templatePath: string;
@@ -18,4 +18,4 @@ interface IGatorAppOptions {
   skipInstall: boolean;
 }
 
-export default IGatorAppOptions;
+export default IBuilderOptions;

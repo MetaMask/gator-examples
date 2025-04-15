@@ -1,18 +1,18 @@
-export class GatorAppError extends Error {
+export class BuilderError extends Error {
   constructor(
     message: string,
     public readonly code: string,
     public readonly details?: unknown
   ) {
     super(message);
-    this.name = "GatorAppError";
+    this.name = "BuilderError";
   }
 
-  static fromError(error: unknown, code: string): GatorAppError {
-    if (error instanceof GatorAppError) {
+  static fromError(error: unknown, code: string): BuilderError {
+    if (error instanceof BuilderError) {
       return error;
     }
-    return new GatorAppError(
+    return new BuilderError(
       error instanceof Error ? error.message : String(error),
       code,
       error

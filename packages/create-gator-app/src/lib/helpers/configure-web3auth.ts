@@ -1,9 +1,9 @@
 import path from "path";
 import fs from "fs-extra";
-import IGatorAppOptions from "../types/gator-app-options";
+import IBuilderOptions from "../types/builder-options";
 
 export const configureWeb3Auth = async (
-  gatorAppConfiguration: IGatorAppOptions
+  gatorAppConfiguration: IBuilderOptions
 ) => {
   const connectorTemplatePath = path.join(
     gatorAppConfiguration.web3AuthTemplatePath!,

@@ -1,12 +1,12 @@
 import { Answers } from "inquirer";
 import { OptionValues } from "commander";
 import path from "path";
-import IGatorAppOptions from "./types/gator-app-options";
+import IBuilderOptions from "./types/builder-options";
 import { checkLLMRulesExist } from "./helpers/check-llm-rules";
 import { isWeb3AuthSupported } from "./helpers/check-web3auth-support";
 
-export class GatorAppConfig {
-  private options: IGatorAppOptions;
+export class BuilderConfig {
+  private options: IBuilderOptions;
 
   constructor(
     baseAnswers: Answers,
@@ -47,7 +47,7 @@ export class GatorAppConfig {
     };
   }
 
-  getOptions(): IGatorAppOptions {
+  getOptions(): IBuilderOptions {
     return this.options;
   }
 

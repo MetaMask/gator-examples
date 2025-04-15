@@ -8,9 +8,9 @@ import { displayOutro } from "./lib/helpers/outro";
 import { WEB3AUTH_PROMPTS } from "./lib/prompts/web3auth";
 import { BASE_PROMPTS } from "./lib/prompts/base";
 import { LLM_PROMPTS } from "./lib/prompts/llm";
-import { GatorAppConfig } from "./lib/gator-app-config";
-import { CreateGatorApp } from "./lib/create-gator-app";
-import { GatorAppError } from "./lib/types/gator-app-error";
+import { BuilderConfig } from "./lib/config";
+import { Builder } from "./lib/builder";
+import { BuilderError } from "./lib/types/builder-error";
 import { isWeb3AuthSupported } from "./lib/helpers/check-web3auth-support";
 import { checkLLMRulesExist } from "./lib/helpers/check-llm-rules";
 
@@ -37,19 +37,19 @@ export async function main() {
   displayIntro();
   try {
     const { answers, web3AuthAnswers, llmAnswers } = await promptUser(flags);
-    const gatorAppConfig = new GatorAppConfig(
+    const builderConfig = new BuilderConfig(
       answers,
       web3AuthAnswers,
       llmAnswers,
       flags
     );
 
-    const createGatorApp = new CreateGatorApp(gatorAppConfig.getOptions());
+    const createGatorApp = new Builder(builderConfig.getOptions());
     await createGatorApp.createProject();
 
-    displayOutro(gatorAppConfig.getOptions());
+    displayOutro(builderConfig.getOptions());
   } catch (error) {
-    if (error instanceof GatorAppError) {
+    if (error instanceof BuilderError) {
       console.error(chalk.red(`\nError: ${error.message}`));
     } else {
       console.error(

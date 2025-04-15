@@ -1,18 +1,31 @@
 import fs from "fs-extra";
 import inquirer from "inquirer";
 import chalk from "chalk";
-import IGatorAppOptions from "./types/gator-app-options";
+import IBuilderOptions from "./types/builder-options";
 import {
   installTemplate,
   configureWeb3Auth,
   installDependencies,
 } from "./helpers";
 import { configurePackageJson } from "./helpers/configure-package-json";
-import { ErrorCodes, GatorAppError } from "./types/gator-app-error";
-import { GatorAppConfig } from "./gator-app-config";
+import { ErrorCodes, BuilderError } from "./types/builder-error";
+import { BuilderConfig } from "./config";
 
-export class CreateGatorApp {
-  constructor(private options: IGatorAppOptions) {}
+export class Builder {
+  private builderConfig: BuilderConfig;
+
+  constructor(private options: IBuilderOptions) {
+    this.builderConfig = new BuilderConfig({
+      projectName: this.options.projectName,
+      framework: this.options.framework,
+      template: this.options.template,
+      packageManager: this.options.packageManager,
+    },
+      { web3AuthNetwork: this.options.web3AuthNetwork },
+      undefined,
+      { addWeb3auth: this.options.addWeb3auth }
+    );
+  }
 
   async createProject(): Promise<void> {
     await this.handleExistingDirectory();
@@ -34,7 +47,7 @@ export class CreateGatorApp {
       ]);
 
       if (!overwrite) {
-        throw new GatorAppError(
+        throw new BuilderError(
           "Operation cancelled. Please choose a different project name.",
           ErrorCodes.PROJECT_EXISTS
         );
@@ -50,11 +63,11 @@ export class CreateGatorApp {
     const templateResult = await installTemplate(
       this.options.templatePath,
       this.options.targetDir,
-      this.options
+      this.builderConfig
     );
 
     if (!templateResult.success) {
-      throw new GatorAppError(
+      throw new BuilderError(
         templateResult.message,
         ErrorCodes.TEMPLATE_COPY_FAILED
       );
@@ -62,32 +75,21 @@ export class CreateGatorApp {
   }
 
   private async configureWeb3Auth(): Promise<void> {
-    const gatorAppConfig = new GatorAppConfig(
-      {
-        projectName: this.options.projectName,
-        framework: this.options.framework,
-        template: this.options.template,
-        packageManager: this.options.packageManager,
-      },
-      { web3AuthNetwork: this.options.web3AuthNetwork },
-      undefined,
-      { addWeb3auth: this.options.addWeb3auth }
-    );
 
-    if (gatorAppConfig.shouldAddWeb3AuthConfig()) {
+    if (this.builderConfig.shouldAddWeb3AuthConfig()) {
       try {
         await configureWeb3Auth(this.options);
       } catch (error) {
-        throw GatorAppError.fromError(error, ErrorCodes.WEB3AUTH_CONFIG_FAILED);
+        throw BuilderError.fromError(error, ErrorCodes.WEB3AUTH_CONFIG_FAILED);
       }
     }
   }
 
   private async configurePackage(): Promise<void> {
     try {
-      await configurePackageJson(this.options);
+      await configurePackageJson(this.builderConfig);
     } catch (error) {
-      throw GatorAppError.fromError(error, ErrorCodes.PACKAGE_CONFIG_FAILED);
+      throw BuilderError.fromError(error, ErrorCodes.PACKAGE_CONFIG_FAILED);
     }
   }
 
@@ -104,16 +106,14 @@ export class CreateGatorApp {
         );
         console.error(
           chalk.red(
-            `\nInstallation error: ${
-              error instanceof Error ? error.message : String(error)
+            `\nInstallation error: ${error instanceof Error ? error.message : String(error)
             }`
           )
         );
         console.log("\nYou can try installing dependencies manually:");
         console.log(`cd ${this.options.projectName}`);
         console.log(
-          `  ${this.options.packageManager} ${
-            this.options.packageManager === "yarn" ? "" : "install"
+          `  ${this.options.packageManager} ${this.options.packageManager === "yarn" ? "" : "install"
           }`
         );
       }

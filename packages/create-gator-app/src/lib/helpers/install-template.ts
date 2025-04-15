@@ -1,8 +1,8 @@
 import fs from "fs-extra";
 import path from "path";
 import { configureENV } from "./configure-env";
-import IGatorAppOptions from "../types/gator-app-options";
 import { copyLLMRulesFiles } from "./copy-llm-rules";
+import { BuilderConfig } from "../config";
 
 interface TemplateResult {
   success: boolean;
@@ -12,9 +12,10 @@ interface TemplateResult {
 export const installTemplate = async (
   templatePath: string,
   targetDir: string,
-  gatorAppConfiguration: IGatorAppOptions
+  builderConfig: BuilderConfig
 ): Promise<TemplateResult> => {
   try {
+    const options = builderConfig.getOptions();
     const templateFiles = fs.readdirSync(templatePath);
 
     for (let file of templateFiles) {
@@ -27,18 +28,15 @@ export const installTemplate = async (
 
         if (file === ".env.example") {
           file = ".env";
-          contents = configureENV(contents, gatorAppConfiguration);
+          contents = configureENV(contents, builderConfig);
         }
 
         const writePath = `${targetDir}/${file}`;
         fs.writeFileSync(writePath, contents, "utf8");
       } else if (stats.isDirectory()) {
         if (file === "llmRules") {
-          if (
-            gatorAppConfiguration.addLLMRules &&
-            gatorAppConfiguration.areLLMRulesAvailable
-          ) {
-            const ideType = gatorAppConfiguration.ideType || "Both";
+          if (builderConfig.shouldAddLLMRules()) {
+            const ideType = options.ideType || "Both";
             copyLLMRulesFiles(templatePath, targetDir, ideType);
           }
           continue;
@@ -49,7 +47,7 @@ export const installTemplate = async (
         await installTemplate(
           `${templatePath}/${file}`,
           `${targetDir}/${file}`,
-          gatorAppConfiguration
+          builderConfig
         );
       }
     }
@@ -58,9 +56,8 @@ export const installTemplate = async (
   } catch (error) {
     return {
       success: false,
-      message: `Failed to install template: ${
-        error instanceof Error ? error.message : String(error)
-      }`,
+      message: `Failed to install template: ${error instanceof Error ? error.message : String(error)
+        }`,
     };
   }
 };

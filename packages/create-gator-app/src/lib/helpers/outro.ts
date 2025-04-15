@@ -1,7 +1,7 @@
 import chalk from "chalk";
-import IGatorAppOptions from "../types/gator-app-options";
+import IBuilderOptions from "../types/builder-options";
 
-export const displayOutro = (gatorAppConfiguration: IGatorAppOptions) => {
+export const displayOutro = (gatorAppConfiguration: IBuilderOptions) => {
   console.log(chalk.cyan("\n🚀 Next steps:"));
   console.log(chalk.white(`  1. cd ${gatorAppConfiguration.projectName}`));
   console.log(chalk.white(`  2. Update the .env file variables`));
