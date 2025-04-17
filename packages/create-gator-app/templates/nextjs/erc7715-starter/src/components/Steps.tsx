@@ -31,7 +31,7 @@ export default function Steps() {
               delegations (ERC7710) that was granted by the user (ERC7715). For
               this example, we will use a
               <a
-                href="https://metamask.github.io/delegator-core/docs/concepts/delegator-smart-account"
+                href="https://docs.gator.metamask.io/concepts/delegator-accounts"
                 className="text-blue-400 hover:text-blue-300 underline ml-1"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -54,7 +54,7 @@ export default function Steps() {
               signer and save the private key in the session storage. In
               production explore all other signer supported by gator SDK
               <a
-                href="https://docs.gator.metamask.io/how-to/configure-accounts"
+                href="https://docs.gator.metamask.io/how-to/configure-delegator-accounts-signers"
                 className="text-blue-400 hover:text-blue-300 underline ml-1"
                 target="_blank"
                 rel="noopener noreferrer"
