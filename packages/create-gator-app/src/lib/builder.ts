@@ -14,19 +14,12 @@ import ora from "ora";
 
 export class Builder {
   private builderConfig: BuilderConfig;
+  private options: IBuilderOptions;
   private spinner: ora.Ora;
 
-  constructor(private options: IBuilderOptions) {
-    this.builderConfig = new BuilderConfig({
-      projectName: this.options.projectName,
-      framework: this.options.framework,
-      template: this.options.template,
-      packageManager: this.options.packageManager,
-    },
-      { web3AuthNetwork: this.options.web3AuthNetwork },
-      undefined,
-      { addWeb3auth: this.options.addWeb3auth }
-    );
+  constructor(private config: BuilderConfig) {
+    this.builderConfig = config;
+    this.options = config.getOptions();
     this.spinner = ora("Creating your project...");
   }
 
@@ -34,9 +27,13 @@ export class Builder {
     this.spinner.start();
     await this.handleExistingDirectory();
     await this.copyTemplateFiles();
-    await this.configureWeb3Auth();
+    if (this.builderConfig.shouldAddWeb3AuthConfig()) {
+      await this.configureWeb3Auth();
+    }
     await this.configurePackage();
-    await this.installDependencies();
+    if (!this.options.skipInstall) {
+      await this.installDependencies();
+    }
     this.spinner.succeed(
       chalk.green(`Project structure created at ${this.options.targetDir}`)
     );
@@ -86,8 +83,7 @@ export class Builder {
   }
 
   private async configureWeb3Auth(): Promise<void> {
-    if (this.builderConfig.shouldAddWeb3AuthConfig()) {
-      this.spinner.start("Configuring Web3Auth...");
+    this.spinner.start("Configuring Web3Auth...");
       try {
         await configureWeb3Auth(this.options);
         this.spinner.succeed("Web3Auth configured successfully");
@@ -95,7 +91,7 @@ export class Builder {
         this.spinner.fail("Web3Auth configuration failed");
         throw BuilderError.fromError(error, ErrorCodes.WEB3AUTH_CONFIG_FAILED);
       }
-    }
+  
   }
 
   private async configurePackage(): Promise<void> {
@@ -110,31 +106,29 @@ export class Builder {
   }
 
   private async installDependencies(): Promise<void> {
-    if (!this.options.skipInstall) {
-      this.spinner.start("Installing dependencies...");
-      try {
-        process.chdir(this.options.targetDir);
-        await installDependencies(this.options.packageManager);
-        this.spinner.succeed("Dependencies installed successfully");
-      } catch (error) {
-        this.spinner.warn(
-          chalk.yellow(
-            "Dependencies installation failed, but your project was created."
-          )
-        );
-        console.error(
-          chalk.red(
-            `\nInstallation error: ${error instanceof Error ? error.message : String(error)
-            }`
-          )
-        );
-        console.log("\nYou can try installing dependencies manually:");
-        console.log(`cd ${this.options.projectName}`);
-        console.log(
-          `  ${this.options.packageManager} ${this.options.packageManager === "yarn" ? "" : "install"
+    this.spinner.start("Installing dependencies...");
+    try {
+      process.chdir(this.options.targetDir);
+      await installDependencies(this.options.packageManager);
+      this.spinner.succeed("Dependencies installed successfully");
+    } catch (error) {
+      this.spinner.warn(
+        chalk.yellow(
+          "Dependencies installation failed, but your project was created."
+        )
+      );
+      console.error(
+        chalk.red(
+          `\nInstallation error: ${error instanceof Error ? error.message : String(error)
           }`
-        );
-      }
+        )
+      );
+      console.log("\nYou can try installing dependencies manually:");
+      console.log(`cd ${this.options.projectName}`);
+      console.log(
+        `  ${this.options.packageManager} ${this.options.packageManager === "yarn" ? "" : "install"
+        }`
+      );
     }
   }
 }

@@ -2,8 +2,7 @@ import { Answers } from "inquirer";
 import { OptionValues } from "commander";
 import path from "path";
 import IBuilderOptions from "./types/builder-options";
-import { checkLLMRulesExist } from "./helpers/check-llm-rules";
-import { isWeb3AuthSupported } from "./helpers/check-web3auth-support";
+import { resolveTemplate } from "./helpers/resolve-template";
 
 export class BuilderConfig {
   private options: IBuilderOptions;
@@ -15,6 +14,7 @@ export class BuilderConfig {
     flags: OptionValues
   ) {
     const targetDir = path.join(process.cwd(), baseAnswers.projectName);
+
     const templatePath = path.join(
       __dirname,
       "../../../templates",
@@ -37,13 +37,11 @@ export class BuilderConfig {
       addWeb3auth: flags.addWeb3auth,
       framework: baseAnswers.framework,
       packageManager: baseAnswers.packageManager,
-      template: baseAnswers.template,
+      template: resolveTemplate(baseAnswers),
       web3AuthNetwork: web3AuthAnswers?.web3AuthNetwork,
       addLLMRules: flags.addLlmRules,
-      areLLMRulesAvailable: checkLLMRulesExist(templatePath),
       ideType: llmAnswers?.ideType,
       skipInstall: flags.skipInstall,
-      isWeb3AuthSupported: isWeb3AuthSupported(baseAnswers.template),
     };
   }
 
@@ -52,10 +50,10 @@ export class BuilderConfig {
   }
 
   shouldAddLLMRules(): boolean {
-    return this.options.addLLMRules && this.options.areLLMRulesAvailable;
+    return this.options.addLLMRules && this.options.template.areLLMRulesSupported;
   }
 
   shouldAddWeb3AuthConfig(): boolean {
-    return this.options.addWeb3auth && this.options.isWeb3AuthSupported;
+    return this.options.addWeb3auth && this.options.template.isWeb3AuthSupported;
   }
 }

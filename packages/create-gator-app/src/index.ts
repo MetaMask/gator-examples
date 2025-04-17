@@ -11,19 +11,20 @@ import { LLM_PROMPTS } from "./lib/prompts/llm";
 import { BuilderConfig } from "./lib/config";
 import { Builder } from "./lib/builder";
 import { BuilderError } from "./lib/types/builder-error";
-import { isWeb3AuthSupported } from "./lib/helpers/check-web3auth-support";
-import { checkLLMRulesExist } from "./lib/helpers/check-llm-rules";
+import { resolveTemplate } from "./lib/helpers/resolve-template";
 
 async function promptUser(flags: OptionValues) {
   const answers = await inquirer.prompt(BASE_PROMPTS);
   let web3AuthAnswers: Answers | undefined;
   let llmAnswers: Answers | undefined;
 
-  if (flags.addWeb3auth && isWeb3AuthSupported(answers.template)) {
+  const template = resolveTemplate(answers);
+
+  if (flags.addWeb3auth && template.isWeb3AuthSupported) {
     web3AuthAnswers = await inquirer.prompt(WEB3AUTH_PROMPTS);
   }
 
-  if (flags.addLlmRules && checkLLMRulesExist(answers.template)) {
+  if (flags.addLlmRules && template.areLLMRulesSupported) {
     llmAnswers = await inquirer.prompt(LLM_PROMPTS);
   }
 
@@ -44,7 +45,7 @@ export async function main() {
       flags
     );
 
-    const createGatorApp = new Builder(builderConfig.getOptions());
+    const createGatorApp = new Builder(builderConfig);
     await createGatorApp.createProject();
 
     displayOutro(builderConfig.getOptions());

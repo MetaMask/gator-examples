@@ -36,8 +36,7 @@ export const installTemplate = async (
       } else if (stats.isDirectory()) {
         if (file === "llmRules") {
           if (builderConfig.shouldAddLLMRules()) {
-            const ideType = options.ideType || "Both";
-            copyLLMRulesFiles(templatePath, targetDir, ideType);
+            copyLLMRulesFiles(options);
           }
           continue;
         }

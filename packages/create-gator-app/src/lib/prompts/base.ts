@@ -1,10 +1,7 @@
 import { Answers } from "inquirer";
 import { FRAMEWORK_OPTIONS } from "../choices/framework";
 import { PACKAGE_MANAGER_OPTIONS } from "../choices/package-manager";
-import {
-  NEXTJS_TEMPLATE_OPTIONS,
-  VITE_REACT_TEMPLATE_OPTIONS,
-} from "../choices/templates";
+import { TEMPLATE_OPTIONS } from "../choices/templates";
 import { validateProjectName } from "../helpers/validators";
 
 export const BASE_PROMPTS = [
@@ -26,9 +23,7 @@ export const BASE_PROMPTS = [
     name: "template",
     message: "Pick a template:",
     choices: (answers: Answers) => {
-      return answers.framework === "nextjs"
-        ? NEXTJS_TEMPLATE_OPTIONS
-        : VITE_REACT_TEMPLATE_OPTIONS;
+        return TEMPLATE_OPTIONS.filter(t => t.framework === answers.framework);
     },
   },
   {

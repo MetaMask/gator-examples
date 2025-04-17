@@ -1,5 +1,6 @@
 import { Framework } from "./framework";
 import { PackageManager } from "./package-manager";
+import { ITemplate } from "./template";
 
 interface IBuilderOptions {
   projectName: string;
@@ -7,13 +8,11 @@ interface IBuilderOptions {
   templatePath: string;
   web3AuthTemplatePath?: string;
   addWeb3auth: boolean;
-  isWeb3AuthSupported: boolean;
   framework: Framework;
   packageManager: PackageManager;
   web3AuthNetwork?: string;
-  template: string;
+  template: ITemplate;
   addLLMRules: boolean;
-  areLLMRulesAvailable: boolean;
   ideType: "Cursor" | "Windsurf" | "Both";
   skipInstall: boolean;
 }

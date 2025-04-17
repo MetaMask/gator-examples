@@ -1,33 +1,33 @@
 import chalk from "chalk";
 import IBuilderOptions from "../types/builder-options";
 
-export const displayOutro = (gatorAppConfiguration: IBuilderOptions) => {
+export const displayOutro = (options: IBuilderOptions) => {
   console.log(chalk.cyan("\n🚀 Next steps:"));
-  console.log(chalk.white(`  1. cd ${gatorAppConfiguration.projectName}`));
+  console.log(chalk.white(`  1. cd ${options.projectName}`));
   console.log(chalk.white(`  2. Update the .env file variables`));
-  if (gatorAppConfiguration.packageManager === "npm") {
+  if (options.packageManager === "npm") {
     console.log(
-      chalk.white(`  3. ${gatorAppConfiguration.packageManager} run dev`)
+      chalk.white(`  3. ${options.packageManager} run dev`)
     );
   } else {
     console.log(
-      chalk.white(`  3. ${gatorAppConfiguration.packageManager} dev`)
+      chalk.white(`  3. ${options.packageManager} dev`)
     );
   }
   
-  if (gatorAppConfiguration.addLLMRules) {
+  if (options.addLLMRules) {
     console.log(chalk.cyan("\n🤖 LLM Context:"));
     let ideMessage = "";
     
-    if (gatorAppConfiguration.ideType === "Cursor") {
+    if (options.ideType === "Cursor") {
       ideMessage = "Cursor";
-    } else if (gatorAppConfiguration.ideType === "Windsurf") {
+    } else if (options.ideType === "Windsurf") {
       ideMessage = "Windsurf";
-    } else if (gatorAppConfiguration.ideType === "Both") {
+    } else if (options.ideType === "Both") {
       ideMessage = "Cursor and Windsurf";
     }
     
-    if(gatorAppConfiguration.areLLMRulesAvailable) {
+    if(options.template.areLLMRulesSupported) {
       console.log(
         chalk.white(
           `  • LLM rules files for ${ideMessage} have been copied from the template for better context`
@@ -42,10 +42,10 @@ export const displayOutro = (gatorAppConfiguration: IBuilderOptions) => {
     }
   }
 
-  if (gatorAppConfiguration.addWeb3auth) {
+  if (options.addWeb3auth) {
     console.log(chalk.cyan("\n🛠 Web3Auth:"));
 
-    if(gatorAppConfiguration.isWeb3AuthSupported) {
+    if(options.template.isWeb3AuthSupported) {
       console.log(
         chalk.white(
           "  • Web3Auth has been added to the project"
