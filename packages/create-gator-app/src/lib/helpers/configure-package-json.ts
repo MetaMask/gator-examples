@@ -1,16 +1,21 @@
 import fs from "fs-extra";
 import path from "path";
-import GatorAppConfiguration from "../types/gator-app-configuration";
+import { BuilderConfig } from "../config";
 
 export const configurePackageJson = async (
-  gatorAppConfiguration: GatorAppConfiguration
+  builderConfig: BuilderConfig
 ) => {
-  const packageJsonPath = path.join(gatorAppConfiguration.targetDir, "package.json");
+  const options = builderConfig.getOptions();
+
+  const packageJsonPath = path.join(
+    options.targetDir,
+    "package.json"
+  );
   // If the package.json file exists, update the name and dependencies
   if (fs.existsSync(packageJsonPath)) {
     const pkgJson = await fs.readJson(packageJsonPath);
-    pkgJson.name = gatorAppConfiguration.projectName;
-    if (gatorAppConfiguration.useWeb3auth) {
+    pkgJson.name = builderConfig.getOptions().projectName;
+    if (builderConfig.shouldAddWeb3AuthConfig()) {
       pkgJson.dependencies = {
         ...pkgJson.dependencies,
         "@web3auth/ethereum-provider": "^9.7.0",
@@ -23,7 +28,7 @@ export const configurePackageJson = async (
       //
       // This is because vite-react requires a polyfill for the Buffer and process
       // variables, which are not available in the browser.
-      if (gatorAppConfiguration.framework === "vite-react") {
+      if (options.framework === "vite-react") {
         pkgJson.devDependencies = {
           ...pkgJson.devDependencies,
           buffer: "^6.0.3",

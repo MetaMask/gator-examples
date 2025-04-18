@@ -1,20 +1,22 @@
-import GatorAppConfiguration from "../types/gator-app-configuration";
+import { BuilderConfig } from "../config";
 
 export const configureENV = (
   content: string,
-  gatorAppConfiguration: GatorAppConfiguration
+  builderConfig: BuilderConfig
 ) => {
-  if (gatorAppConfiguration.useWeb3auth) {
-    const web3AuthNetwork = gatorAppConfiguration.web3AuthNetwork!;
-    if (gatorAppConfiguration.framework === "nextjs") {
+  const options = builderConfig.getOptions();
+
+  if (builderConfig.shouldAddWeb3AuthConfig()) {
+    const web3AuthNetwork = options.web3AuthNetwork!;
+    if (options.framework === "nextjs") {
       content += `
-  NEXT_PUBLIC_WEB3AUTH_CLIENT_ID=YOUR_WEB3AUTH_CLIENT_ID_FOR_${web3AuthNetwork.toUpperCase()}
-  NEXT_PUBLIC_WEB3AUTH_NETWORK=${web3AuthNetwork}
+NEXT_PUBLIC_WEB3AUTH_CLIENT_ID=YOUR_WEB3AUTH_CLIENT_ID_FOR_${web3AuthNetwork.toUpperCase()}
+NEXT_PUBLIC_WEB3AUTH_NETWORK=${web3AuthNetwork}
     `;
-    } else if (gatorAppConfiguration.framework === "vite-react") {
+    } else if (options.framework === "vite-react") {
       content += `
-  VITE_WEB3AUTH_CLIENT_ID=YOUR_WEB3AUTH_CLIENT_ID_FOR_${web3AuthNetwork.toUpperCase()}
-  VITE_WEB3AUTH_NETWORK=${web3AuthNetwork}
+VITE_WEB3AUTH_CLIENT_ID=YOUR_WEB3AUTH_CLIENT_ID_FOR_${web3AuthNetwork.toUpperCase()}
+VITE_WEB3AUTH_NETWORK=${web3AuthNetwork}
     `;
     }
   }
