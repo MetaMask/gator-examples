@@ -10,7 +10,9 @@ export const createCommand = (): Command => {
     )
     .helpOption("-h, --help", "Display the available options")
     .option(
-      "--use-web3auth",
-      "Use Web3Auth Embedded Wallet as a signer for delegator"
-    );
+      "--add-web3auth",
+      "Add Web3Auth Embedded Wallet as a signer for delegator smart account"
+    )
+    .option("--skip-install", "Skip the installation of dependencies")
+    .option("--add-llm-rules", "Add LLM rules for your IDE");
 };

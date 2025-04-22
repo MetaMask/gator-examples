@@ -1,18 +1,20 @@
 import { Framework } from "./framework";
 import { PackageManager } from "./package-manager";
+import { ITemplate } from "./template";
 
-interface GatorAppConfiguration {
+interface IBuilderOptions {
   projectName: string;
   targetDir: string;
   templatePath: string;
   web3AuthTemplatePath?: string;
-  useWeb3auth: boolean;
+  addWeb3auth: boolean;
   framework: Framework;
   packageManager: PackageManager;
   web3AuthNetwork?: string;
-  template: string;
-  llmRules?: boolean;
-  ideType?: "Cursor" | "Windsurf" | "Both";
+  template: ITemplate;
+  addLLMRules: boolean;
+  ideType: "Cursor" | "Windsurf" | "Both";
+  skipInstall: boolean;
 }
 
-export default GatorAppConfiguration;
+export default IBuilderOptions;

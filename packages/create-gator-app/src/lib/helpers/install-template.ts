@@ -1,8 +1,8 @@
 import fs from "fs-extra";
 import path from "path";
 import { configureENV } from "./configure-env";
-import GatorAppConfiguration from "../types/gator-app-configuration";
 import { copyLLMRulesFiles } from "./copy-llm-rules";
+import { BuilderConfig } from "../config";
 
 interface TemplateResult {
   success: boolean;
@@ -12,9 +12,10 @@ interface TemplateResult {
 export const installTemplate = async (
   templatePath: string,
   targetDir: string,
-  gatorAppConfiguration: GatorAppConfiguration
+  builderConfig: BuilderConfig
 ): Promise<TemplateResult> => {
   try {
+    const options = builderConfig.getOptions();
     const templateFiles = fs.readdirSync(templatePath);
 
     for (let file of templateFiles) {
@@ -27,16 +28,15 @@ export const installTemplate = async (
 
         if (file === ".env.example") {
           file = ".env";
-          contents = configureENV(contents, gatorAppConfiguration);
+          contents = configureENV(contents, builderConfig);
         }
 
         const writePath = `${targetDir}/${file}`;
         fs.writeFileSync(writePath, contents, "utf8");
       } else if (stats.isDirectory()) {
         if (file === "llmRules") {
-          if (gatorAppConfiguration.llmRules) {
-            const ideType = gatorAppConfiguration.ideType || "Both";
-            copyLLMRulesFiles(templatePath, targetDir, ideType);
+          if (builderConfig.shouldAddLLMRules()) {
+            copyLLMRulesFiles(options);
           }
           continue;
         }
@@ -46,7 +46,7 @@ export const installTemplate = async (
         await installTemplate(
           `${templatePath}/${file}`,
           `${targetDir}/${file}`,
-          gatorAppConfiguration
+          builderConfig
         );
       }
     }
@@ -55,9 +55,8 @@ export const installTemplate = async (
   } catch (error) {
     return {
       success: false,
-      message: `Failed to install template: ${
-        error instanceof Error ? error.message : String(error)
-      }`,
+      message: `Failed to install template: ${error instanceof Error ? error.message : String(error)
+        }`,
     };
   }
 };
