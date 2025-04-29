@@ -7,14 +7,14 @@ export const configureWeb3Auth = async (
 ) => {
   const connectorTemplatePath = path.join(
     gatorAppConfiguration.web3AuthTemplatePath!,
-    "Web3AuthConnector.ts"
+    "ConnectButton.tsx"
   );
 
   const connectorPath = path.join(
     gatorAppConfiguration.targetDir,
     "src",
-    "connectors",
-    "Web3AuthConnector.ts"
+    "components",
+    "ConnectButton.tsx"
   );
 
   await fs.copy(connectorTemplatePath, connectorPath);
