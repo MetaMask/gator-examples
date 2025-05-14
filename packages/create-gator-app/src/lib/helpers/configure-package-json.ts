@@ -18,7 +18,7 @@ export const configurePackageJson = async (
     if (builderConfig.shouldAddWeb3AuthConfig()) {
       pkgJson.dependencies = {
         ...pkgJson.dependencies,
-        "@web3auth/modal": "10.0.0-beta.8",
+        "@web3auth/modal": "10.0.0-beta.9",
       };
 
       // If the project is using vite-react, we need to add the buffer and process
