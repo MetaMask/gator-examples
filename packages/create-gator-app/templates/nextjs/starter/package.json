@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^5.76.1",
-    "next": "15.2.2",
+    "next": "15.2.4",
     "@metamask/delegation-toolkit": "^0.11.0",
     "permissionless": "^0.2.46",
     "react": "^19.0.0",
