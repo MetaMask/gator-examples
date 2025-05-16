@@ -9,14 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@metamask/delegation-toolkit": "^0.10.2",
+    "@metamask/delegation-toolkit": "^0.11.0",
     "@tailwindcss/postcss": "^4.1.1",
     "lucide-react": "^0.487.0",
     "next": "15.2.2",
-    "permissionless": "^0.2.36",
+    "permissionless": "^0.2.46",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "viem": "^2.23.10"
+    "viem": "^2.29.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

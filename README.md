@@ -38,13 +38,12 @@ create-gator-app
 
 - Node.js (v22 or later)
 - Yarn (required for create-gator-app development)
-- npm or yarn (for examples)
 
 ### Setup
 
 ```bash
 # Clone the repository
-git clone https://github.com/chin-flags/gator-examples
+git clone https://github.com/metamask/gator-examples
 cd gator-examples
 
 # Install dependencies using yarn (required for create-gator-app)
