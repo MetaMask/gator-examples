@@ -9,6 +9,7 @@ import { useSessionAccount } from "@/providers/SessionAccountProvider";
 import { usePermissions } from "@/providers/PermissionProvider";
 import { Loader2, CheckCircle, ExternalLink } from "lucide-react";
 import { config } from "@/config";
+import Button from "@/components/Button";
 
 export default function RedeemPermissionButton() {
   const { sessionAccount } = useSessionAccount();
@@ -94,28 +95,28 @@ export default function RedeemPermissionButton() {
   if (txHash) {
     return (
       <div className="space-y-4">
-        <div className="bg-green-800 border-2 border-green-600 p-6 rounded-lg shadow-md">
-          <h3 className="text-xl font-semibold text-white mb-2">
+        <div className="bg-green-50 dark:bg-green-900/30 border-2 border-green-200 dark:border-green-600 p-6 rounded-lg shadow-md">
+          <h3 className="text-xl font-semibold text-green-800 dark:text-green-200 mb-2">
             Transaction Successful!
           </h3>
-          <p className="text-gray-300 mb-4">
+          <p className="text-green-700 dark:text-green-300 mb-4">
             Your transaction has been processed and confirmed on the blockchain.
           </p>
 
-          <button
-            className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center space-x-2"
+          <Button
+            className="w-full bg-gradient-to-br from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 space-x-2"
             onClick={() =>
               window.open(`${config.ethScanerUrl}/tx/${txHash}`, "_blank")
             }
           >
             <span>View on Etherscan</span>
             <ExternalLink className="h-5 w-5" />
-          </button>
+          </Button>
         </div>
-        
+
         <div className="space-y-6">
-          <button
-            className="w-full bg-blue-600 cursor-pointer hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
+          <Button
+            className="w-full space-x-2"
             onClick={handleRedeemPermission}
             disabled={loading}
           >
@@ -127,7 +128,7 @@ export default function RedeemPermissionButton() {
             ) : (
               <CheckCircle className="h-5 w-5" />
             )}
-          </button>
+          </Button>
         </div>
       </div>
     );
@@ -135,8 +136,8 @@ export default function RedeemPermissionButton() {
 
   return (
     <div className="space-y-6">
-      <button
-        className="w-full bg-blue-600 cursor-pointer hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
+      <Button
+        className="w-full space-x-2"
         onClick={handleRedeemPermission}
         disabled={loading}
       >
@@ -148,7 +149,7 @@ export default function RedeemPermissionButton() {
         ) : (
           <CheckCircle className="h-5 w-5" />
         )}
-      </button>
+      </Button>
     </div>
   );
 }

@@ -8,11 +8,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      fontFamily: {
-        sans: ['var(--font-geist-sans)'],
-        mono: ['var(--font-geist-mono)'],
-      },
       colors: {
+        background: "var(--background)",
+        foreground: "var(--foreground)",
         primary: {
           50: '#f0f9ff',
           100: '#e0f2fe',
@@ -26,9 +24,16 @@ const config: Config = {
           900: '#0c4a6e',
         },
       },
+      fontFamily: {
+        'geist-sans': ['var(--font-geist-sans)'],
+        'geist-mono': ['var(--font-geist-mono)'],
+        sans: ['var(--font-geist-sans)'],
+        mono: ['var(--font-geist-mono)'],
+      },
     },
   },
   plugins: [],
+  darkMode: 'media',
   future: {
     hoverOnlyWhenSupported: true,
   },

@@ -34,7 +34,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white flex flex-col">
+    <div className="min-h-screen bg-white dark:bg-black text-black dark:text-white flex flex-col">
       <main className="container mx-auto px-4 py-8 max-w-4xl flex-1">
         <Hero />
         <WalletInfoContainer />

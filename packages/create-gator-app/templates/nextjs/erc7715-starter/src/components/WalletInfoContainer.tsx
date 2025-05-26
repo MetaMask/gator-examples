@@ -22,7 +22,6 @@ export default function WalletInfoContainer() {
           <WalletInfo address={smartAccount} label="Smart Account" />
         )}
       </div>
-   
     </div>
   );
 }

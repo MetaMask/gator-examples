@@ -55,15 +55,17 @@ export default function WalletInfo({
   };
 
   return (
-    <div className="bg-gray-800 rounded-lg p-3 shadow-md">
+    <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-3 shadow-md border border-gray-200 dark:border-gray-700">
       <div className="flex justify-between items-center">
         <div>
           <div className="flex justify-between gap-2">
-            <h3 className="text-sm font-semibold text-white">{label}</h3>
+            <h3 className="text-sm font-semibold text-gray-900 dark:text-white">
+              {label}
+            </h3>
             {showClearButton && onClear && (
               <button
                 onClick={onClear}
-                className="text-red-400 hover:text-red-300 text-xs"
+                className="text-red-500 hover:text-red-400 text-xs"
                 title="Clear account"
               >
                 <Trash2 className="h-4 w-4" />
@@ -71,16 +73,18 @@ export default function WalletInfo({
             )}
           </div>
           <div className="flex items-center gap-2">
-            <p className="text-gray-300 font-mono text-sm">{trimmedAddress}</p>
+            <p className="text-gray-700 dark:text-gray-300 font-mono text-sm">
+              {trimmedAddress}
+            </p>
             <button
               onClick={viewOnEtherscan}
-              className="text-blue-400 hover:text-blue-300"
+              className="text-blue-500 hover:text-blue-400"
               title="View on Etherscan"
             >
               <ExternalLink className="h-4 w-4" />
             </button>
           </div>
-          <p className="text-gray-400 text-xs">
+          <p className="text-gray-600 dark:text-gray-400 text-xs">
             Balance: {isLoading ? "Loading..." : `${balance} ETH`}
           </p>
         </div>
