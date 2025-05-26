@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { createClient, custom } from "viem";
-import { sepolia } from "viem/chains";
-import { erc7715ProviderActions } from "@metamask/delegation-toolkit/experimental";
-import { useSessionAccount } from "@/providers/SessionAccountProvider";
-import { usePermissions } from "@/providers/PermissionProvider";
-import { Loader2, CheckCircle } from "lucide-react";
-import Button from "@/components/Button";
+import { useState } from 'react';
+import { createClient, custom } from 'viem';
+import { sepolia } from 'viem/chains';
+import { erc7715ProviderActions } from '@metamask/delegation-toolkit/experimental';
+import { useSessionAccount } from '@/providers/SessionAccountProvider';
+import { usePermissions } from '@/providers/PermissionProvider';
+import { Loader2, CheckCircle } from 'lucide-react';
+import Button from '@/components/Button';
 
 export default function GrantPermissionsButton() {
   const { sessionAccount } = useSessionAccount();
@@ -33,7 +33,7 @@ export default function GrantPermissionsButton() {
    */
   const handleGrantPermissions = async () => {
     if (!sessionAccount) {
-      throw new Error("Session account not found");
+      throw new Error('Session account not found');
     }
 
     setIsLoading(true);
@@ -52,26 +52,26 @@ export default function GrantPermissionsButton() {
           chainId: sepolia.id,
           expiry,
           signer: {
-            type: "account",
+            type: 'account',
             data: {
               address: sessionAccount.address,
             },
           },
           permission: {
-            type: "native-token-stream",
+            type: 'native-token-stream',
             data: {
               initialAmount: 1n, // 1 WEI
               amountPerSecond: 1n, // 1 WEI per second
               startTime: currentTime,
               maxAmount: 10n, // 10 WEI
-              justification: "Payment for a subscription service",
+              justification: 'Payment for a subscription service',
             },
           },
         },
       ]);
       savePermission(permissions[0]);
     } catch (error) {
-      console.error("Error granting permissions:", error);
+      console.error('Error granting permissions:', error);
     } finally {
       setIsLoading(false);
     }
@@ -85,7 +85,7 @@ export default function GrantPermissionsButton() {
         disabled={isLoading}
       >
         <span>
-          {isLoading ? "Granting Permissions..." : "Grant Permissions"}
+          {isLoading ? 'Granting Permissions...' : 'Grant Permissions'}
         </span>
         {isLoading ? (
           <Loader2 className="h-5 w-5 animate-spin" />

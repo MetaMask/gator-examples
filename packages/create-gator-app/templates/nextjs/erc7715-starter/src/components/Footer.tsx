@@ -1,4 +1,4 @@
-import { File, Code2 } from "lucide-react";
+import { File, Code2 } from 'lucide-react';
 export default function Footer() {
   return (
     <footer className="border-t border-gray-200 dark:border-gray-700/30 py-6 mt-auto">

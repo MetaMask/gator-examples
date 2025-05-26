@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { usePermissions } from "@/providers/PermissionProvider";
-import { Trash2 } from "lucide-react";
-import { formatEther, maxUint256 } from "viem";
+import { usePermissions } from '@/providers/PermissionProvider';
+import { Trash2 } from 'lucide-react';
+import { formatEther, maxUint256 } from 'viem';
 
 export default function PermissionInfo() {
   const { permission, removePermission } = usePermissions();
@@ -14,9 +14,9 @@ export default function PermissionInfo() {
 
   const formatPermissionType = (type: string) => {
     return type
-      .split("-")
+      .split('-')
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ");
+      .join(' ');
   };
 
   if (!permission) {
@@ -79,20 +79,20 @@ export default function PermissionInfo() {
 }
 
 function formatPermissionData(
-  data: Record<string, unknown>
+  data: Record<string, unknown>,
 ): Record<string, unknown> {
   if (!data) return data;
 
-  if (typeof data === "object") {
+  if (typeof data === 'object') {
     const formattedData: Record<string, unknown> = {};
 
     for (const [key, value] of Object.entries(data)) {
-      if (["initialAmount", "amountPerSecond", "maxAmount"].includes(key)) {
+      if (['initialAmount', 'amountPerSecond', 'maxAmount'].includes(key)) {
         // format as ether
         const valueBigInt = BigInt(value as string);
 
         if (valueBigInt === maxUint256) {
-          formattedData[key] = "Unlimited";
+          formattedData[key] = 'Unlimited';
         } else {
           try {
             formattedData[key] = formatEther(valueBigInt);
@@ -104,9 +104,9 @@ function formatPermissionData(
         formattedData[key] = value.map((item) => {
           return formatPermissionData(item as Record<string, unknown>);
         });
-      } else if (typeof value === "object" && value !== null) {
+      } else if (typeof value === 'object' && value !== null) {
         formattedData[key] = formatPermissionData(
-          value as Record<string, unknown>
+          value as Record<string, unknown>,
         );
       } else {
         formattedData[key] = value;

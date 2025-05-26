@@ -1,12 +1,12 @@
-"use client";
-import Steps from "@/components/Steps";
-import Hero from "@/components/Hero";
-import Footer from "@/components/Footer";
-import { useEffect, useState } from "react";
-import InstallFlask from "@/components/InstallFlask";
-import WalletInfoContainer from "@/components/WalletInfoContainer";
-import Loader from "@/components/Loader";
-import PermissionInfo from "@/components/PermissionInfo";
+'use client';
+import Steps from '@/components/Steps';
+import Hero from '@/components/Hero';
+import Footer from '@/components/Footer';
+import { useEffect, useState } from 'react';
+import InstallFlask from '@/components/InstallFlask';
+import WalletInfoContainer from '@/components/WalletInfoContainer';
+import Loader from '@/components/Loader';
+import PermissionInfo from '@/components/PermissionInfo';
 
 export default function Home() {
   const [isFlask, setIsFlask] = useState(false);
@@ -18,10 +18,10 @@ export default function Home() {
 
       if (provider) {
         const clientVersion = await provider.request({
-          method: "web3_clientVersion",
+          method: 'web3_clientVersion',
         });
 
-        const isFlaskDetected = (clientVersion as string[])?.includes("flask");
+        const isFlaskDetected = (clientVersion as string[])?.includes('flask');
 
         setIsFlask(isFlaskDetected);
       }

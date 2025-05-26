@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import { formatEther } from "viem";
-import { publicClient } from "@/services/publicClient";
-import { Trash2, ExternalLink } from "lucide-react";
-import { config } from "@/config";
+import { useEffect, useState } from 'react';
+import { formatEther } from 'viem';
+import { publicClient } from '@/services/publicClient';
+import { Trash2, ExternalLink } from 'lucide-react';
+import { config } from '@/config';
 
 interface WalletInfoProps {
   address: string;
@@ -19,9 +19,9 @@ export default function WalletInfo({
   onClear,
   showClearButton = false,
 }: WalletInfoProps) {
-  const [balance, setBalance] = useState<string>("0");
+  const [balance, setBalance] = useState<string>('0');
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [trimmedAddress, setTrimmedAddress] = useState<string>("");
+  const [trimmedAddress, setTrimmedAddress] = useState<string>('');
 
   useEffect(() => {
     if (address) {
@@ -40,8 +40,8 @@ export default function WalletInfo({
         });
         setBalance(formatEther(balanceWei));
       } catch (error) {
-        console.error("Error fetching balance:", error);
-        setBalance("0");
+        console.error('Error fetching balance:', error);
+        setBalance('0');
       } finally {
         setIsLoading(false);
       }
@@ -51,7 +51,7 @@ export default function WalletInfo({
   }, [address]);
 
   const viewOnEtherscan = () => {
-    window.open(`${config.ethScanerUrl}/address/${address}`, "_blank");
+    window.open(`${config.ethScanerUrl}/address/${address}`, '_blank');
   };
 
   return (
@@ -85,7 +85,7 @@ export default function WalletInfo({
             </button>
           </div>
           <p className="text-gray-600 dark:text-gray-400 text-xs">
-            Balance: {isLoading ? "Loading..." : `${balance} ETH`}
+            Balance: {isLoading ? 'Loading...' : `${balance} ETH`}
           </p>
         </div>
       </div>
