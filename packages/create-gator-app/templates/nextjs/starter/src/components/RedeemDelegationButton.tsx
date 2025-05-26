@@ -1,16 +1,20 @@
-"use client";
+'use client';
 
-import { usePimlicoServices } from "@/hooks/usePimlicoServices";
-import useDelegateSmartAccount from "@/hooks/useDelegateSmartAccount";
-import useStorageClient from "@/hooks/useStorageClient";
-import { prepareRedeemDelegationData } from "@/utils/delegationUtils";
-import { useState } from "react";
-import { Hex } from "viem";
+import { usePimlicoServices } from '@/hooks/usePimlicoServices';
+import useDelegateSmartAccount from '@/hooks/useDelegateSmartAccount';
+import useStorageClient from '@/hooks/useStorageClient';
+import { prepareRedeemDelegationData } from '@/utils/delegationUtils';
+import { getDeleGatorEnvironment } from '@metamask/delegation-toolkit';
+import { useState } from 'react';
+import { Hex } from 'viem';
+import { sepolia } from 'viem/chains';
+import Button from './Button';
 
 export default function RedeemDelegationButton() {
   const { smartAccount } = useDelegateSmartAccount();
   const [loading, setLoading] = useState(false);
   const [transactionHash, setTransactionHash] = useState<Hex | null>(null);
+  const chain = sepolia;
   const { getDelegation } = useStorageClient();
   const { bundlerClient, paymasterClient, pimlicoClient } =
     usePimlicoServices();
@@ -33,7 +37,7 @@ export default function RedeemDelegationButton() {
       account: smartAccount,
       calls: [
         {
-          to: smartAccount.environment.DelegationManager,
+          to: getDeleGatorEnvironment(chain.id).DelegationManager,
           data: redeemData,
         },
       ],
@@ -54,28 +58,23 @@ export default function RedeemDelegationButton() {
   if (transactionHash) {
     return (
       <div>
-        <button
-          className="button"
+        <Button
           onClick={() =>
             window.open(
               `https://sepolia.etherscan.io/tx/${transactionHash}`,
-              "_blank"
+              '_blank',
             )
           }
         >
           View on Etherscan
-        </button>
+        </Button>
       </div>
     );
   }
 
   return (
-    <button
-      className="button"
-      onClick={handleRedeemDelegation}
-      disabled={loading}
-    >
-      {loading ? "Redeeming..." : "Redeem Delegation"}
-    </button>
+    <Button onClick={handleRedeemDelegation} disabled={loading}>
+      {loading ? 'Redeeming...' : 'Redeem Delegation'}
+    </Button>
   );
 }

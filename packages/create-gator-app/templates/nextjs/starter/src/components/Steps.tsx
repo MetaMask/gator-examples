@@ -1,15 +1,15 @@
-"use client";
-import { useEffect } from "react";
-import ConnectButton from "@/components/ConnectButton";
-import CreateDelegateButton from "@/components/CreateDelegateButton";
-import CreateDelegationButton from "@/components/CreateDelegationButton";
-import DeployDelegatorButton from "@/components/DeployDelegatorButton";
-import RedeemDelegationButton from "@/components/RedeemDelegationButton";
-import useDelegateSmartAccount from "@/hooks/useDelegateSmartAccount";
-import useDelegatorSmartAccount from "@/hooks/useDelegatorSmartAccount";
-import useStorageClient from "@/hooks/useStorageClient";
-import { useAccount } from "wagmi";
-import { useStepContext } from "@/hooks/useStepContext";
+'use client';
+import { useEffect } from 'react';
+import ConnectButton from '@/components/ConnectButton';
+import CreateDelegateButton from '@/components/CreateDelegateButton';
+import CreateDelegationButton from '@/components/CreateDelegationButton';
+import DeployDelegatorButton from '@/components/DeployDelegatorButton';
+import RedeemDelegationButton from '@/components/RedeemDelegationButton';
+import useDelegateSmartAccount from '@/hooks/useDelegateSmartAccount';
+import useDelegatorSmartAccount from '@/hooks/useDelegatorSmartAccount';
+import useStorageClient from '@/hooks/useStorageClient';
+import { useAccount } from 'wagmi';
+import { useStepContext } from '@/hooks/useStepContext';
 
 export default function Steps() {
   const { step, changeStep } = useStepContext();
@@ -48,7 +48,7 @@ export default function Steps() {
     <>
       {step === 1 && (
         <>
-          <p className="text-block">
+          <p className="max-w-2xl leading-relaxed mb-6">
             The first step would be to connect your Metamask wallet.
             <br />
             <br />
@@ -60,7 +60,7 @@ export default function Steps() {
       )}
       {step === 2 && (
         <>
-          <p className="text-block">
+          <p className="max-w-2xl leading-relaxed mb-6">
             The MetaMask smart contract account that grants authority. This will
             on chain be deployed, just in time for redeeming the delegation.
           </p>
@@ -70,7 +70,7 @@ export default function Steps() {
       )}
       {step === 3 && (
         <>
-          <p className="text-block">
+          <p className="max-w-2xl leading-relaxed mb-6">
             The MetaMask smart contract account that receives the delegation.
             Initially this will be counterfactual (not deployed on-chain), until
             it is deployed by submitting a user operation
@@ -80,7 +80,7 @@ export default function Steps() {
       )}
       {step === 4 && (
         <>
-          <p className="text-block">
+          <p className="max-w-2xl leading-relaxed mb-6">
             The delegator creates and signs a delegation, granting specific
             authority to the delegate account. In this case, the delegation can
             be used to perform any transaction on delegator's behalf.
@@ -94,7 +94,7 @@ export default function Steps() {
       )}
       {step === 5 && (
         <>
-          <p className="text-block">
+          <p className="max-w-2xl leading-relaxed mb-6">
             The redeemer submits a user operation that executes the action
             allowed by the delegation (in this case, transfer nothing to no one)
             on behalf of the delegator
