@@ -18,9 +18,7 @@ export const configurePackageJson = async (
     if (builderConfig.shouldAddWeb3AuthConfig()) {
       pkgJson.dependencies = {
         ...pkgJson.dependencies,
-        "@web3auth/ethereum-provider": "^9.7.0",
-        "@web3auth/modal": "^9.7.0",
-        "@web3auth/web3auth-wagmi-connector": "^7.0.0",
+        "@web3auth/modal": "v10.0.0",
       };
 
       // If the project is using vite-react, we need to add the buffer and process
