@@ -1,7 +1,8 @@
-'use client';
-import Steps from '@/components/Steps';
-import Hero from '@/components/Hero';
-import Footer from '@/components/Footer';
+"use client";
+
+import Steps from "@/components/Steps";
+import Hero from "@/components/Hero";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (

@@ -1,5 +1,5 @@
-import fileIcon from '@/assets/file.svg';
-import windowIcon from '@/assets/window.svg';
+import fileIcon from "@/assets/file.svg";
+import windowIcon from "@/assets/window.svg";
 
 export default function Footer() {
   return (

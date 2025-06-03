@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 export default function InstallFlask() {
   return (
@@ -21,7 +21,7 @@ export default function InstallFlask() {
               className="text-blue-500 hover:text-blue-400 underline underline-offset-4 decoration-2 cursor-pointer"
             >
               Visit MetaMask Flask
-            </a>{' '}
+            </a>{" "}
             and click the &ldquo;Install MetaMask Flask&rdquo; button in your
             browser
           </li>

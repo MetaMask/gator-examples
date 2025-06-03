@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import { usePimlicoServices } from '@/hooks/usePimlicoServices';
-import useDelegateSmartAccount from '@/hooks/useDelegateSmartAccount';
-import useStorageClient from '@/hooks/useStorageClient';
-import { prepareRedeemDelegationData } from '@/utils/delegationUtils';
-import { getDeleGatorEnvironment } from '@metamask/delegation-toolkit';
-import { useState } from 'react';
-import { Hex } from 'viem';
-import { sepolia } from 'viem/chains';
-import Button from './Button';
+import { usePimlicoServices } from "@/hooks/usePimlicoServices";
+import useDelegateSmartAccount from "@/hooks/useDelegateSmartAccount";
+import useStorageClient from "@/hooks/useStorageClient";
+import { prepareRedeemDelegationData } from "@/utils/delegationUtils";
+import { getDeleGatorEnvironment } from "@metamask/delegation-toolkit";
+import { useState } from "react";
+import { Hex } from "viem";
+import { sepolia } from "viem/chains";
+import Button from "./Button";
 
 export default function RedeemDelegationButton() {
   const { smartAccount } = useDelegateSmartAccount();
@@ -62,7 +62,7 @@ export default function RedeemDelegationButton() {
           onClick={() =>
             window.open(
               `https://sepolia.etherscan.io/tx/${transactionHash}`,
-              '_blank',
+              "_blank",
             )
           }
         >

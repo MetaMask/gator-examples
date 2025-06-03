@@ -5,7 +5,7 @@ export default function Hero() {
         <span className="bg-gradient-to-b from-white to-green-500 bg-clip-text text-transparent">
           Hello <br />
           Gator
-        </span>{' '}
+        </span>{" "}
         <span className="inline-block animate-wiggle">🐊</span>
       </h1>
       <div className="text-white/50">

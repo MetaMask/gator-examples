@@ -1,15 +1,16 @@
-'use client';
-import { useEffect } from 'react';
-import ConnectButton from '@/components/ConnectButton';
-import CreateDelegateButton from '@/components/CreateDelegateButton';
-import CreateDelegationButton from '@/components/CreateDelegationButton';
-import DeployDelegatorButton from '@/components/DeployDelegatorButton';
-import RedeemDelegationButton from '@/components/RedeemDelegationButton';
-import useDelegateSmartAccount from '@/hooks/useDelegateSmartAccount';
-import useDelegatorSmartAccount from '@/hooks/useDelegatorSmartAccount';
-import useStorageClient from '@/hooks/useStorageClient';
-import { useAccount } from 'wagmi';
-import { useStepContext } from '@/hooks/useStepContext';
+"use client";
+
+import { useEffect } from "react";
+import ConnectButton from "@/components/ConnectButton";
+import CreateDelegateButton from "@/components/CreateDelegateButton";
+import CreateDelegationButton from "@/components/CreateDelegationButton";
+import DeployDelegatorButton from "@/components/DeployDelegatorButton";
+import RedeemDelegationButton from "@/components/RedeemDelegationButton";
+import useDelegateSmartAccount from "@/hooks/useDelegateSmartAccount";
+import useDelegatorSmartAccount from "@/hooks/useDelegatorSmartAccount";
+import useStorageClient from "@/hooks/useStorageClient";
+import { useAccount } from "wagmi";
+import { useStepContext } from "@/hooks/useStepContext";
 
 export default function Steps() {
   const { step, changeStep } = useStepContext();

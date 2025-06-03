@@ -1,10 +1,10 @@
-import { useAccountAbstractionUtils } from '@/hooks/useAccountAbstractionUtils';
-import useDelegateSmartAccount from '@/hooks/useDelegateSmartAccount';
-import useStorageClient from '@/hooks/useStorageClient';
-import { prepareRedeemDelegationData } from '@/utils/delegationUtils';
-import { useState } from 'react';
-import { Hex } from 'viem';
-import Button from '@/components/Button';
+import { useAccountAbstractionUtils } from "@/hooks/useAccountAbstractionUtils";
+import useDelegateSmartAccount from "@/hooks/useDelegateSmartAccount";
+import useStorageClient from "@/hooks/useStorageClient";
+import { prepareRedeemDelegationData } from "@/utils/delegationUtils";
+import { useState } from "react";
+import { Hex } from "viem";
+import Button from "@/components/Button";
 
 export default function RedeemDelegationButton() {
   const { smartAccount } = useDelegateSmartAccount();
@@ -57,7 +57,7 @@ export default function RedeemDelegationButton() {
           onClick={() =>
             window.open(
               `https://sepolia.etherscan.io/tx/${transactionHash}`,
-              '_blank',
+              "_blank",
             )
           }
         >
@@ -69,7 +69,7 @@ export default function RedeemDelegationButton() {
 
   return (
     <Button onClick={handleRedeemDelegation} disabled={loading}>
-      {loading ? 'Redeeming...' : 'Redeem Delegation'}
+      {loading ? "Redeeming..." : "Redeem Delegation"}
     </Button>
   );
 }

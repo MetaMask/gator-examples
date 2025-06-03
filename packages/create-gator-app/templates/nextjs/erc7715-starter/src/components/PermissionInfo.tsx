@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { usePermissions } from '@/providers/PermissionProvider';
-import { Trash2 } from 'lucide-react';
-import { formatEther, maxUint256 } from 'viem';
+import { usePermissions } from "@/providers/PermissionProvider";
+import { Trash2 } from "lucide-react";
+import { formatEther, maxUint256 } from "viem";
 
 export default function PermissionInfo() {
   const { permission, removePermission } = usePermissions();
@@ -14,9 +14,9 @@ export default function PermissionInfo() {
 
   const formatPermissionType = (type: string) => {
     return type
-      .split('-')
+      .split("-")
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(' ');
+      .join(" ");
   };
 
   if (!permission) {

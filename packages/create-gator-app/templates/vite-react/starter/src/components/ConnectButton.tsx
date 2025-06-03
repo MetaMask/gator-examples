@@ -1,5 +1,5 @@
-import { useConnect } from 'wagmi';
-import Button from '@/components/Button';
+import { useConnect } from "wagmi";
+import Button from "@/components/Button";
 
 export default function ConnectButton() {
   const { connect, connectors } = useConnect();

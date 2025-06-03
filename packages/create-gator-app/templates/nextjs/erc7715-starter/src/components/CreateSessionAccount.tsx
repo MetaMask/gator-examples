@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useSessionAccount } from '@/providers/SessionAccountProvider';
-import { ArrowRight } from 'lucide-react';
-import Button from '@/components/Button';
+import { useSessionAccount } from "@/providers/SessionAccountProvider";
+import { ArrowRight } from "lucide-react";
+import Button from "@/components/Button";
 
 export default function CreateSessionAccountButton() {
   const { createSessionAccount } = useSessionAccount();

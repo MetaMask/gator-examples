@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useSessionAccount } from '@/providers/SessionAccountProvider';
-import { usePermissions } from '@/providers/PermissionProvider';
-import WalletInfo from './WalletInfo';
+import { useSessionAccount } from "@/providers/SessionAccountProvider";
+import { usePermissions } from "@/providers/PermissionProvider";
+import WalletInfo from "./WalletInfo";
 
 export default function WalletInfoContainer() {
   const { sessionAccount, clearSessionAccount } = useSessionAccount();

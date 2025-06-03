@@ -1,5 +1,5 @@
-import { useGatorContext } from '@/hooks/useGatorContext';
-import Button from '@/components/Button';
+import { useGatorContext } from "@/hooks/useGatorContext";
+import Button from "@/components/Button";
 
 export default function CreateDelegateButton() {
   const { generateDelegateWallet } = useGatorContext();

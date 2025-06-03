@@ -1,9 +1,9 @@
-import { useAccountAbstractionUtils } from '@/hooks/useAccountAbstractionUtils';
-import useDelegatorSmartAccount from '@/hooks/useDelegatorSmartAccount';
-import { useStepContext } from '@/hooks/useStepContext';
-import { useState } from 'react';
-import { zeroAddress } from 'viem';
-import Button from '@/components/Button';
+import { useAccountAbstractionUtils } from "@/hooks/useAccountAbstractionUtils";
+import useDelegatorSmartAccount from "@/hooks/useDelegatorSmartAccount";
+import { useStepContext } from "@/hooks/useStepContext";
+import { useState } from "react";
+import { zeroAddress } from "viem";
+import Button from "@/components/Button";
 
 export default function DeployDelegatorButton() {
   const [loading, setLoading] = useState(false);
@@ -40,7 +40,7 @@ export default function DeployDelegatorButton() {
   return (
     <>
       <Button onClick={handleDeployDelegator}>
-        {loading ? 'Deploying...' : 'Deploy Delegator Account'}
+        {loading ? "Deploying..." : "Deploy Delegator Account"}
       </Button>
     </>
   );

@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { createPublicClient, Hex, http } from 'viem';
-import { sepolia } from 'viem/chains';
-import { pimlicoClient } from '@/services/pimlicoClient';
-import { bundlerClient } from '@/services/bundlerClient';
-import { useSessionAccount } from '@/providers/SessionAccountProvider';
-import { usePermissions } from '@/providers/PermissionProvider';
-import { Loader2, CheckCircle, ExternalLink } from 'lucide-react';
-import { config } from '@/config';
-import Button from '@/components/Button';
+import { useState } from "react";
+import { createPublicClient, Hex, http } from "viem";
+import { sepolia } from "viem/chains";
+import { pimlicoClient } from "@/services/pimlicoClient";
+import { bundlerClient } from "@/services/bundlerClient";
+import { useSessionAccount } from "@/providers/SessionAccountProvider";
+import { usePermissions } from "@/providers/PermissionProvider";
+import { Loader2, CheckCircle, ExternalLink } from "lucide-react";
+import { config } from "@/config";
+import Button from "@/components/Button";
 
 export default function RedeemPermissionButton() {
   const { sessionAccount } = useSessionAccount();
@@ -39,7 +39,7 @@ export default function RedeemPermissionButton() {
       const { accountMeta, context, signerMeta } = permission;
 
       if (!signerMeta) {
-        console.error('No signer meta found');
+        console.error("No signer meta found");
         setLoading(false);
         return;
       }
@@ -47,7 +47,7 @@ export default function RedeemPermissionButton() {
 
       // Validate required parameters
       if (!context || !delegationManager) {
-        console.error('Missing required parameters for delegation');
+        console.error("Missing required parameters for delegation");
         setLoading(false);
         return;
       }
@@ -121,7 +121,7 @@ export default function RedeemPermissionButton() {
             disabled={loading}
           >
             <span>
-              {loading ? 'Processing Transaction...' : 'Redeem Permission'}
+              {loading ? "Processing Transaction..." : "Redeem Permission"}
             </span>
             {loading ? (
               <Loader2 className="h-5 w-5 animate-spin" />
@@ -142,7 +142,7 @@ export default function RedeemPermissionButton() {
         disabled={loading}
       >
         <span>
-          {loading ? 'Processing Transaction...' : 'Redeem Permission'}
+          {loading ? "Processing Transaction..." : "Redeem Permission"}
         </span>
         {loading ? (
           <Loader2 className="h-5 w-5 animate-spin" />
