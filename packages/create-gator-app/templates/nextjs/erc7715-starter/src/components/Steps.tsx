@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import CreateSessionAccountButton from '@/components/CreateSessionAccount';
+import CreateSessionAccountButton from "@/components/CreateSessionAccount";
 import RedeemPermissionButton from "@/components/RedeemPermissionButton";
 import GrantPermissionsButton from "./GrantPermissionsButton";
-import { useSessionAccount } from "@/providers/SessionAccountProvider";
+import { useSessionAccount } from "@/providers/SessionAccountProvider'";
 import { usePermissions } from "@/providers/PermissionProvider";
 
 export default function Steps() {
