@@ -3,11 +3,12 @@ import windowIcon from "@/assets/window.svg";
 
 export default function Footer() {
   return (
-    <footer className="footer">
+    <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-start">
       <a
         href="https://docs.gator.metamask.io/"
         target="_blank"
         rel="noopener noreferrer"
+        className="flex items-center gap-2 hover:underline hover:underline-offset-4"
       >
         <img
           aria-hidden
@@ -15,6 +16,7 @@ export default function Footer() {
           alt="File icon"
           width={16}
           height={16}
+          className="flex-shrink-0"
         />
         Docs
       </a>
@@ -22,6 +24,7 @@ export default function Footer() {
         href="https://github.com/metamask/gator-examples"
         target="_blank"
         rel="noopener noreferrer"
+        className="flex items-center gap-2 hover:underline hover:underline-offset-4"
       >
         <img
           aria-hidden
@@ -29,6 +32,7 @@ export default function Footer() {
           alt="Window icon"
           width={16}
           height={16}
+          className="flex-shrink-0"
         />
         Examples
       </a>

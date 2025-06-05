@@ -7,6 +7,7 @@ import { erc7715ProviderActions } from "@metamask/delegation-toolkit/experimenta
 import { useSessionAccount } from "@/providers/SessionAccountProvider";
 import { usePermissions } from "@/providers/PermissionProvider";
 import { Loader2, CheckCircle } from "lucide-react";
+import Button from "@/components/Button";
 
 export default function GrantPermissionsButton() {
   const { sessionAccount } = useSessionAccount();
@@ -70,7 +71,7 @@ export default function GrantPermissionsButton() {
       ]);
       savePermission(permissions[0]);
     } catch (error) {
-      console.error("Error granting permissions:", error);
+      console.error('Error granting permissions:', error);
     } finally {
       setIsLoading(false);
     }
@@ -78,8 +79,8 @@ export default function GrantPermissionsButton() {
 
   return (
     <div className="space-y-6">
-      <button
-        className="w-full bg-blue-600 hover:bg-blue-700 cursor-pointer text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
+      <Button
+        className="w-full space-x-2"
         onClick={handleGrantPermissions}
         disabled={isLoading}
       >
@@ -91,7 +92,7 @@ export default function GrantPermissionsButton() {
         ) : (
           <CheckCircle className="h-5 w-5" />
         )}
-      </button>
+      </Button>
     </div>
   );
 }

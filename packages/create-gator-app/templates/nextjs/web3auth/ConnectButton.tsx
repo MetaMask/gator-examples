@@ -1,15 +1,14 @@
-'use client';
+"use client";
 
-import { useWeb3AuthConnect } from '@web3auth/modal/react';
+import { useWeb3AuthConnect } from "@web3auth/modal/react";
+import Button from "@/components/Button";
 
 export default function ConnectButton() {
   const { connect } = useWeb3AuthConnect();
 
   return (
-    <div className="button-container">
-      <button className="button" onClick={() => connect()}>
-        Connect with Web3Auth
-      </button>
+    <div className="flex gap-2">
+      <Button onClick={() => connect()}>Connect with Web3Auth</Button>
     </div>
   );
 }

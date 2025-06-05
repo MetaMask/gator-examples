@@ -3,6 +3,7 @@ import useDelegatorSmartAccount from "@/hooks/useDelegatorSmartAccount";
 import { useStepContext } from "@/hooks/useStepContext";
 import useStorageClient from "@/hooks/useStorageClient";
 import { prepareRootDelegation } from "@/utils/delegationUtils";
+import Button from "@/components/Button";
 
 export default function CreateDelegationButton() {
   const { smartAccount } = useDelegatorSmartAccount();
@@ -15,7 +16,7 @@ export default function CreateDelegationButton() {
     console.log(smartAccount.address, delegateSmartAccount.address);
     const delegation = prepareRootDelegation(
       smartAccount,
-      delegateSmartAccount.address
+      delegateSmartAccount.address,
     );
 
     const signature = await smartAccount.signDelegation({
@@ -32,9 +33,5 @@ export default function CreateDelegationButton() {
     changeStep(5);
   };
 
-  return (
-    <button className="button" onClick={handleCreateDelegation}>
-      Create Delegation
-    </button>
-  );
+  return <Button onClick={handleCreateDelegation}>Create Delegation</Button>;
 }

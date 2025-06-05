@@ -3,7 +3,7 @@ import useDelegatorSmartAccount from "@/hooks/useDelegatorSmartAccount";
 import { useStepContext } from "@/hooks/useStepContext";
 import { useState } from "react";
 import { zeroAddress } from "viem";
-
+import Button from "@/components/Button";
 
 export default function DeployDelegatorButton() {
   const [loading, setLoading] = useState(false);
@@ -39,9 +39,9 @@ export default function DeployDelegatorButton() {
 
   return (
     <>
-      <button className="button" onClick={handleDeployDelegator}>
+      <Button onClick={handleDeployDelegator}>
         {loading ? "Deploying..." : "Deploy Delegator Account"}
-      </button>
+      </Button>
     </>
   );
 }

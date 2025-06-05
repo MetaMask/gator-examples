@@ -1,17 +1,17 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactNode } from 'react';
-import { GatorProvider } from '@/providers/GatorProvider';
-import { StepProvider } from '@/providers/StepProvider';
-import { Web3AuthOptions, WEB3AUTH_NETWORK } from '@web3auth/modal';
-import { Web3AuthProvider } from '@web3auth/modal/react';
-import { WagmiProvider } from '@web3auth/modal/react/wagmi';
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactNode } from "react";
+import { GatorProvider } from "@/providers/GatorProvider";
+import { StepProvider } from "@/providers/StepProvider";
+import { WEB3AUTH_NETWORK_TYPE, Web3AuthOptions } from "@web3auth/modal";
+import { Web3AuthProvider } from "@web3auth/modal/react";
+import { WagmiProvider } from "@web3auth/modal/react/wagmi";
 
 const queryClient = new QueryClient();
 
 const web3AuthOptions: Web3AuthOptions = {
-  clientId: process.env.NEXT_PUBLIC_WEB3AUTH_CLIENT_ID,
-  web3AuthNetwork: process.env.NEXT_PUBLIC_WEB3AUTH_NETWORK as WEB3AUTH_NETWORK,
-  authBuildEnv: 'testing',
+  clientId: import.meta.env.VITE_WEB3AUTH_CLIENT_ID as string,
+  web3AuthNetwork: import.meta.env
+    .VITE_WEB3AUTH_NETWORK as WEB3AUTH_NETWORK_TYPE,
 };
 
 const web3authConfig = {

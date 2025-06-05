@@ -10,8 +10,6 @@ import CreateDelegationButton from "./CreateDelegationButton";
 import DeployDelegatorButton from "./DeployDelegatorButton";
 import RedeemDelegationButton from "./RedeemDelegationButton";
 
-
-
 export default function Steps() {
   const { step, changeStep } = useStepContext();
   const { isConnected } = useAccount();
@@ -49,7 +47,7 @@ export default function Steps() {
     <>
       {step === 1 && (
         <>
-          <p className="text-block">
+          <p className="max-w-2xl leading-relaxed mb-6">
             The first step would be to connect your Metamask wallet.
             <br />
             <br />
@@ -61,7 +59,7 @@ export default function Steps() {
       )}
       {step === 2 && (
         <>
-          <p className="text-block">
+          <p className="max-w-2xl leading-relaxed mb-6">
             The MetaMask smart contract account that grants authority. This will
             on chain be deployed, just in time for redeeming the delegation.
           </p>
@@ -71,7 +69,7 @@ export default function Steps() {
       )}
       {step === 3 && (
         <>
-          <p className="text-block">
+          <p className="max-w-2xl leading-relaxed mb-6">
             The MetaMask smart contract account that receives the delegation.
             Initially this will be counterfactual (not deployed on-chain), until
             it is deployed by submitting a user operation
@@ -81,7 +79,7 @@ export default function Steps() {
       )}
       {step === 4 && (
         <>
-          <p className="text-block">
+          <p className="max-w-2xl leading-relaxed mb-6">
             The delegator creates and signs a delegation, granting specific
             authority to the delegate account. In this case, the delegation can
             be used to perform any transaction on delegator's behalf.
@@ -95,7 +93,7 @@ export default function Steps() {
       )}
       {step === 5 && (
         <>
-          <p className="text-block">
+          <p className="max-w-2xl leading-relaxed mb-6">
             The redeemer submits a user operation that executes the action
             allowed by the delegation (in this case, transfer nothing to no one)
             on behalf of the delegator
