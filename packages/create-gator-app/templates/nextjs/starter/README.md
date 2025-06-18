@@ -64,5 +64,5 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 To learn more about Delegation Toolkit, take a look at the following resources:
 
-- [Delegation Toolkit Documentation](https://docs.gator.metamask.io/) - learn about Delegation Toolkit features and API.
+- [Delegation Toolkit Documentation](https://docs.metamask.io/delegation-toolkit/) - learn about Delegation Toolkit features and API.
 

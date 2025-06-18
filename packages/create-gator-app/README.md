@@ -50,4 +50,4 @@ Currently, the following templates are available:
 
 ## Related Projects
 
-- [MetaMask Delegation Toolkit Docs](https://docs.gator.metamask.io/)
+- [MetaMask Delegation Toolkit Docs](https://docs.metamask.io/delegation-toolkit/)

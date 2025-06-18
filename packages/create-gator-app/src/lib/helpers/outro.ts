@@ -63,7 +63,7 @@ export const displayOutro = (options: IBuilderOptions) => {
   console.log(chalk.cyan("\n📚 Documentation:"));
   console.log(
     chalk.white(
-      "  • Learn more about Delegation toolkit: https://docs.gator.metamask.io/"
+      "  • Learn more about Delegation toolkit: https://docs.metamask.io/delegation-toolkit"
     )
   );
   
