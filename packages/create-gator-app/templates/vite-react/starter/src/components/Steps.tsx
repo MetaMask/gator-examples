@@ -81,7 +81,7 @@ export default function Steps() {
       {step === 1 && (
         <>
           <p className="text-white/70 max-w-4xl leading-relaxed">
-            The first step would be to connect your Metamask wallet.
+            The first step would be to connect your wallet.
             <br />
             <br />
             You can customize the Wagmi config to connect to any chain you want,
@@ -97,7 +97,7 @@ export default function Steps() {
             be deployed on-chain, just in time for redeeming the delegation.
           </p>
 
-          <LearnMoreButton href="https://docs.gator.metamask.io/how-to/create-smart-account" />
+          <LearnMoreButton href="https://docs.metamask.io/delegation-toolkit/how-to/create-smart-account" />
           <CreateDelegatorCodeBlock />
           <DeployDelegatorButton />
         </>
@@ -110,7 +110,7 @@ export default function Steps() {
             it is deployed by submitting a user operation.
           </p>
 
-          <LearnMoreButton href="https://docs.gator.metamask.io/how-to/create-smart-account" />
+          <LearnMoreButton href="https://docs.metamask.io/delegation-toolkit/how-to/create-smart-account" />
           <CreateDelegateCodeBlock />
           <CreateDelegateButton />
         </>
@@ -127,7 +127,7 @@ export default function Steps() {
             The delegator must specify sufficient caveats to limit the authority
             being granted to the delegate.{" "}
             <a
-              href="https://docs.gator.metamask.io/development/how-to/create-delegation/restrict-delegation"
+              href="https://docs.metamask.io/delegation-toolkit/how-to/create-delegation/restrict-delegation"
               target="_blank"
               rel="noopener noreferrer"
               className="text-cyan-400 hover:text-cyan-300 underline italic"
@@ -137,7 +137,7 @@ export default function Steps() {
             .
           </p>
 
-          <LearnMoreButton href="https://docs.gator.metamask.io/how-to/create-delegation" />
+          <LearnMoreButton href="https://docs.metamask.io/delegation-toolkit/how-to/create-delegation" />
           <CreateDelegationCodeBlock />
           <CreateDelegationButton />
         </>
@@ -169,7 +169,7 @@ export default function Steps() {
             stored in localStorage to execute on behalf of the delegator.
           </p>
 
-          <LearnMoreButton href="https://docs.gator.metamask.io/how-to/redeem-delegation" />
+          <LearnMoreButton href="https://docs.metamask.io/delegation-toolkit/how-to/redeem-delegation" />
           <RedeemDelegationCodeBlock />
           <RedeemDelegationButton />
         </>

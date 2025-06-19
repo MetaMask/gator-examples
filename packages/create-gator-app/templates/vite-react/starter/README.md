@@ -67,4 +67,4 @@ Open [localhost:5173](http://localhost:5173/) with your browser to see the resul
 
 To learn more about Delegation Toolkit, take a look at the following resources:
 
-- [Delegation Toolkit Documentation](https://docs.gator.metamask.io/) - learn about Delegation Toolkit features and API.
+- [Delegation Toolkit Documentation](https://docs.metamask.io/delegation-toolkit/) - learn about Delegation Toolkit features and API.

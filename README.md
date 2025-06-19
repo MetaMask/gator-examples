@@ -1,6 +1,6 @@
 # Gator Examples
 
-A monorepo containing the example applications for building apps with Metamask Delegation Tookit (https://docs.gator.metamask.io/)
+A monorepo containing the example applications for building apps with [Metamask Delegation Tookit](https://docs.metamask.io/delegation-toolkit/)
 
 ## Overview
 

@@ -10,4 +10,9 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  define: {
+    // By default, Vite doesn't include shims for NodeJS/
+    // necessary for Web3Auth package to work
+    global: {},
+  },
 });

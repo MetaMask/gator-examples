@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import CreateSessionAccountButton from "@/components/CreateSessionAccount";
 import RedeemPermissionButton from "@/components/RedeemPermissionButton";
 import GrantPermissionsButton from "./GrantPermissionsButton";
-import { useSessionAccount } from "@/providers/SessionAccountProvider'";
+import { useSessionAccount } from "@/providers/SessionAccountProvider";
 import { usePermissions } from "@/providers/PermissionProvider";
 
 export default function Steps() {
@@ -32,7 +32,7 @@ export default function Steps() {
               delegations (ERC7710) that was granted by the user (ERC7715). For
               this example, we will use a
               <a
-                href="https://docs.gator.metamask.io/concepts/delegator-accounts"
+                href="https://docs.metamask.io/delegation-toolkit/concepts/smart-accounts/"
                 className="text-blue-500 hover:text-blue-400 underline ml-1"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -55,7 +55,7 @@ export default function Steps() {
               signer and save the private key in the session storage. In
               production explore all other signer supported by gator SDK
               <a
-                href="https://docs.gator.metamask.io/how-to/configure-delegator-accounts-signers"
+                href="https://docs.metamask.io/delegation-toolkit/how-to/create-smart-account/configure-accounts-signers/"
                 className="text-blue-500 hover:text-blue-400 underline ml-1"
                 target="_blank"
                 rel="noopener noreferrer"

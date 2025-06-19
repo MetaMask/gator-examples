@@ -22,7 +22,7 @@ export function prepareRootDelegation(
   // information on restricting delegate's actions.
 
   // Restricting a delegation:
-  // https://docs.gator.metamask.io/how-to/create-delegation/restrict-delegation
+  // https://docs.metamask.io/delegation-toolkit/how-to/create-delegation/restrict-delegation/
   const caveats = createCaveatBuilder(delegator.environment)
     .addCaveat("limitedCalls", 1)
     .build();
