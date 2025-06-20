@@ -11,6 +11,7 @@ import { configurePackageJson } from "./helpers/configure-package-json";
 import { ErrorCodes, BuilderError } from "./types/builder-error";
 import { BuilderConfig } from "./config";
 import ora from "ora";
+import path from "path";
 
 export class Builder {
   private builderConfig: BuilderConfig;
@@ -31,6 +32,9 @@ export class Builder {
       await this.configureWeb3Auth();
     }
     await this.configurePackage();
+    if (this.options.packageManager === "yarn") {
+      await this.configureYarnLock();
+    }
     if (!this.options.skipInstall) {
       await this.installDependencies();
     }
@@ -103,6 +107,10 @@ export class Builder {
       this.spinner.fail("package.json configuration failed");
       throw BuilderError.fromError(error, ErrorCodes.PACKAGE_CONFIG_FAILED);
     }
+  }
+
+  private async configureYarnLock(): Promise<void> {
+    await fs.createFile(path.join(this.options.targetDir, "yarn.lock"));
   }
 
   private async installDependencies(): Promise<void> {
