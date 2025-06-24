@@ -3,15 +3,15 @@ import {
   createDelegation,
   createExecution,
   Delegation,
-  DelegationFramework,
   MetaMaskSmartAccount,
-  SINGLE_DEFAULT_MODE,
 } from "@metamask/delegation-toolkit";
-import { Address, Hex } from "viem";
+import { DelegationManager } from "@metamask/delegation-toolkit/contracts";
+import { SINGLE_DEFAULT_MODE } from "@metamask/delegation-toolkit/utils";
+import { Address, Hex, zeroAddress } from "viem";
 
 export function prepareRootDelegation(
   delegator: MetaMaskSmartAccount,
-  delegate: Address
+  delegate: Address,
 ): Delegation {
   // The following caveat enforcer is a simple example that limits
   // the number of executions the delegate can perform on the delegator's
@@ -35,8 +35,8 @@ export function prepareRootDelegation(
 }
 
 export function prepareRedeemDelegationData(delegation: Delegation): Hex {
-  const execution = createExecution();
-  const data = DelegationFramework.encode.redeemDelegations({
+  const execution = createExecution({ target: zeroAddress });
+  const data = DelegationManager.encode.redeemDelegations({
     delegations: [[delegation]],
     modes: [SINGLE_DEFAULT_MODE],
     executions: [[execution]],
