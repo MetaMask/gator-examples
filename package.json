@@ -1,7 +1,8 @@
 {
   "name": "@metamask/gator-examples",
   "type": "module",
-  "version": "0.0.0",
+  "private": true,
+  "version": "1.0.0",
   "license": "(MIT-0 OR Apache-2.0)",
   "description": "CLI tool to create Gator examples",
   "main": "dist/index.js",
