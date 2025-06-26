@@ -1,7 +1,8 @@
 {
   "name": "@metamask/gator-examples",
   "type": "module",
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "private": true,
   "license": "(MIT-0 OR Apache-2.0)",
   "description": "CLI tool to create Gator examples",
   "main": "dist/index.js",
@@ -16,14 +17,16 @@
     "dev": "turbo run dev",
     "build": "turbo run build --cache-dir=.turbo --filter=./packages/create-gator-app",
     "lint": "turbo lint",
+    "clean": "turbo clean",
     "changelog:update": "turbo run changelog:update",
-    "changelog:validate": "turbo run changelog:validate"
+    "changelog:validate": "turbo run changelog:validate",
+    "allow-scripts": "echo 'n/a'"
   },
   "dependencies": {
     "eslint": "^9.24.0",
     "turbo": "^2.4.4"
   },
-  "packageManager": "yarn@3.2.1",
+  "packageManager": "yarn@4.2.2",
   "devDependencies": {
     "@metamask/create-release-branch": "^4.1.1",
     "prettier": "^3.5.3"
