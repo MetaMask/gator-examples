@@ -26,7 +26,14 @@
   },
   "packageManager": "yarn@4.2.2",
   "devDependencies": {
+    "@lavamoat/allow-scripts": "^3.0.4",
     "@metamask/create-release-branch": "^4.1.1",
     "prettier": "^3.5.3"
+  },
+  "lavamoat": {
+    "allowScripts": {
+      "@lavamoat/preinstall-always-fail": false,
+      "vite>esbuild": false
+    }
   }
 }
