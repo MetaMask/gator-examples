@@ -17,6 +17,7 @@
     "dev": "turbo run dev",
     "build": "turbo run build --cache-dir=.turbo --filter=./packages/create-gator-app",
     "lint": "turbo lint",
+    "clean": "turbo clean",
     "changelog:update": "turbo run changelog:update",
     "changelog:validate": "turbo run changelog:validate",
     "allow-scripts": "echo 'n/a'"
