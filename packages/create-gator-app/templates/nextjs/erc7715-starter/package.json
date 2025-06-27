@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@metamask/delegation-toolkit": "^0.11.0",
+    "@metamask/delegation-toolkit": "^0.12.0",
     "@tailwindcss/postcss": "^4.1.1",
     "lucide-react": "^0.487.0",
     "next": "15.2.2",
