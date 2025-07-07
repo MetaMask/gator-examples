@@ -1,31 +1,33 @@
-# Vite React Gator Starter Template
+# MetaMask Smart Accounts & Delegation starter template
 
-This is a Vite React Gator Starter template created with create-gator-app.
+This is a React MetaMask Smart Accounts & Delegation starter template created with `@metamask/create-gator-app`.
 
-This template is meant to help you bootstrap your own projects with [Metamask Delegation Toolkit](https://metamask.io/developer/delegation-toolkit). It helps you build smart accounts with account abstraction, and powerful delegation features.
+This template is meant to help you bootstrap your own projects with Metamask Smart Acounts. It helps you build smart accounts with account abstraction, and powerful delegation features.
 
-Learn more about [Metamask Delegation Toolkit](https://metamask.io/developer/delegation-toolkit).
+Learn more about [Metamask Smart Accounts](https://docs.metamask.io/delegation-toolkit/concepts/smart-accounts/).
 
 ## Prerequisites
 
-1. **Pimlico API Key**: In this template, we use Pimlico’s Bundler and Paymaster services to submit user operations and sponsor transactions, respectively. You can retrieve the required API key from [Pimlico’s Dashboard](https://dashboard.pimlico.io/apikeys).
+1. **Pimlico API Key**: In this template, you’ll use Pimlico’s 
+bundler and paymaster services to submit user operations and 
+sponsor transactions. You can get your API key from [Pimlico’s dashboard](https://dashboard.pimlico.io/apikeys).
 
-2. **Web3Auth Client ID**: During setup, if you choose the embedded wallet option, you’ll need to create a new project on the Web3Auth Dashboard and obtain the Client ID. For full instructions, [refer to the Web3Auth documentation](https://web3auth.io/docs/dashboard-setup#getting-started).
+2. **Web3Auth Client ID**: During setup, if you used the 
+`-add-web3auth` flag, you’ll need to create a new project on the 
+Web3Auth Dashboard and get your Client ID. You can follow the [Web3Auth documentation](https://web3auth.io/docs/dashboard-setup#getting-started).
 
-## Project Structure
+## Project structure
 
 ```bash
-vite-react-starter/
+template/
 ├── public/ # Static assets
 ├── src/
 │ ├── App.tsx # Main App component
 │ ├── main.tsx # Entry point
-│ ├── App.css # App-specific styles
 │ ├── index.css # Global styles
 │ ├── components/ # UI Components
 │ ├── hooks/ # Custom React hooks
 │ ├── providers/ # Custom React Context Provider
-│ ├── connectors(optional)/ # Web3Auth connector for Wagmi
 │ └── utils/ # Utils for the starter
 ├── .env # Environment variables
 ├── .gitignore # Git ignore rules
@@ -33,25 +35,27 @@ vite-react-starter/
 └── tsconfig.json # TypeScript configuration
 ```
 
-## Setup Enviroment Variables
+## Setup environment variables
 
-Update the following environment variables in the `.env` file located in your project's root directory.
+Update the following environment variables in the `.env` file at 
+the root of your project.
 
 ```
 VITE_PIMLICO_API_KEY =
 
-# Specify the Web3Auth Client ID if you opt
-# for the embedded wallet option.
+# Enter your Web3Auth Client ID if you 
+# used the --add-web3auth flag.
 VITE_WEB3AUTH_CLIENT_ID =
 
-# The Web3Auth network is configured according to
-# the your chosen Web3Auth network input.
+# The Web3Auth network is configured based 
+# on the network option you selected during setup.
 VITE_WEB3AUTH_NETWORK =
 ```
 
-## Getting Started
+## Getting started
 
-First, start the development server using the package manager you selected during setup.
+First, start the development server using the package manager 
+you chose during setup.
 
 ```bash
 npm run dev
@@ -61,10 +65,11 @@ yarn dev
 pnpm dev
 ```
 
-Open [localhost:5173](http://localhost:5173/) with your browser to see the result.
+Open [http://localhost:5173](http://localhost:5173) in your browser to view the app.
 
-## Learn More
+## Learn more
 
-To learn more about Delegation Toolkit, take a look at the following resources:
+To learn more about MetaMask Smart Accounts, take a look at the following resources:
 
-- [Delegation Toolkit Documentation](https://docs.metamask.io/delegation-toolkit/) - learn about Delegation Toolkit features and API.
+- [Quickstart](https://docs.metamask.io/delegation-toolkit/get-started/quickstart/) - Get started quickly with the MetaMask Smart Accounts
+- [Delegation quickstart](https://docs.metamask.io/delegation-toolkit/get-started/delegation-quickstart/) - Get started quickly with creating a MetaMask smart account and completing the delegation lifecycle (creating, signing, and redeeming a delegation).
