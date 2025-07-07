@@ -1,5 +1,5 @@
 {
-  "name": "nextjs-starter",
+  "name": "metamask-smart-account-starter",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,24 +10,23 @@
   },
   "dependencies": {
     "@metamask/delegation-toolkit": "^0.12.0",
-    "@tanstack/react-query": "^5.76.1",
-    "next": "15.2.1",
-    "permissionless": "^0.2.46",
+    "@tanstack/react-query": "^5.81.5",
+    "permissionless": "^0.2.47",
+    "next": "15.3.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "viem": "^2.29.2",
-    "wagmi": "^2.15.3"
+    "viem": "^2.31.6",
+    "wagmi": "^2.15.6"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
-    "@tailwindcss/postcss": "^4.1.7",
+    "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "15.2.1",
-    "postcss": "^8.5.3",
-    "tailwindcss": "^4.1.7",
+    "eslint-config-next": "15.3.4",
+    "tailwindcss": "^4",
     "typescript": "^5"
   }
 }

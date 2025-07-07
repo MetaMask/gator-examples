@@ -3,8 +3,6 @@ import { createConfig, http, WagmiProvider } from "wagmi";
 import { sepolia } from "viem/chains";
 import { ReactNode } from "react";
 import { metaMask } from "wagmi/connectors";
-import { GatorProvider } from "@/providers/GatorProvider";
-import { StepProvider } from "@/providers/StepProvider";
 
 export const connectors = [metaMask()];
 
@@ -23,9 +21,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   return (
     <QueryClientProvider client={queryClient}>
       <WagmiProvider config={wagmiConfig}>
-        <StepProvider>
-          <GatorProvider>{children}</GatorProvider>
-        </StepProvider>
+        {children}
       </WagmiProvider>
     </QueryClientProvider>
   );

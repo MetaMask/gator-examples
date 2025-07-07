@@ -2,17 +2,25 @@ import { ITemplate } from "../types/template";
 
 const NEXTJS_TEMPLATE_OPTIONS: ITemplate[] = [
   {
-    name: "Basic Delegator app with NextJS",
+    name: "MetaMask Smart Accounts Starter",
     value: "starter",
-    description: "A basic Next.js template with App Router",
+    description: "A basic Next.js MetaMask Smart Accounts starter",
     framework: "nextjs",
     isWeb3AuthSupported: true,
     areLLMRulesSupported: false,
   },
   {
-    name: "Experimental: Basic Gator app to try out ERC7715 Permissions",
+    name: "MetaMask Smart Accounts & Delegation Starter",
+    value: "delegation-starter",
+    description: "A basic Next.js MetaMask Smart Accounts & Delegation starter",
+    framework: "nextjs",
+    isWeb3AuthSupported: true,
+    areLLMRulesSupported: false,
+  },
+  {
+    name: "Experimental: ERC7715 Permissions starter",
     value: "erc7715-starter",
-    description: "Experimental: A basic Gator app to try out ERC7715 Permissions",
+    description: "A basic Next.js ERC7715 Permissions starter",
     framework: "nextjs",
     isWeb3AuthSupported: false,
     areLLMRulesSupported: true,
@@ -21,9 +29,17 @@ const NEXTJS_TEMPLATE_OPTIONS: ITemplate[] = [
 
 const VITE_REACT_TEMPLATE_OPTIONS: ITemplate[] = [
   {
-    name: "Basic Delegator app with Vite React",
+    name: "MetaMask Smart Accounts Starter",
     value: "starter",
-    description: "A basic Vite React template with App Router",
+    description: "A basic Vite React MetaMask Smart Accounts starter",
+    framework: "vite-react",
+    isWeb3AuthSupported: true,
+    areLLMRulesSupported: false,
+  },
+  {
+    name: "MetaMask Smart Accounts & Delegation Starter",
+    value: "delegation-starter",
+    description: "A basic Vite React MetaMask Smart Accounts & Delegation starter",
     framework: "vite-react",
     isWeb3AuthSupported: true,
     areLLMRulesSupported: false,

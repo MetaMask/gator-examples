@@ -1,3 +1,5 @@
+"use client";
+
 import { createContext, useCallback, useState } from "react";
 import { Hex } from "viem";
 import { generatePrivateKey } from "viem/accounts";

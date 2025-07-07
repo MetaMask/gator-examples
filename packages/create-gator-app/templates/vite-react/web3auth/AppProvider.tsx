@@ -1,7 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactNode } from "react";
-import { GatorProvider } from "@/providers/GatorProvider";
-import { StepProvider } from "@/providers/StepProvider";
 import { WEB3AUTH_NETWORK_TYPE, Web3AuthOptions } from "@web3auth/modal";
 import { Web3AuthProvider } from "@web3auth/modal/react";
 import { WagmiProvider } from "@web3auth/modal/react/wagmi";
@@ -23,9 +21,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     <Web3AuthProvider config={web3authConfig}>
       <QueryClientProvider client={queryClient}>
         <WagmiProvider>
-          <StepProvider>
-            <GatorProvider>{children}</GatorProvider>
-          </StepProvider>
+          {children}
         </WagmiProvider>
       </QueryClientProvider>
     </Web3AuthProvider>

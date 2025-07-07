@@ -1,3 +1,5 @@
+"use client";
+
 import { createContext, useCallback, useState } from "react";
 
 export const StepContext = createContext({
