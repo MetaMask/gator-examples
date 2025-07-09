@@ -9,7 +9,7 @@ export default function Steps() {
     return (
       <div className="max-w-2xl mx-auto flex flex-col gap-8">
         <p className="text-white/70 leading-relaxed">
-          The first step would be to connect your wallet.
+          The first step is to connect your wallet.
           <br />
           <br />
           You can customize the Wagmi configuration to connect to any chain
