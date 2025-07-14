@@ -5,7 +5,7 @@ import ConnectButton from "@/components/ConnectButton";
 import CreateLinkButton from "@/components/CreateLinkButton";
 import DeployDelegatorButton from "@/components/DeployDelegatorButton";
 import ClaimRewardButton from "@/components/ClaimRewardButton";
-import { useAccount, useBalance } from "wagmi";
+import { useAccount } from "wagmi";
 import useDelegatorSmartAccount from "@/hooks/useDelegatorSmartAccount";
 import { useStepContext } from "@/hooks/useStepContext";
 import { decodeDelegation } from "@/utils/delegationUtils";
@@ -90,7 +90,8 @@ export default function Steps() {
             Your smart account needs to be deployed. This is a one-time action.
             <br />
             <br />
-            This transaction will be sponsored, so you don't have to pay for gas.
+            This transaction will be sponsored, so you don&apos;t have to pay for
+            gas.
           </p>
           <DeployDelegatorButton />
         </>

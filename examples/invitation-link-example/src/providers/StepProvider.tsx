@@ -2,7 +2,7 @@ import { createContext, useCallback, useState } from "react";
 
 export const StepContext = createContext({
   step: 1,
-  changeStep: (step: number) => {},
+  changeStep: (_: number) => {},
 });
 
 export const StepProvider = ({ children }: { children: React.ReactNode }) => {
