@@ -10,11 +10,12 @@ import useDelegatorSmartAccount from "@/hooks/useDelegatorSmartAccount";
 import { useStepContext } from "@/hooks/useStepContext";
 import { decodeDelegation } from "@/utils/delegationUtils";
 import AccountCard from "@/components/AccountCard";
+import { Delegation } from "@metamask/delegation-toolkit";
 
 export default function Steps() {
   const { step, changeStep } = useStepContext();
   const { address } = useAccount();
-  const [urlDelegation, setUrlDelegation] = useState<any>(null);
+  const [urlDelegation, setUrlDelegation] = useState<Delegation | null>(null);
   const { smartAccount } = useDelegatorSmartAccount();
 
   useEffect(() => {
@@ -117,7 +118,7 @@ export default function Steps() {
             Claim the reward by submitting a transaction on the network.
           </p>
 
-          <ClaimRewardButton delegation={urlDelegation} />
+          <ClaimRewardButton delegation={urlDelegation!} />
         </>
       )}
     </>

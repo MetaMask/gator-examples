@@ -1,8 +1,13 @@
 import { createContext, useCallback, useState } from "react";
 
-export const StepContext = createContext({
+type ChangeStep = (step: number) => void;
+
+export const StepContext = createContext<{
+  step: number;
+  changeStep: ChangeStep;
+}>({
   step: 1,
-  changeStep: (_: number) => {},
+  changeStep: () => {},
 });
 
 export const StepProvider = ({ children }: { children: React.ReactNode }) => {
@@ -12,7 +17,7 @@ export const StepProvider = ({ children }: { children: React.ReactNode }) => {
     (step: number) => {
       setStep(step);
     },
-    [step]
+    []
   );
 
   return (
