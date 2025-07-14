@@ -1,21 +1,27 @@
-# NextJS 7715 Starter Template
+# ERC-7715 permissions starter template
 
-This is a NextJS 7115 Starter template created with create-gator-app.
+This is a NextJS ERC-7715 permissions starter template created with `@metamask/create-gator-app`.
 
-This template is meant to help you bootstrap your own projects with [Metamask Delegation Toolkit](https://metamask.io/developer/delegation-toolkit). It helps you build smart accounts with account abstraction, and powerful delegation features.
+This template is meant to help you bootstrap your own projects with [ERC-7715 permissions](https://docs.metamask.io/delegation-toolkit/experimental/erc-7715-request-permissions/). It helps you build 
+a dApp with ERC-7715 support to request permissions and redeem them.
 
-Learn more about [Metamask Delegation Toolkit](https://docs.metamask.io/delegation-toolkit/get-started/quickstart/).
+Learn more about [ERC-7715](https://eips.ethereum.org/EIPS/eip-7715).
 
 ## Prerequisites
 
-1. **Pimlico API Key**: In this template, we use Pimlico's Bundler and Paymaster services to submit user operations and sponsor transactions, respectively. You can retrieve the required API key from [Pimlico's Dashboard](https://dashboard.pimlico.io/apikeys).
+1. **Pimlico API Key**: In this template, you’ll use Pimlico’s 
+bundler and paymaster services to submit user operations and 
+sponsor transactions. You can get your API key from [Pimlico’s dashboard](https://dashboard.pimlico.io/apikeys).
 
-2. **RPC URL** In this template, you’ll need an RPC URL for the Sepolia chain. You can use any preferred RPC provider or a public RPC. However, we recommend using a paid RPC to ensure better reliability and avoid potential rate-limiting issues.
 
-## Project Structure
+2. **RPC URL** In this template, you’ll need an RPC URL for the Sepolia chain. You can use a public 
+RPC or any provider of your choice, but we recommend using a paid RPC for better reliability and to 
+avoid rate-limiting issues.
+
+## Project structure
 
 ```bash
-erc7715-starter/
+template/
 ├── public/ # Static assets
 ├── src/
 │ ├── app/ # App router pages
@@ -42,18 +48,19 @@ erc7715-starter/
 └── tsconfig.json # TypeScript configuration
 ```
 
-## Setup Environment Variables
+## Setup environment variables
 
-Update the following environment variables in the `.env` file located in your project's root directory.
+Update the following environment variables in the `.env` file at 
+the root of your project.
 
 ```
 NEXT_PUBLIC_PIMLICO_API_KEY =
-NEXT_PUBLIC_RPC_URL= 
+NEXT_PUBLIC_RPC_URL = 
 ```
 
-## Getting Started
+## Getting started
 
-First, start the development server using the package manager you selected during setup.
+First, start the development server using the package manager you chose during setup.
 
 ```bash
 npm run dev
@@ -63,19 +70,26 @@ yarn dev
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser to view the app.
 
-## Application Flow
 
-This template demonstrates a complete ERC7715 delegation flow:
+## Application flow
 
-1. **Create Session Account**: Users can create a delegator smart account that will be used to redeem permissions.
-2. **Grant Permissions**: Users can grant permissions to the session account, which involves installing MetaMask snaps and approving the delegation.
-3. **Redeem Permissions**: The session account can redeem the granted permissions to perform actions on behalf of the user.
+This template demonstrates a complete ERC-7715 delegation flow:
 
-## Learn More
+1. **Create session account**: Users create a delegator smart account, which will be
+used to redeem permissions.
 
-To learn more about Delegation Toolkit, take a look at the following resources:
+2. **Grant permissions**: Users grant permissions to the session account by installing
+MetaMask Snaps and approving the ERC-7715 permisison request.
 
-- [Delegation Toolkit Documentation](https://docs.metamask.io/delegation-toolkit) - learn about Delegation Toolkit features and API.
+3. **Redeem permissions**: The session account uses the granted permissions to perform
+actions on behalf of the user.
+
+## Learn more
+
+To learn more about ERC-7715, take a look at the following resources:
+
+- [ERC-7715 Request permissions](https://docs.metamask.io/delegation-toolkit/experimental/erc-7715-request-permissions/) - Learn how to request ERC-7715 request permissions.
+- [ERC-7710 Redeem delegations](https://docs.metamask.io/delegation-toolkit/experimental/erc-7710-redeem-delegations/) - Learn how to redeem ERC-7715 granted permissions.
 
