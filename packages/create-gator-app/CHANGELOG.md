@@ -9,14 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.1.1]
 
-### Uncategorized
-
-- Resolve dependabot alerts
-- Update templates to latest v0.12
-
 ### Added
 
 - Adds MetaMask Smart Accounts template
+
+### Changed
+
+- Update templates to latest v0.12
+
+### Fixed
+
+- Fix dependabot alerts
 
 ## [0.1.0]
 
