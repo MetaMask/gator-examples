@@ -7,14 +7,13 @@ import { prepareRedeemDelegationData } from "@/utils/delegationUtils";
 import { getDeleGatorEnvironment } from "@metamask/delegation-toolkit";
 import { useState } from "react";
 import { Hex } from "viem";
-import { sepolia } from "viem/chains";
+import { baseSepolia as chain } from "viem/chains";
 import Button from "./Button";
 
 export default function RedeemDelegationButton() {
   const { smartAccount } = useDelegateSmartAccount();
   const [loading, setLoading] = useState(false);
   const [transactionHash, setTransactionHash] = useState<Hex | null>(null);
-  const chain = sepolia;
   const { getDelegation } = useStorageClient();
   const { bundlerClient, paymasterClient, pimlicoClient } =
     usePimlicoServices();
