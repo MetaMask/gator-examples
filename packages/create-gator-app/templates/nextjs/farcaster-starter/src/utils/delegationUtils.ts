@@ -24,8 +24,7 @@ export function prepareRootDelegation(
   // Restricting a delegation:
   // https://docs.metamask.io/delegation-toolkit/how-to/create-delegation/restrict-delegation/
   const caveats = createCaveatBuilder(delegator.environment)
-    .addCaveat("limitedCalls", 1)
-    .build();
+    .addCaveat("limitedCalls", 1);
 
   return createDelegation({
     to: delegate,

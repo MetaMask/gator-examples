@@ -1,24 +1,21 @@
 import {
   createPimlicoClient,
-  PimlicoClient,
 } from "permissionless/clients/pimlico";
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 import { http } from "viem";
 import {
-  BundlerClient,
   createBundlerClient,
   createPaymasterClient,
-  PaymasterClient,
 } from "viem/account-abstraction";
 import { useChainId } from "wagmi";
 
 export function usePimlicoServices() {
-  const [paymasterClient, setPaymasterClient] = useState<PaymasterClient>();
-  const [bundlerClient, setBundlerClient] = useState<BundlerClient>();
-  const [pimlicoClient, setPimlicoClient] = useState<PimlicoClient>();
   const chainId = useChainId();
-
-  useEffect(() => {
+  const {
+    pimlicoClient,
+    bundlerClient,
+    paymasterClient
+  } = useMemo(() => {
     const pimlicoKey = process.env.NEXT_PUBLIC_PIMLICO_API_KEY;
 
     if (!pimlicoKey) {
@@ -43,9 +40,12 @@ export function usePimlicoServices() {
       ),
     });
 
-    setPimlicoClient(pimlicoClient);
-    setBundlerClient(bundlerClient);
-    setPaymasterClient(paymasterClient);
+    return {
+      pimlicoClient,
+      bundlerClient,
+      paymasterClient
+    }
+
   }, [chainId]);
 
   return { bundlerClient, paymasterClient, pimlicoClient };

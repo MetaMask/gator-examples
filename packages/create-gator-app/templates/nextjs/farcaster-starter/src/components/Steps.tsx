@@ -32,23 +32,23 @@ export default function Steps() {
       changeStep(1);
     }
 
-    if (address && smartAccount && !delegateSmartAccount) {
-      smartAccount.isDeployed().then((isDeployed: boolean) => {
-        if (!isDeployed) {
-          changeStep(2);
+    if (address && smartAccount) {
+      if (delegateSmartAccount) {
+        const delegation = getDelegation(delegateSmartAccount.address);
+        if (delegation) {
+          changeStep(5);
+        } else {
+          changeStep(4);
         }
-        if (isDeployed) {
-          changeStep(3);
-        }
-      });
-    }
-
-    if (address && smartAccount && delegateSmartAccount) {
-      const delegation = getDelegation(delegateSmartAccount.address);
-      if (!delegation) {
-        changeStep(4);
       } else {
-        changeStep(5);
+        (async () => {
+          const isDeployed = await smartAccount.isDeployed();
+          if (isDeployed) {
+            changeStep(3);
+          } else {
+            changeStep(2);
+          }
+        })();
       }
     }
   }, [address, smartAccount, delegateSmartAccount]);

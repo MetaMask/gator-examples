@@ -15,7 +15,7 @@ export default function DeployDelegatorButton() {
     usePimlicoServices();
 
   const handleDeployDelegator = async () => {
-    if (!smartAccount) return;
+    if(!smartAccount || !pimlicoClient || !bundlerClient) return;
     setLoading(true);
     const { fast: fee } = await pimlicoClient!.getUserOperationGasPrice();
 

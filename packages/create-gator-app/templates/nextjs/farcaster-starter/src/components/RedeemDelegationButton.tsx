@@ -19,7 +19,7 @@ export default function RedeemDelegationButton() {
     usePimlicoServices();
 
   const handleRedeemDelegation = async () => {
-    if (!smartAccount) return;
+    if (!smartAccount || !pimlicoClient || !bundlerClient || !paymasterClient) return;
 
     setLoading(true);
 
@@ -32,7 +32,7 @@ export default function RedeemDelegationButton() {
     const redeemData = prepareRedeemDelegationData(delegation);
     const { fast: fee } = await pimlicoClient!.getUserOperationGasPrice();
 
-    const userOperationHash = await bundlerClient!.sendUserOperation({
+    const userOperationHash = await bundlerClient.sendUserOperation({
       account: smartAccount,
       calls: [
         {
@@ -44,13 +44,13 @@ export default function RedeemDelegationButton() {
       paymaster: paymasterClient,
     });
 
-    const { receipt } = await bundlerClient!.waitForUserOperationReceipt({
+    const { receipt } = await bundlerClient.waitForUserOperationReceipt({
       hash: userOperationHash,
     });
 
     setTransactionHash(receipt.transactionHash);
 
-    console.log(receipt);
+    console.log(`Redeemed delegation receipt: ${receipt.transactionHash}`);
     setLoading(false);
   };
 
@@ -60,12 +60,12 @@ export default function RedeemDelegationButton() {
         <Button
           onClick={() =>
             window.open(
-              `https://sepolia.etherscan.io/tx/${transactionHash}`,
+              `https://sepolia.basescan.org/tx/${transactionHash}`,
               "_blank",
             )
           }
         >
-          View on Etherscan
+          View on BaseScan
         </Button>
       </div>
     );

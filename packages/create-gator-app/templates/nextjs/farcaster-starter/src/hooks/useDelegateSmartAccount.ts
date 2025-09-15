@@ -7,6 +7,7 @@ import {
 } from "@metamask/delegation-toolkit";
 import { useEffect, useState } from "react";
 import { privateKeyToAccount } from "viem/accounts";
+import { Hex } from "viem";
 import { usePublicClient } from "wagmi";
 import { useGatorContext } from "@/hooks/useGatorContext";
 
@@ -19,11 +20,10 @@ export default function useDelegateSmartAccount() {
   );
 
   useEffect(() => {
-    console.log(delegateWallet);
     if (delegateWallet === "0x" || !publicClient) return;
 
     console.log("Creating smart account");
-    const account = privateKeyToAccount(delegateWallet as `0x${string}`);
+    const account = privateKeyToAccount(delegateWallet as Hex);
 
     toMetaMaskSmartAccount({
       client: publicClient,

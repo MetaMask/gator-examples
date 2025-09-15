@@ -15,7 +15,8 @@ export default function CreateDelegationButton() {
 
   const handleCreateDelegation = async () => {
     if (!smartAccount || !delegateSmartAccount) return;
-    console.log(smartAccount.address, delegateSmartAccount.address);
+    console.log(`Creating delegation from ${smartAccount.address} to ${delegateSmartAccount.address}`);
+    
     const delegation = prepareRootDelegation(
       smartAccount,
       delegateSmartAccount.address,
