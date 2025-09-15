@@ -34,7 +34,6 @@ export default function DeployDelegatorButton() {
       hash: userOperationHash,
     });
 
-    console.log(receipt);
     setLoading(false);
     changeStep(3);
   };
