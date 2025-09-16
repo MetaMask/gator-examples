@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@metamask/delegation-toolkit": "^0.12.0",
+    "@metamask/delegation-toolkit": "^0.13.0",
     "@tanstack/react-query": "^5.76.1",
     "next": "15.3.4",
     "permissionless": "^0.2.46",
