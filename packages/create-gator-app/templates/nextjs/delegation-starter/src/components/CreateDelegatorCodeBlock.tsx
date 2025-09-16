@@ -66,7 +66,7 @@ export default function CreateDelegatorCodeBlock() {
       content: (
         <>
           {" "}
-          <Property>signatory</Property>: {`{ `}
+          <Property>signer</Property>: {`{ `}
           <Variable>walletClient</Variable>
           {` }`},
         </>

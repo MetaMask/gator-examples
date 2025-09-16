@@ -80,7 +80,7 @@ export default function CreateDelegateCodeBlock() {
       content: (
         <>
           {" "}
-          <Property>signatory</Property>: {`{ `}
+          <Property>signer</Property>: {`{ `}
           <Variable>account</Variable>
           {` }`},
         </>

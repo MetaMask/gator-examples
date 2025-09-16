@@ -51,7 +51,7 @@ export default function RedeemDelegationCodeBlock() {
       content: (
         <>
           {" "}
-          <Property>modes</Property>: [<Variable>SINGLE_DEFAULT_MODE</Variable>
+          <Property>modes</Property>: [<Variable>ExecutionMode.SingleDefault</Variable>
           ],
         </>
       ),

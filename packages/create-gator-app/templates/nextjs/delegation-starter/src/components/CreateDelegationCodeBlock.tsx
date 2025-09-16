@@ -5,7 +5,6 @@ import {
   Method,
   Property,
   StringLiteral,
-  NumberLiteral,
 } from "@/components/CodeBlock";
 
 export default function CreateDelegationCodeBlock() {
@@ -13,36 +12,6 @@ export default function CreateDelegationCodeBlock() {
     {
       prefix: "$" as const,
       content: "// utils/delegationUtils.ts",
-    },
-    {
-      prefix: ">" as const,
-      content: (
-        <>
-          <Keyword>const</Keyword> <Variable>caveats</Variable> ={" "}
-          <Method>createCaveatBuilder</Method>(<Variable>smartAccount</Variable>
-          .<Property>environment</Property>)
-        </>
-      ),
-    },
-    {
-      prefix: ">" as const,
-      content: (
-        <>
-          {" "}
-          .<Method>addCaveat</Method>(
-          <StringLiteral>"limitedCalls"</StringLiteral>,{" "}
-          <NumberLiteral>1</NumberLiteral>)
-        </>
-      ),
-    },
-    {
-      prefix: ">" as const,
-      content: (
-        <>
-          {" "}
-          .<Method>build</Method>()
-        </>
-      ),
     },
     {
       prefix: ">" as const,
@@ -54,6 +23,29 @@ export default function CreateDelegationCodeBlock() {
         <>
           <Keyword>const</Keyword> <Variable>delegation</Variable> ={" "}
           <Method>createDelegation</Method>({`{`}
+        </>
+      ),
+    },
+    {
+      prefix: ">" as const,
+      content: (
+        <>
+          {" "}
+          <Property>scope</Property>: {`{`}
+        </>
+      ),
+    },
+    {
+      prefix: ">" as const,
+      content: (
+        <>
+          {"   "}
+          <Property>type</Property>: <StringLiteral>"nativeTokenTransferAmount"</StringLiteral>,
+          <br />
+          {"   "}
+          <Property>maxAmount</Property>: <Method>parseEther</Method>(<StringLiteral>"0.001"</StringLiteral>),
+          <br />
+          {` }`},
         </>
       ),
     },
@@ -82,7 +74,8 @@ export default function CreateDelegationCodeBlock() {
       content: (
         <>
           {" "}
-          <Property>caveats</Property>: <Variable>caveats</Variable>,
+          <Property>environment</Property>: <Variable>delegateSmartAccount</Variable>.
+          <Property>environment</Property>,
         </>
       ),
     },
