@@ -18,6 +18,14 @@ const NEXTJS_TEMPLATE_OPTIONS: ITemplate[] = [
     areLLMRulesSupported: false,
   },
   {
+    name: "Farcaster Mini App Delegation Starter",
+    value: "farcaster-starter",
+    description: "A basic Next.js Farcaster Mini App Delegation starter",
+    framework: "nextjs",
+    isWeb3AuthSupported: false,
+    areLLMRulesSupported: false,
+  },
+  {
     name: "Experimental: ERC7715 Permissions starter",
     value: "erc7715-starter",
     description: "A basic Next.js ERC7715 Permissions starter",
