@@ -26,7 +26,7 @@ export default function useSmartAccount(): {
       implementation: Implementation.Hybrid,
       deployParams: [address, [], [], []],
       deploySalt: "0x",
-      signatory: { walletClient },
+      signer: { walletClient },
     }).then((smartAccount) => {
       setSmartAccount(smartAccount);
     });
