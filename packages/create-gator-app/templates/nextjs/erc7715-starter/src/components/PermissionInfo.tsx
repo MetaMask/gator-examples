@@ -45,12 +45,6 @@ export default function PermissionInfo() {
             </h4>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
               <div>
-                <p className="text-gray-600 dark:text-gray-400">Expiry:</p>
-                <p className="text-gray-900 dark:text-white">
-                  {formatDate(permission.permission.data.expiry as number)}
-                </p>
-              </div>
-              <div>
                 <p className="text-gray-600 dark:text-gray-400">Chain:</p>
                 <p className="text-gray-900 dark:text-white">
                   {permission.chainId}
