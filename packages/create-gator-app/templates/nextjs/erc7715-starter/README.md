@@ -1,8 +1,8 @@
 # ERC-7715 permissions starter template
 
-This is a NextJS ERC-7715 permissions starter template created with `@metamask/create-gator-app`.
+This is a NextJS ERC-7715 permissions starter template created with [@metamask/create-gator-app](https://www.npmjs.com/package/@metamask/create-gator-app).
 
-This template is meant to help you bootstrap your own projects with [ERC-7715 permissions](https://docs.metamask.io/delegation-toolkit/experimental/erc-7715-request-permissions/). It helps you build 
+This template is meant to help you bootstrap your own projects with [ERC-7715 permissions](https://docs.metamask.io/delegation-toolkit/guides/erc7715/execute-on-metamask-users-behalf/). It helps you build 
 a dApp with ERC-7715 support to request permissions and redeem them.
 
 Learn more about [ERC-7715](https://eips.ethereum.org/EIPS/eip-7715).
@@ -73,23 +73,17 @@ pnpm dev
 Open [http://localhost:3000](http://localhost:3000) in your browser to view the app.
 
 
-## Application flow
+## Application Flow
 
-This template demonstrates a complete ERC-7715 delegation flow:
+This template demonstrates a complete ERC-7715 flow:
 
-1. **Create session account**: Users create a delegator smart account, which will be
-used to redeem permissions.
+1. **Create Session Account**: Users can create a session account that will be used to redeem permissions.
+2. **Grant Permissions**: Users can grant ERC-7715 permissions to the session account.
+3. **Redeem Permissions**: The session account can use the granted permissions to perform actions on behalf of the MetaMask user.
 
-2. **Grant permissions**: Users grant permissions to the session account by installing
-MetaMask Snaps and approving the ERC-7715 permisison request.
+## Learn More
 
-3. **Redeem permissions**: The session account uses the granted permissions to perform
-actions on behalf of the user.
+To learn more about Delegation Toolkit, take a look at the following resources:
 
-## Learn more
-
-To learn more about ERC-7715, take a look at the following resources:
-
-- [ERC-7715 Request permissions](https://docs.metamask.io/delegation-toolkit/experimental/erc-7715-request-permissions/) - Learn how to request ERC-7715 request permissions.
-- [ERC-7710 Redeem delegations](https://docs.metamask.io/delegation-toolkit/experimental/erc-7710-redeem-delegations/) - Learn how to redeem ERC-7715 granted permissions.
-
+- [ERC-7715 guide](https://docs.metamask.io/delegation-toolkit/guides/erc7715/execute-on-metamask-users-behalf/) - Learn how to use ERC-7715 permissions.
+- [Delegation Toolkit Documentation](https://docs.metamask.io/delegation-toolkit/) - learn about Delegation Toolkit features and API.
