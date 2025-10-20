@@ -31,11 +31,11 @@ export const SessionAccountProvider = ({
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-    const createSessionAccount = useCallback(async (privateKey?: `0x${string}`) => {
+  const createSessionAccount = useCallback(async (privateKey?: `0x${string}`) => {
     try {
       setIsLoading(true);
       setError(null);
-      
+
       const key = privateKey || generatePrivateKey();
       const account = privateKeyToAccount(key as `0x${string}`);
 
@@ -44,11 +44,11 @@ export const SessionAccountProvider = ({
         implementation: Implementation.Hybrid,
         deployParams: [account.address, [], [], []],
         deploySalt: "0x",
-        signatory: { account },
+        signer: { account },
       });
 
       setSessionAccount(newSessionAccount);
-      
+
       // Save the private key to session storage
       if (!privateKey) {
         sessionStorage.setItem(PRIVATE_KEY_STORAGE_KEY, key);
@@ -73,7 +73,7 @@ export const SessionAccountProvider = ({
       try {
         setIsLoading(true);
         const storedPrivateKey = sessionStorage.getItem(PRIVATE_KEY_STORAGE_KEY);
-        
+
         if (storedPrivateKey) {
           await createSessionAccount(storedPrivateKey as `0x${string}`);
         }
@@ -89,11 +89,11 @@ export const SessionAccountProvider = ({
   }, [createSessionAccount]);
 
   return (
-    <SessionAccountContext.Provider 
-      value={{ 
-        sessionAccount, 
-        createSessionAccount, 
-        isLoading, 
+    <SessionAccountContext.Provider
+      value={{
+        sessionAccount,
+        createSessionAccount,
+        isLoading,
         error,
         clearSessionAccount
       }}

@@ -47,13 +47,7 @@ export default function PermissionInfo() {
               <div>
                 <p className="text-gray-600 dark:text-gray-400">Expiry:</p>
                 <p className="text-gray-900 dark:text-white">
-                  {formatDate(permission.expiry)}
-                </p>
-              </div>
-              <div>
-                <p className="text-gray-600 dark:text-gray-400">Start:</p>
-                <p className="text-gray-900 dark:text-white">
-                  {formatDate(permission.permission.data.startTime as number)}
+                  {formatDate(permission.permission.data.expiry as number)}
                 </p>
               </div>
               <div>
