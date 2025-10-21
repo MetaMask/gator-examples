@@ -25,11 +25,11 @@ The `create-gator-app` package is a CLI tool that helps you bootstrap a new proj
 
 ```bash
 # Using npx
-npx create-gator-app@latest
+npx @metamask/create-gator-app@latest
 
 # Or install globally
-npm install -g create-gator-app
-create-gator-app
+npm install -g @metamask/create-gator-app
+@metamask/create-gator-app
 ```
 
 ## Development
