@@ -26,7 +26,7 @@ const NEXTJS_TEMPLATE_OPTIONS: ITemplate[] = [
     areLLMRulesSupported: false,
   },
   {
-    name: "Experimental: ERC7715 Permissions starter",
+    name: "ERC-7715 Permissions Starter",
     value: "erc7715-starter",
     description: "A basic Next.js ERC7715 Permissions starter",
     framework: "nextjs",

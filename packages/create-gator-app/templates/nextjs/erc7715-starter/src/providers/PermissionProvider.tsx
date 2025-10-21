@@ -7,10 +7,10 @@ import {
   useEffect,
   useState,
 } from "react";
-import { GrantPermissionsReturnType } from "@metamask/delegation-toolkit/experimental";
+import { RequestExecutionPermissionsReturnType } from "@metamask/delegation-toolkit/experimental";
 import { Address } from "viem";
 
-export type Permission = NonNullable<GrantPermissionsReturnType>[number];
+export type Permission = NonNullable<RequestExecutionPermissionsReturnType>[number];
 
 interface PermissionContextType {
   permission: Permission | null;
@@ -23,9 +23,9 @@ interface PermissionContextType {
 export const PermissionContext = createContext<PermissionContextType>({
   permission: null,
   smartAccount: null,
-  savePermission: () => {},
+  savePermission: () => { },
   fetchPermission: () => null,
-  removePermission: () => {},
+  removePermission: () => { },
 });
 
 const PERMISSION_STORAGE_KEY = "gator-permission";

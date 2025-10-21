@@ -36,7 +36,7 @@ export default function RedeemPermissionButton() {
     setLoading(true);
 
     try {
-      const { accountMeta, context, signerMeta } = permission;
+      const { context, signerMeta } = permission;
 
       if (!signerMeta) {
         console.error("No signer meta found");
@@ -75,7 +75,6 @@ export default function RedeemPermissionButton() {
           },
         ],
         ...fee,
-        accountMetadata: accountMeta,
       });
 
       const { receipt } = await bundlerClient.waitForUserOperationReceipt({
@@ -104,7 +103,7 @@ export default function RedeemPermissionButton() {
           </p>
 
           <Button
-            className="w-full bg-gradient-to-br from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 space-x-2"
+            className="w-full space-x-2"
             onClick={() =>
               window.open(`${config.ethScanerUrl}/tx/${txHash}`, '_blank')
             }
