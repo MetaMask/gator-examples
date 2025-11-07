@@ -1,5 +1,5 @@
 {
-  "name": "erc-7715-permissions-starter",
+  "name": "advanced-permissions-starter",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -11,12 +11,14 @@
   "dependencies": {
     "@metamask/delegation-toolkit": "^0.13.0",
     "@tailwindcss/postcss": "^4.1.1",
+    "@tanstack/react-query": "^5.90.7",
     "lucide-react": "^0.487.0",
     "next": "15.3.4",
     "permissionless": "^0.2.46",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "viem": "^2.29.2"
+    "viem": "^2.38.6",
+    "wagmi": "^2.19.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

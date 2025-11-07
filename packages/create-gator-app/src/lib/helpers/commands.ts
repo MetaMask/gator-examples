@@ -14,5 +14,4 @@ export const createCommand = (): Command => {
       "Add Web3Auth Embedded Wallet as a signer for delegator smart account"
     )
     .option("--skip-install", "Skip the installation of dependencies")
-    .option("--add-llm-rules", "Add LLM rules for your IDE");
 };

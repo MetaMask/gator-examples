@@ -1,7 +1,6 @@
 import fs from "fs-extra";
 import path from "path";
 import { configureENV } from "./configure-env";
-import { copyLLMRulesFiles } from "./copy-llm-rules";
 import { BuilderConfig } from "../config";
 
 interface TemplateResult {
@@ -34,13 +33,6 @@ export const installTemplate = async (
         const writePath = `${targetDir}/${file}`;
         fs.writeFileSync(writePath, contents, "utf8");
       } else if (stats.isDirectory()) {
-        if (file === "llmRules") {
-          if (builderConfig.shouldAddLLMRules()) {
-            copyLLMRulesFiles(options);
-          }
-          continue;
-        }
-
         fs.mkdirSync(`${targetDir}/${file}`);
 
         await installTemplate(

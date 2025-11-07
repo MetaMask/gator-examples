@@ -1,5 +1,4 @@
 import { createPimlicoClient } from "permissionless/clients/pimlico";
-import { config } from "@/config";
 import { http } from "viem";
 
 const pimlicoKey = process.env.NEXT_PUBLIC_PIMLICO_API_KEY;
@@ -12,8 +11,8 @@ if (!pimlicoKey) {
  * Pimlico client instance configured for Linea Sepolia network
  * Used for estimating gas prices (maxFeePerGas, maxPriorityFeePerGas) for sending a UserOperation
  */
-export const pimlicoClient = createPimlicoClient({
+export const pimlicoClient = (chainId: number) => createPimlicoClient({
   transport: http(
-    `https://api.pimlico.io/v2/${config.chain.id}/rpc?apikey=${pimlicoKey}`
+    `https://api.pimlico.io/v2/${chainId}/rpc?apikey=${pimlicoKey}`
   ),
 });

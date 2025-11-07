@@ -1,30 +1,58 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import ConnectButton from "@/components/ConnectButton";
 import CreateSessionAccountButton from "@/components/CreateSessionAccount";
 import RedeemPermissionButton from "@/components/RedeemPermissionButton";
 import GrantPermissionsButton from "./GrantPermissionsButton";
 import { useSessionAccount } from "@/providers/SessionAccountProvider";
 import { usePermissions } from "@/providers/PermissionProvider";
+import { useAccount } from "wagmi";
 
 export default function Steps() {
   const [step, setStep] = useState<number>(1);
   const { sessionAccount } = useSessionAccount();
   const { permission } = usePermissions();
+  const { isConnected } = useAccount();
 
   useEffect(() => {
+    if (!isConnected) {
+      setStep(1);
+      return;
+    }
+
     if (permission && sessionAccount) {
-      setStep(3);
+      setStep(4);
     } else if (sessionAccount) {
+      setStep(3);
+    } else if (isConnected) {
       setStep(2);
     } else {
       setStep(1);
     }
-  }, [sessionAccount, permission]);
+  }, [sessionAccount, permission, isConnected]);
 
   return (
     <div className="max-w-4xl mx-auto p-3 space-y-8">
       {step === 1 && (
+        <div className="space-y-6 flex flex-col gap-6 items-center justify-center">
+          <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-6 shadow-lg border border-gray-200 dark:border-gray-700">
+            <p className="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
+              To get started, please connect your wallet. Make sure your connected account is upgraded to a MetaMask Smart Account.
+              If your account is not upgraded, you can upgrade it by following the instructions on the
+              <a href="https://support.metamask.io/configure/accounts/switch-to-or-revert-from-a-smart-account/" className="text-blue-500 hover:text-blue-400 underline ml-1" target="_blank" rel="noopener noreferrer">
+                MetaMask Support Page.
+              </a>
+            </p>
+            <p className="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
+              If your account is not upgraded, the session account won't able to redeem the permissions.
+            </p>
+          </div>
+          <ConnectButton />
+        </div>
+
+      )}
+      {step === 2 && (
         <div className="space-y-6">
           <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-6 shadow-lg border border-gray-200 dark:border-gray-700">
             <p className="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
@@ -67,7 +95,7 @@ export default function Steps() {
           <CreateSessionAccountButton />
         </div>
       )}
-      {step === 2 && (
+      {step === 3 && (
         <div className="space-y-6">
           <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-6 shadow-lg border border-gray-200 dark:border-gray-700">
             <p className="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
@@ -78,13 +106,13 @@ export default function Steps() {
             <p className="text-gray-700 dark:text-gray-300 mt-4 leading-relaxed">
               You can safely store the response for later redemption by the
               session account. In this example, we will save the response in
-              local storage.
+              session state.
             </p>
           </div>
           <GrantPermissionsButton />
         </div>
       )}
-      {step === 3 && (
+      {step === 4 && (
         <div className="space-y-6">
           <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-6 shadow-lg border border-gray-200 dark:border-gray-700">
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed">

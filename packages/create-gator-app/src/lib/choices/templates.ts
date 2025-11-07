@@ -26,9 +26,9 @@ const NEXTJS_TEMPLATE_OPTIONS: ITemplate[] = [
     areLLMRulesSupported: false,
   },
   {
-    name: "ERC-7715 Permissions Starter",
-    value: "erc7715-starter",
-    description: "A basic Next.js ERC7715 Permissions starter",
+    name: "Advanced Permissions (ERC-7715) Starter",
+    value: "advanced-permissions-starter",
+    description: "A basic Next.js Advanced Permissions (ERC-7715) starter",
     framework: "nextjs",
     isWeb3AuthSupported: false,
     areLLMRulesSupported: true,

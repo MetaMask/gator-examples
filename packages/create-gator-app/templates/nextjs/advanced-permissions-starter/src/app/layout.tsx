@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { SessionAccountProvider } from "@/providers/SessionAccountProvider";
-import { PermissionProvider } from "@/providers/PermissionProvider";
+import { AppProvider } from "@/providers/AppProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Gator ERC7715",
-  description: "A dApp to test the Gator ERC7715 implementation",
+  title: "Advanced Permissions (ERC-715)",
+  description: "A dApp to test the Advanced Permissions (ERC-715) implementation",
 };
 
 export default function RootLayout({
@@ -31,9 +30,9 @@ export default function RootLayout({
       >
         <div className="flex-1">
           <main>
-            <PermissionProvider>
-              <SessionAccountProvider>{children}</SessionAccountProvider>
-            </PermissionProvider>
+            <AppProvider>
+              {children}
+            </AppProvider>
           </main>
         </div>
       </body>
