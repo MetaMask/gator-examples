@@ -10,7 +10,6 @@ export class BuilderConfig {
   constructor(
     baseAnswers: Answers,
     web3AuthAnswers: Answers | undefined,
-    llmAnswers: Answers | undefined,
     flags: OptionValues
   ) {
     const targetDir = path.join(process.cwd(), baseAnswers.projectName);
@@ -39,18 +38,12 @@ export class BuilderConfig {
       packageManager: baseAnswers.packageManager,
       template: resolveTemplate(baseAnswers),
       web3AuthNetwork: web3AuthAnswers?.web3AuthNetwork,
-      addLLMRules: flags.addLlmRules,
-      ideType: llmAnswers?.ideType,
       skipInstall: flags.skipInstall,
     };
   }
 
   getOptions(): IBuilderOptions {
     return this.options;
-  }
-
-  shouldAddLLMRules(): boolean {
-    return this.options.addLLMRules && this.options.template.areLLMRulesSupported;
   }
 
   shouldAddWeb3AuthConfig(): boolean {

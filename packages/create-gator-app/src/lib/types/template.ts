@@ -6,6 +6,5 @@ export interface ITemplate {
   description: string;
   framework: Framework;
   isWeb3AuthSupported: boolean;
-  areLLMRulesSupported: boolean;
 }
 

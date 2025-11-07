@@ -7,7 +7,6 @@ import { displayIntro } from "./lib/helpers/intro";
 import { displayOutro } from "./lib/helpers/outro";
 import { WEB3AUTH_PROMPTS } from "./lib/prompts/web3auth";
 import { BASE_PROMPTS } from "./lib/prompts/base";
-import { LLM_PROMPTS } from "./lib/prompts/llm";
 import { BuilderConfig } from "./lib/config";
 import { Builder } from "./lib/builder";
 import { BuilderError } from "./lib/types/builder-error";
@@ -16,7 +15,6 @@ import { resolveTemplate } from "./lib/helpers/resolve-template";
 async function promptUser(flags: OptionValues) {
   const answers = await inquirer.prompt(BASE_PROMPTS);
   let web3AuthAnswers: Answers | undefined;
-  let llmAnswers: Answers | undefined;
 
   const template = resolveTemplate(answers);
 
@@ -24,11 +22,7 @@ async function promptUser(flags: OptionValues) {
     web3AuthAnswers = await inquirer.prompt(WEB3AUTH_PROMPTS);
   }
 
-  if (flags.addLlmRules && template.areLLMRulesSupported) {
-    llmAnswers = await inquirer.prompt(LLM_PROMPTS);
-  }
-
-  return { answers, web3AuthAnswers, llmAnswers };
+  return { answers, web3AuthAnswers };
 }
 
 export async function main() {
@@ -37,11 +31,10 @@ export async function main() {
 
   displayIntro();
   try {
-    const { answers, web3AuthAnswers, llmAnswers } = await promptUser(flags);
+    const { answers, web3AuthAnswers } = await promptUser(flags);
     const builderConfig = new BuilderConfig(
       answers,
       web3AuthAnswers,
-      llmAnswers,
       flags
     );
 

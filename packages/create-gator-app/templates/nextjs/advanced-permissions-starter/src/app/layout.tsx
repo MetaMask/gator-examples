@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Advanced Permissions (ERC-715)",
-  description: "A dApp to test the Advanced Permissions (ERC-715) implementation",
+  title: "Advanced Permissions (ERC-7715)",
+  description: "A dApp to test the Advanced Permissions (ERC-7715) implementation",
 };
 
 export default function RootLayout({
