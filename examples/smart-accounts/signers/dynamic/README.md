@@ -1,6 +1,6 @@
-# MetaMask Smart Accounts x Dynamic Quickstart
+# MetaMask Smart Accounts & Dynamic Quickstart
 
-This is a NextJS MetaMask Smart Accounts starter x Dynamic Quickstart created with `@metamask/create-gator-app`.
+This is a NextJS MetaMask Smart Accounts starter & Dynamic Quickstart created with [`@metamask/create-gator-app`](https://www.npmjs.com/package/@metamask/create-gator-app).
 
 This template is meant to help you bootstrap your own projects with Metamask Smart Acounts. It helps you build smart accounts with account abstraction, and powerful delegation features.
 
