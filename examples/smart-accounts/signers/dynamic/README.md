@@ -4,7 +4,7 @@ This is a NextJS MetaMask Smart Accounts starter x Dynamic Quickstart created wi
 
 This template is meant to help you bootstrap your own projects with Metamask Smart Acounts. It helps you build smart accounts with account abstraction, and powerful delegation features.
 
-Learn more about [Metamask Smart Accounts](https://docs.metamask.io/delegation-toolkit/concepts/smart-accounts/).
+Learn more about [Metamask Smart Accounts](https://docs.metamask.io/smart-accounts-kit/concepts/smart-accounts/).
 
 ## Prerequisites
 
@@ -62,5 +62,5 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to view the 
 
 To learn more about MetaMask Smart Accounts, take a look at the following resources:
 
-- [Quickstart](https://docs.metamask.io/delegation-toolkit/get-started/quickstart/) - Get started quickly with the MetaMask Smart Accounts
-- [Delegation quickstart](https://docs.metamask.io/delegation-toolkit/get-started/delegation-quickstart/) - Get started quickly with creating a MetaMask smart account and completing the delegation lifecycle (creating, signing, and redeeming a delegation).
+- [Quickstart](https://docs.metamask.io/smart-accounts-kit/get-started/smart-account-quickstart/) - Get started quickly with the MetaMask Smart Accounts
+- [Delegation quickstart](https://docs.metamask.io/smart-accounts-kit/guides/delegation/execute-on-smart-accounts-behalf/) - Get started quickly with creating a MetaMask smart account and completing the delegation lifecycle (creating, signing, and redeeming a delegation).

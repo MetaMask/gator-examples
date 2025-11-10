@@ -1559,26 +1559,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@metamask/delegation-deployments@npm:^0.12.0":
-  version: 0.12.0
-  resolution: "@metamask/delegation-deployments@npm:0.12.0"
-  checksum: 10/fd3b373efc1857cc867b44b4ca33db0cf8487c1109d6f2ed7e3ce10e6a65d4165b7fcc034cab92d919d6f0833e3749a055ff862adc8d7a348cdd3a0f593f6aa6
-  languageName: node
-  linkType: hard
-
-"@metamask/delegation-toolkit@npm:^0.13.0":
-  version: 0.13.0
-  resolution: "@metamask/delegation-toolkit@npm:0.13.0"
-  dependencies:
-    "@metamask/7715-permission-types": "npm:^0.3.0"
-    "@metamask/delegation-abis": "npm:^0.11.0"
-    "@metamask/delegation-core": "npm:^0.2.0"
-    "@metamask/delegation-deployments": "npm:^0.12.0"
-    buffer: "npm:^6.0.3"
-    webauthn-p256: "npm:^0.0.10"
-  peerDependencies:
-    viem: ^2.31.4
-  checksum: 10/1b17715588c76f2cb6964036165348652b39ff9874104532fdd01fa6c6826e597ec7d96f09a0a15ad02a266f658af0c14236474e623ed54a9e0f0fffdb1baf33
+"@metamask/delegation-deployments@npm:^0.14.0":
+  version: 0.14.0
+  resolution: "@metamask/delegation-deployments@npm:0.14.0"
+  checksum: 10/135633e5908ace67311104bc659a5decd0bcc020ee1ef655d6bc89d16792c8e6e48e38740fd2d32b87ad479d32d4390c56aee56cd514391999506596ae2277b9
   languageName: node
   linkType: hard
 
@@ -1811,6 +1795,22 @@ __metadata:
     util: "npm:^0.12.4"
     uuid: "npm:^8.3.2"
   checksum: 10/1cc614ec2de97ede0df59f369fda1ddb7a0cf0d4f7bdb22e207cca373b8299a015aa683b3a51ec2703c4b90ae8f4aa26a985b943c24105f582f07837c0e77e23
+  languageName: node
+  linkType: hard
+
+"@metamask/smart-accounts-kit@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "@metamask/smart-accounts-kit@npm:0.1.0"
+  dependencies:
+    "@metamask/7715-permission-types": "npm:^0.3.0"
+    "@metamask/delegation-abis": "npm:^0.11.0"
+    "@metamask/delegation-core": "npm:^0.2.0"
+    "@metamask/delegation-deployments": "npm:^0.14.0"
+    buffer: "npm:^6.0.3"
+    webauthn-p256: "npm:^0.0.10"
+  peerDependencies:
+    viem: ^2.31.4
+  checksum: 10/4fe8ba31d75f0a00b28dc3ae64995a83bf3f26c2ffe8c1edf304d19651d30cdcda919c6a1e41e427caf22c0bca94b316684a3aab425f20f8087d062c473a323a
   languageName: node
   linkType: hard
 
@@ -8221,7 +8221,7 @@ __metadata:
     "@dynamic-labs/sdk-react-core": "npm:^4.42.0"
     "@dynamic-labs/wagmi-connector": "npm:^4.42.0"
     "@eslint/eslintrc": "npm:^3"
-    "@metamask/delegation-toolkit": "npm:^0.13.0"
+    "@metamask/smart-accounts-kit": "npm:^0.1.0"
     "@tailwindcss/postcss": "npm:^4"
     "@tanstack/react-query": "npm:^5.90.6"
     "@types/node": "npm:^20"

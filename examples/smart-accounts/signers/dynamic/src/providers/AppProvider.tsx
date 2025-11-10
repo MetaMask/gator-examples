@@ -6,7 +6,7 @@ import { sepolia } from "viem/chains";
 import { ReactNode } from "react";
 import { metaMask } from "wagmi/connectors";
 import { EthereumWalletConnectors } from "@dynamic-labs/ethereum";
-import { DynamicContextProvider, DynamicWidget } from "@dynamic-labs/sdk-react-core";
+import { DynamicContextProvider } from "@dynamic-labs/sdk-react-core";
 import { DynamicWagmiConnector } from "@dynamic-labs/wagmi-connector";
 
 export const connectors = [metaMask()];
