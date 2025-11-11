@@ -14,35 +14,34 @@ import { useChainId } from "wagmi";
 
 export function usePimlicoServices() {
   const chainId = useChainId();
-  const pimlicoKey = process.env.NEXT_PUBLIC_PIMLICO_API_KEY;
 
-  if (!pimlicoKey) {
-    throw new Error("Pimlico API key is not set");
-  }
+  const { bundlerClient, paymasterClient, pimlicoClient } = useMemo(() => {
+    const pimlicoKey = process.env.NEXT_PUBLIC_PIMLICO_API_KEY;
 
-  const bundlerClient: BundlerClient = useMemo(() => {
-    return createBundlerClient({
+    if (!pimlicoKey) {
+      throw new Error("Pimlico API key is not set");
+    }
+
+    const bundlerClient: BundlerClient = createBundlerClient({
       transport: http(
         `https://api.pimlico.io/v2/${chainId}/rpc?apikey=${pimlicoKey}`
       ),
     });
-  }, [chainId, pimlicoKey]);
 
-  const paymasterClient: PaymasterClient = useMemo(() => {
-    return createPaymasterClient({
+    const paymasterClient: PaymasterClient = createPaymasterClient({
       transport: http(
         `https://api.pimlico.io/v2/${chainId}/rpc?apikey=${pimlicoKey}`
       ),
     });
-  }, [chainId, pimlicoKey]);
 
-  const pimlicoClient: PimlicoClient = useMemo(() => {
-    return createPimlicoClient({
+    const pimlicoClient: PimlicoClient = createPimlicoClient({
       transport: http(
         `https://api.pimlico.io/v2/${chainId}/rpc?apikey=${pimlicoKey}`
       ),
     });
-  }, [chainId, pimlicoKey]) as PimlicoClient;
+
+    return { bundlerClient, paymasterClient, pimlicoClient };
+  }, [chainId]);
 
   return { bundlerClient, paymasterClient, pimlicoClient };
 }
