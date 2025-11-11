@@ -1,10 +1,10 @@
-# MetaMask Smart Accounts & Delegation starter template
+# MetaMask Smart Accounts & Delegation Template
 
-This is a React MetaMask Smart Accounts & Delegation starter template created with `@metamask/create-gator-app`.
+This is a React MetaMask Smart Accounts & Delegation template created with [`@metamask/create-gator-app`](https://npmjs.com/package/@metamask/create-gator-app).
 
 This template is meant to help you bootstrap your own projects with Metamask Smart Acounts. It helps you build smart accounts with account abstraction, and powerful delegation features.
 
-Learn more about [Metamask Smart Accounts](https://docs.metamask.io/delegation-toolkit/concepts/smart-accounts/).
+Learn more about [Metamask Smart Accounts](https://docs.metamask.io/smart-accounts-kit/concepts/smart-accounts/).
 
 ## Prerequisites
 
@@ -71,5 +71,5 @@ Open [http://localhost:5173](http://localhost:5173) in your browser to view the 
 
 To learn more about MetaMask Smart Accounts, take a look at the following resources:
 
-- [Quickstart](https://docs.metamask.io/delegation-toolkit/get-started/quickstart/) - Get started quickly with the MetaMask Smart Accounts
-- [Delegation quickstart](https://docs.metamask.io/delegation-toolkit/get-started/delegation-quickstart/) - Get started quickly with creating a MetaMask smart account and completing the delegation lifecycle (creating, signing, and redeeming a delegation).
+- [MetaMask Smart Accounts Quickstart](https://docs.metamask.io/smart-accounts-kit/get-started/smart-account-quickstart/) - Get started quickly with the MetaMask Smart Accounts
+- [Delegation guide](https://docs.metamask.io/smart-accounts-kit/guides/delegation/execute-on-smart-accounts-behalf/) - Get started quickly with creating a MetaMask smart account and completing the delegation lifecycle (creating, signing, and redeeming a delegation).
