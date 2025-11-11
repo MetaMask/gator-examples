@@ -5,7 +5,7 @@ import {
   useContext,
   useState,
 } from "react";
-import { RequestExecutionPermissionsReturnType } from "@metamask/delegation-toolkit/experimental";
+import { RequestExecutionPermissionsReturnType } from "@metamask/smart-accounts-kit/actions";
 
 export type Permission = NonNullable<RequestExecutionPermissionsReturnType>[number];
 

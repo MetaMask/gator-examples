@@ -2,7 +2,7 @@
 
 This is a NextJS MetaMask Advanced Permissions (ERC-7715) starter created with [@metamask/create-gator-app](https://www.npmjs.com/package/@metamask/create-gator-app).
 
-This template is meant to help you bootstrap your own projects with [Advanced Permissions (ERC-7715)](https://docs.metamask.io/delegation-toolkit/guides/erc7715/execute-on-metamask-users-behalf/). It helps you build 
+This template is meant to help you bootstrap your own projects with [Advanced Permissions (ERC-7715)](https://docs.metamask.io/smart-accounts-kit/guides/advanced-permissions/execute-on-metamask-users-behalf/). It helps you build 
 a dApp with ERC-7715 support to request permissions and redeem them.
 
 Learn more about [ERC-7715](https://eips.ethereum.org/EIPS/eip-7715).
@@ -87,7 +87,7 @@ This template demonstrates a complete Advanced Permissions (ERC-7715) flow:
 
 ## Learn More
 
-To learn more about Delegation Toolkit, take a look at the following resources:
+To learn more about Smart Accounts Kit, take a look at the following resources:
 
-- [Advanced Permissions (ERC-7715) guide](https://docs.metamask.io/delegation-toolkit/guides/erc7715/execute-on-metamask-users-behalf/) - Learn how to use ERC-7715 permissions.
-- [Delegation Toolkit Documentation](https://docs.metamask.io/delegation-toolkit/) - learn about Delegation Toolkit features and API.
+- [Advanced Permissions (ERC-7715) guide](https://docs.metamask.io/smart-accounts-kit/guides/advanced-permissions/execute-on-metamask-users-behalf/) - Learn how to use ERC-7715 permissions.
+- [Smart Accounts Kit Documentation](https://docs.metamask.io/smart-accounts-kit/) - Learn more about Smart Accounts Kit features and API.

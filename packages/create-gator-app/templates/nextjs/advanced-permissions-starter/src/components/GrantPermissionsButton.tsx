@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { parseEther } from "viem";
-import { erc7715ProviderActions } from "@metamask/delegation-toolkit/experimental";
+import { erc7715ProviderActions } from "@metamask/smart-accounts-kit/actions";
 import { useSessionAccount } from "@/providers/SessionAccountProvider";
 import { usePermissions } from "@/providers/PermissionProvider";
 import { Loader2, CheckCircle } from "lucide-react";
@@ -50,7 +50,7 @@ export default function GrantPermissionsButton() {
       const client = walletClient.extend(erc7715ProviderActions());
       const currentTime = Math.floor(Date.now() / 1000);
       // 30 days in seconds
-      const expiry = currentTime + 86400 * 30;
+      const expiry = currentTime + 24 * 60 * 60 * 30;
 
       const permissions = await client.requestExecutionPermissions([{
         chainId,

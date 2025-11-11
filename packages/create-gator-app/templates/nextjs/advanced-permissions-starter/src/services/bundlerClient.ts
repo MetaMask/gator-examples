@@ -1,6 +1,7 @@
 import { createBundlerClient } from "viem/account-abstraction";
-import { erc7710BundlerActions } from "@metamask/delegation-toolkit/experimental";
+import { erc7710BundlerActions } from "@metamask/smart-accounts-kit/actions";
 import { http } from "viem";
+
 const pimlicoKey = process.env.NEXT_PUBLIC_PIMLICO_API_KEY;
 
 if (!pimlicoKey) {

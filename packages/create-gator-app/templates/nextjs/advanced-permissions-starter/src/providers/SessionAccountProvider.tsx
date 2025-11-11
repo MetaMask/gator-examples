@@ -4,7 +4,7 @@ import {
   Implementation,
   MetaMaskSmartAccount,
   toMetaMaskSmartAccount,
-} from "@metamask/delegation-toolkit";
+} from "@metamask/smart-accounts-kit";
 import { createContext, useState, useContext } from "react";
 import { generatePrivateKey, privateKeyToAccount } from "viem/accounts";
 import { usePublicClient } from "wagmi";

@@ -83,12 +83,12 @@ export default function Steps() {
               key and save it in the session storage. In production explore all other
               signers supported by the
               <a
-                href="https://docs.metamask.io/delegation-toolkit/how-to/create-smart-account/configure-accounts-signers/"
+                href="https://docs.metamask.io/smart-accounts-kit/guides/smart-accounts/create-smart-account/"
                 className="text-blue-500 hover:text-blue-400 underline ml-1"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                MetaMask Delegation Toolkit.
+                MetaMask Smart Accounts Kit.
               </a>
             </p>
           </div>
