@@ -11,7 +11,7 @@
   "dependencies": {
     "@farcaster/miniapp-sdk": "^0.2.1",
     "@farcaster/miniapp-wagmi-connector": "^1.1.0",
-    "@metamask/delegation-toolkit": "^0.13.0",
+    "@metamask/smart-accounts-kit": "^0.1.0",
     "@tanstack/react-query": "^5.76.1",
     "permissionless": "^0.2.57",
     "viem": "^2.38.4",

@@ -1,12 +1,12 @@
-# MetaMask Smart Accounts x Farcaster starter template
+# MetaMask Smart Acccounts Kit Farcaster Mini App Template
 
-This is a NextJS MetaMask Smart Accounts x Farcaster starter template created with `@metamask/create-gator-app`.
+This is a NextJS MetaMask Smart Acccounts Kit Farcaster Mini App template created with [`@metamask/create-gator-app`](https://npmjs.com/package/@metamask/create-gator-app)..
 
-This template helps you quickly bootstrap your project with a Farcaster mini app and MetaMask Smart Accounts. It 
+This template helps you quickly bootstrap your project with a Farcaster mini app with MetaMask Smart Accounts. It 
 provides a foundation for building mini apps that leverage account abstraction and powerful delegation features to 
 deliver seamless, secure, and flexible user experiences.
 
-Learn more about [Metamask Smart Accounts](https://docs.metamask.io/delegation-toolkit/concepts/smart-accounts/).
+Learn more about [Metamask Smart Accounts](https://docs.metamask.io/smart-accounts-kit/concepts/smart-accounts/).
 
 ## Prerequisites
 
@@ -83,7 +83,9 @@ Once you have the remote url, you can view the app in [embed tool](https://farca
 
 ## Learn more
 
+## Learn more
+
 To learn more about MetaMask Smart Accounts, take a look at the following resources:
 
-- [Quickstart](https://docs.metamask.io/delegation-toolkit/get-started/quickstart/) - Get started quickly with the MetaMask Smart Accounts
-- [Delegation quickstart](https://docs.metamask.io/delegation-toolkit/get-started/delegation-quickstart/) - Get started quickly with creating a MetaMask smart account and completing the delegation lifecycle (creating, signing, and redeeming a delegation).
+- [MetaMask Smart Accounts Quickstart](https://docs.metamask.io/smart-accounts-kit/get-started/smart-account-quickstart/) - Get started quickly with the MetaMask Smart Accounts
+- [Delegation guide](https://docs.metamask.io/smart-accounts-kit/guides/delegation/execute-on-smart-accounts-behalf/) - Get started quickly with creating a MetaMask smart account and completing the delegation lifecycle (creating, signing, and redeeming a delegation).
