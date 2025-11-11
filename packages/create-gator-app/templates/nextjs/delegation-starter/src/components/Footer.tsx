@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-start">
       <a
-        href="https://docs.metamask.io/delegation-toolkit/"
+        href="https://docs.metamask.io/smart-accounts-kit/"
         target="_blank"
         rel="noopener noreferrer"
         className="flex items-center gap-2 hover:underline hover:underline-offset-4"
