@@ -1,31 +1,33 @@
-import { useState } from "react";
-import { parseEther, isAddress } from "viem";
+import { useState, useMemo } from "react";
+import { parseEther, isAddress, Address } from "viem";
 import SendUserOperationButton from "@/components/SendUserOperationButton";
 
 export default function TransactionForm() {
   const [address, setAddress] = useState("");
   const [value, setValue] = useState("");
-  const [isValidAddress, setIsValidAddress] = useState(false);
-  const [isValidValue, setIsValidValue] = useState(false);
+
+  const isValidAddress = useMemo(() => {
+    if (address === "") return false;
+    return isAddress(address);
+  }, [address]);
+
+  const isValidValue = useMemo(() => {
+    if (value === "") return false;
+    try {
+      return parseEther(value) >= 0n;
+    } catch {
+      return false;
+    }
+  }, [value]);
 
   const handleAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newAddress = e.target.value;
     setAddress(newAddress);
-    setIsValidAddress(newAddress === "" || isAddress(newAddress));
   };
 
   const handleValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
     setValue(newValue);
-    try {
-      if (newValue === "" || parseFloat(newValue) >= 0) {
-        setIsValidValue(true);
-      } else {
-        setIsValidValue(false);
-      }
-    } catch {
-      setIsValidValue(false);
-    }
   };
 
 
@@ -60,7 +62,7 @@ export default function TransactionForm() {
 
         <div className="mt-8">
           <SendUserOperationButton
-            to={address as `0x${string}`}
+            to={address as Address}
             value={parseEther(value)}
             isEnabled={isFormValid}
           />

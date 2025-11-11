@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@metamask/delegation-toolkit": "^0.13.0",
+    "@metamask/smart-accounts-kit": "^0.1.0",
     "@tanstack/react-query": "^5.81.5",
     "permissionless": "^0.2.47",
     "next": "15.3.4",

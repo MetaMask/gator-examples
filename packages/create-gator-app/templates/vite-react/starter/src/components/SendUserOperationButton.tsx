@@ -20,33 +20,41 @@ export default function SendUserOperation({
     usePimlicoServices();
   const [isLoading, setIsLoading] = useState(false);
   const [receipt, setReceipt] = useState<TransactionReceipt | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSendUserOperation = async () => {
     setIsLoading(true);
     setReceipt(null);
-    if (!smartAccount || !pimlicoClient || !bundlerClient) {
-      return;
+    setError(null);
+
+    try {
+      if (!smartAccount) {
+        throw new Error("Smart account is not available.");
+      }
+
+      const { fast: fees } = await pimlicoClient.getUserOperationGasPrice();
+
+      const userOperationHash = await bundlerClient.sendUserOperation({
+        account: smartAccount,
+        calls: [
+          {
+            to,
+            value,
+          },
+        ],
+        ...fees,
+        paymaster: paymasterClient,
+      });
+
+      const { receipt } = await bundlerClient.waitForUserOperationReceipt({
+        hash: userOperationHash,
+      });
+      setReceipt(receipt);
+    } catch (error) {
+      setError((error as Error).message ?? "An unknown error occurred.");
+    } finally {
+      setIsLoading(false);
     }
-
-    const { fast: fees } = await pimlicoClient.getUserOperationGasPrice();
-
-    const userOperationHash = await bundlerClient.sendUserOperation({
-      account: smartAccount,
-      calls: [
-        {
-          to,
-          value,
-        },
-      ],
-      ...fees,
-      paymaster: paymasterClient,
-    });
-
-    const { receipt } = await bundlerClient.waitForUserOperationReceipt({
-      hash: userOperationHash,
-    });
-    setReceipt(receipt);
-    setIsLoading(false);
   };
 
   return (
@@ -72,6 +80,14 @@ export default function SendUserOperation({
           </Button>
         )}
       </div>
+
+      {error && (
+        <div className="bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-700 rounded-md p-3">
+          <p className="text-red-700 dark:text-red-300 text-sm">
+            <strong>Error:</strong> {error}
+          </p>
+        </div>
+      )}
     </div>
   );
 }
