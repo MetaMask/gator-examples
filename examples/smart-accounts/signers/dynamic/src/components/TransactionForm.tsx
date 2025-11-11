@@ -14,7 +14,7 @@ export default function TransactionForm() {
   const isValidValue = useMemo(() => {
     if (value === "") return false;
     try {
-      return parseEther(value) >= 0;
+      return parseEther(value) >= 0n;
     } catch {
       return false;
     }
