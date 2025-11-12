@@ -17,16 +17,24 @@ export default function RedeemDelegationCodeBlock() {
       content: (
         <>
           <Keyword>const</Keyword> <Variable>execution</Variable> ={" "}
-          <Method>createExecution</Method>()
+          <Method>createExecution</Method>(
+            {`{ `}
+            <Property>target</Property>: <Variable>zeroAddress</Variable>
+            {` }`}
+          )
         </>
       ),
+    },
+    {
+      prefix: ">" as const,
+      content: <br />,
     },
     {
       prefix: ">" as const,
       content: (
         <>
           <Keyword>const</Keyword> <Variable>data</Variable> ={" "}
-          <Variable>DelegationFramework</Variable>.<Property>encode</Property>.
+          <Variable>DelegationManager</Variable>.<Property>encode</Property>.
           <Method>redeemDelegations</Method>({`{`}
         </>
       ),

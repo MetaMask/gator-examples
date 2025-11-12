@@ -12,7 +12,7 @@
   "dependencies": {
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "@metamask/delegation-toolkit": "^0.13.0",
+    "@metamask/smart-accounts-kit": "^0.1.0",
     "@tanstack/react-query": "^5.76.1",
     "permissionless": "^0.2.46",
     "viem": "^2.29.2",
@@ -27,7 +27,8 @@
     "eslint": "^9.29.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
-    "globals": "^16.2.0","postcss": "^8.5.3",
+    "globals": "^16.2.0",
+    "postcss": "^8.5.3",
     "tailwindcss": "^4.1.7",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.34.1",

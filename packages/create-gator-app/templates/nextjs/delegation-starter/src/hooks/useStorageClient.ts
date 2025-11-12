@@ -1,6 +1,6 @@
 "use client";
 
-import { Delegation } from "@metamask/delegation-toolkit";
+import { Delegation } from "@metamask/smart-accounts-kit";
 
 export default function useStorageClient() {
   function storeDelegation(delegation: Delegation) {

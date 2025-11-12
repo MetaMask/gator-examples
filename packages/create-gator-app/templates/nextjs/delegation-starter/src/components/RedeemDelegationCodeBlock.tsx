@@ -17,9 +17,11 @@ export default function RedeemDelegationCodeBlock() {
       content: (
         <>
           <Keyword>const</Keyword> <Variable>execution</Variable> ={" "}
-          <Method>createExecution</Method>({`{ `}
-          <Property>target</Property>: <Variable>zeroAddress</Variable>
-          {` }`})
+          <Method>createExecution</Method>(
+            {`{ `}
+            <Property>target</Property>: <Variable>zeroAddress</Variable>
+            {` }`}
+          )
         </>
       ),
     },

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import AddressCard from "@/components/AddressCard";
 import { CodeBlock } from "@/components/CodeBlock";
 import ConnectButton from "@/components/ConnectButton";
@@ -80,7 +80,7 @@ export default function Steps() {
 
       {step === 1 && (
         <>
-          <p className="text-white/70 max-w-4xl leading-relaxed">
+          <p className="text-gray-700 dark:text-white/70 max-w-4xl leading-relaxed">
             The first step is to connect your wallet.
             <br />
             <br />
@@ -92,7 +92,7 @@ export default function Steps() {
       )}
       {step === 2 && (
         <>
-          <p className="text-white/70 max-w-4xl leading-relaxed">
+          <p className="text-gray-700 dark:text-white/70 max-w-4xl leading-relaxed">
             The MetaMask smart contract account that grants authority. This will
             be deployed on-chain, just in time for redeeming the delegation.
           </p>
@@ -104,7 +104,7 @@ export default function Steps() {
       )}
       {step === 3 && (
         <>
-          <p className="text-white/70 max-w-4xl leading-relaxed mb-6">
+          <p className="text-gray-700 dark:text-white/70 max-w-4xl leading-relaxed mb-6">
             The MetaMask smart contract account that receives the delegation.
             Initially this will be counterfactual (not deployed on-chain), until
             it is deployed by submitting a user operation.
@@ -117,7 +117,7 @@ export default function Steps() {
       )}
       {step === 4 && (
         <>
-          <p className="text-white/70 max-w-4xl leading-relaxed">
+          <p className="text-gray-700 dark:text-white/70 max-w-4xl leading-relaxed">
             The delegator creates and signs a delegation, granting specific
             authority to the delegate account. In this case, the delegation can
             be used to perform any transaction on delegator's behalf. The signed
@@ -130,7 +130,7 @@ export default function Steps() {
               href="https://docs.metamask.io/delegation-toolkit/how-to/create-delegation/restrict-delegation"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-cyan-400 hover:text-cyan-300 underline italic"
+              className="text-cyan-600 dark:text-cyan-400 hover:text-cyan-700 dark:hover:text-cyan-300 underline italic"
             >
               See how to restrict the delegation
             </a>
@@ -146,7 +146,7 @@ export default function Steps() {
         <>
           {storedDelegation && (
             <div>
-              <h4 className="font-semibold mb-4 text-sm text-white">
+              <h4 className="font-semibold mb-4 text-sm text-gray-900 dark:text-white">
                 📋 Delegation to Redeem
               </h4>
               <div className="max-w-4xl">
@@ -162,7 +162,7 @@ export default function Steps() {
             </div>
           )}
 
-          <p className="text-white/70 max-w-4xl leading-relaxed">
+          <p className="text-gray-700 dark:text-white/70 max-w-4xl leading-relaxed">
             The redeemer submits a user operation that executes the action
             allowed by the delegation (in this case, transfer nothing to no one)
             on behalf of the delegator. We are using the signed delegation
