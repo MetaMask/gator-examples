@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { Hex } from "viem";
-import { pimlicoClient } from "@/services/pimlicoClient";
-import { bundlerClient } from "@/services/bundlerClient";
+import { pimlicoClientFactory } from "@/services/pimlicoClient";
+import { bundlerClientFactory } from "@/services/bundlerClient";
 import { useSessionAccount } from "@/providers/SessionAccountProvider";
 import { usePermissions } from "@/providers/PermissionProvider";
 import { Loader2, CheckCircle, ExternalLink } from "lucide-react";
@@ -46,7 +46,10 @@ export default function RedeemPermissionButton() {
         return;
       }
 
-      const { fast: fee } = await pimlicoClient(chain.id).getUserOperationGasPrice();
+      const pimlicoClient = pimlicoClientFactory(chain.id);
+      const bundlerClient = bundlerClientFactory(chain.id);
+
+      const { fast: fee } = await pimlicoClient.getUserOperationGasPrice();
 
       /**
        * Sends a user operation with delegation to the bundler client. Only the session account can redeem the delegation.
@@ -56,7 +59,7 @@ export default function RedeemPermissionButton() {
        * - Account metadata and gas fee information
        * @returns {Promise<Hex>} The hash of the user operation
        */
-      const hash = await bundlerClient(chain.id).sendUserOperationWithDelegation({
+      const hash = await bundlerClient.sendUserOperationWithDelegation({
         publicClient,
         account: sessionAccount,
         calls: [
@@ -71,7 +74,7 @@ export default function RedeemPermissionButton() {
         ...fee,
       });
 
-      const { receipt } = await bundlerClient(chain.id).waitForUserOperationReceipt({
+      const { receipt } = await bundlerClient.waitForUserOperationReceipt({
         hash,
       });
 

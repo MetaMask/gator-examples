@@ -13,7 +13,7 @@ if (!pimlicoKey) {
  * Uses Pimlico's bundler service on the specified chain.
  * Extends the base bundler client with ERC-7710 specific actions.
  */
-export const bundlerClient = (chainId: number) => createBundlerClient({
+export const bundlerClientFactory = (chainId: number) => createBundlerClient({
   transport: http(
     `https://api.pimlico.io/v2/${chainId}/rpc?apikey=${pimlicoKey}`
   ),

@@ -11,7 +11,7 @@ if (!pimlicoKey) {
  * Pimlico client instance configured for Linea Sepolia network
  * Used for estimating gas prices (maxFeePerGas, maxPriorityFeePerGas) for sending a UserOperation
  */
-export const pimlicoClient = (chainId: number) => createPimlicoClient({
+export const pimlicoClientFactory = (chainId: number) => createPimlicoClient({
   transport: http(
     `https://api.pimlico.io/v2/${chainId}/rpc?apikey=${pimlicoKey}`
   ),
