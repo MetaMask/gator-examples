@@ -83,7 +83,7 @@ export default function Steps() {
       {step === 1 && (
         <>
           <p className="text-gray-700 dark:text-white/70 max-w-4xl leading-relaxed">
-            The first step would be to connect your wallet.
+            The first step is to connect your wallet.
             <br />
             <br />
             You can customize the Wagmi config to connect to any chain you want,

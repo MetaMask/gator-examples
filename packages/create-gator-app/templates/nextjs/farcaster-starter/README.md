@@ -83,8 +83,6 @@ Once you have the remote url, you can view the app in [embed tool](https://farca
 
 ## Learn more
 
-## Learn more
-
 To learn more about MetaMask Smart Accounts, take a look at the following resources:
 
 - [MetaMask Smart Accounts Quickstart](https://docs.metamask.io/smart-accounts-kit/get-started/smart-account-quickstart/) - Get started quickly with the MetaMask Smart Accounts

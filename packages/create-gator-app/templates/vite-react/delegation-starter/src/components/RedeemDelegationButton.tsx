@@ -10,6 +10,7 @@ export default function RedeemDelegationButton() {
   const { smartAccount } = useDelegateSmartAccount();
   const [loading, setLoading] = useState(false);
   const [transactionHash, setTransactionHash] = useState<Hex | null>(null);
+  const [error, setError] = useState<string | null>(null);
   const { getDelegation } = useStorageClient();
   const { bundlerClient, paymasterClient, pimlicoClient } =
     useAccountAbstractionUtils();
@@ -18,35 +19,43 @@ export default function RedeemDelegationButton() {
     if (!smartAccount) return;
 
     setLoading(true);
+    setError(null);
 
-    const delegation = getDelegation(smartAccount.address);
+    try {
+      const delegation = getDelegation(smartAccount.address);
 
-    if (!delegation) {
-      return;
+      if (!delegation) {
+        throw new Error("No delegation found");
+      }
+
+      const redeemData = prepareRedeemDelegationData(delegation);
+      const { fast: fee } = await pimlicoClient!.getUserOperationGasPrice();
+
+      const userOperationHash = await bundlerClient!.sendUserOperation({
+        account: smartAccount,
+        calls: [
+          {
+            to: smartAccount.environment.DelegationManager,
+            data: redeemData,
+          },
+        ],
+        ...fee,
+        paymaster: paymasterClient,
+      });
+
+      const { receipt } = await bundlerClient!.waitForUserOperationReceipt({
+        hash: userOperationHash,
+      });
+
+      setTransactionHash(receipt.transactionHash);
+
+      console.log(receipt);
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+      console.error(`Error redeeming delegation: ${errorMessage}`);
+      setError(errorMessage);
     }
 
-    const redeemData = prepareRedeemDelegationData(delegation);
-    const { fast: fee } = await pimlicoClient!.getUserOperationGasPrice();
-
-    const userOperationHash = await bundlerClient!.sendUserOperation({
-      account: smartAccount,
-      calls: [
-        {
-          to: smartAccount.environment.DelegationManager,
-          data: redeemData,
-        },
-      ],
-      ...fee,
-      paymaster: paymasterClient,
-    });
-
-    const { receipt } = await bundlerClient!.waitForUserOperationReceipt({
-      hash: userOperationHash,
-    });
-
-    setTransactionHash(receipt.transactionHash);
-
-    console.log(receipt);
     setLoading(false);
   };
 
@@ -68,8 +77,15 @@ export default function RedeemDelegationButton() {
   }
 
   return (
-    <Button onClick={handleRedeemDelegation} disabled={loading}>
-      {loading ? "Redeeming..." : "Redeem Delegation"}
-    </Button>
+    <div className="flex flex-col gap-2">
+      <Button onClick={handleRedeemDelegation} disabled={loading}>
+        {loading ? "Redeeming..." : "Redeem Delegation"}
+      </Button>
+      {error && (
+        <div className="max-w-4xl p-4 bg-red-100 border border-red-400 text-red-700 rounded">
+          {error}
+        </div>
+      )}
+    </div>
   );
 }
