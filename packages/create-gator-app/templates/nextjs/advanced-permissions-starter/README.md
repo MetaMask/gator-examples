@@ -1,8 +1,8 @@
-# ERC-7715 permissions starter template
+# MetaMask Advanced Permissions (ERC-7715) Starter
 
-This is a NextJS ERC-7715 permissions starter template created with [@metamask/create-gator-app](https://www.npmjs.com/package/@metamask/create-gator-app).
+This is a NextJS MetaMask Advanced Permissions (ERC-7715) starter created with [@metamask/create-gator-app](https://www.npmjs.com/package/@metamask/create-gator-app).
 
-This template is meant to help you bootstrap your own projects with [ERC-7715 permissions](https://docs.metamask.io/delegation-toolkit/guides/erc7715/execute-on-metamask-users-behalf/). It helps you build 
+This template is meant to help you bootstrap your own projects with [Advanced Permissions (ERC-7715)](https://docs.metamask.io/smart-accounts-kit/guides/advanced-permissions/execute-on-metamask-users-behalf/). It helps you build 
 a dApp with ERC-7715 support to request permissions and redeem them.
 
 Learn more about [ERC-7715](https://eips.ethereum.org/EIPS/eip-7715).
@@ -26,23 +26,27 @@ template/
 ├── src/
 │ ├── app/ # App router pages
 │ ├── components/ # UI Components
+│ │ ├── Button.tsx # Reusable button component
+│ │ ├── ConnectButton.tsx # Component for connecting wallet
 │ │ ├── CreateSessionAccount.tsx # Component for creating a session account
+│ │ ├── Footer.tsx # Footer component
 │ │ ├── GrantPermissionsButton.tsx # Component for granting permissions
 │ │ ├── Hero.tsx # Hero section component
-│ │ ├── InstallFlask.tsx # Component for installing MetaMask Flask
-│ │ ├── Loader.tsx # Loading indicator component
 │ │ ├── PermissionInfo.tsx # Component for displaying permission information
 │ │ ├── RedeemPermissionButton.tsx # Component for redeeming permissions
 │ │ ├── Steps.tsx # Step-by-step guide component
-│ │ └── WalletInfoContainer.tsx # Component for displaying wallet information
+│ │ ├── WalletInfo.tsx # Component for displaying wallet information
+│ │ └── WalletInfoContainer.tsx # Container component for wallet information
 │ ├── providers/ # React Context Providers
+│ │ ├── AppProvider.tsx # Main app provider
 │ │ ├── PermissionProvider.tsx # Provider for permission state
 │ │ └── SessionAccountProvider.tsx # Provider for session account state
 │ ├── services/ # Service layer for API interactions
-│ └── config.ts # Configuration settings
+│ │ ├── bundlerClient.ts # Bundler client configuration
+│ │ └── pimlicoClient.ts # Pimlico client configuration
+├── interfaces.d.ts # TypeScript interface definitions
 ├── .env # Environment variables
 ├── .gitignore # Git ignore rules
-├── next.config.ts # Next.js configuration
 ├── postcss.config.mjs # PostCSS configuration
 ├── tailwind.config.ts # Tailwind CSS configuration
 └── tsconfig.json # TypeScript configuration
@@ -75,15 +79,15 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to view the 
 
 ## Application Flow
 
-This template demonstrates a complete ERC-7715 flow:
+This template demonstrates a complete Advanced Permissions (ERC-7715) flow:
 
 1. **Create Session Account**: Users can create a session account that will be used to redeem permissions.
-2. **Grant Permissions**: Users can grant ERC-7715 permissions to the session account.
+2. **Grant Permissions**: Users can grant Advanced Permissions to the session account.
 3. **Redeem Permissions**: The session account can use the granted permissions to perform actions on behalf of the MetaMask user.
 
 ## Learn More
 
-To learn more about Delegation Toolkit, take a look at the following resources:
+To learn more about Smart Accounts Kit, take a look at the following resources:
 
-- [ERC-7715 guide](https://docs.metamask.io/delegation-toolkit/guides/erc7715/execute-on-metamask-users-behalf/) - Learn how to use ERC-7715 permissions.
-- [Delegation Toolkit Documentation](https://docs.metamask.io/delegation-toolkit/) - learn about Delegation Toolkit features and API.
+- [Advanced Permissions (ERC-7715) guide](https://docs.metamask.io/smart-accounts-kit/guides/advanced-permissions/execute-on-metamask-users-behalf/) - Learn how to use ERC-7715 permissions.
+- [Smart Accounts Kit Documentation](https://docs.metamask.io/smart-accounts-kit/) - Learn more about Smart Accounts Kit features and API.

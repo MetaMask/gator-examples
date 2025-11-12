@@ -12,8 +12,6 @@ interface IBuilderOptions {
   packageManager: PackageManager;
   web3AuthNetwork?: string;
   template: ITemplate;
-  addLLMRules: boolean;
-  ideType: "Cursor" | "Windsurf" | "Both";
   skipInstall: boolean;
 }
 

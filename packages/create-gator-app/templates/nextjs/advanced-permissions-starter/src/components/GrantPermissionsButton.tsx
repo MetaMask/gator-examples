@@ -1,18 +1,22 @@
 "use client";
 
 import { useState } from "react";
-import { createClient, custom, parseEther } from "viem";
-import { sepolia } from "viem/chains";
-import { erc7715ProviderActions } from "@metamask/delegation-toolkit/experimental";
+import { parseEther } from "viem";
+import { erc7715ProviderActions } from "@metamask/smart-accounts-kit/actions";
 import { useSessionAccount } from "@/providers/SessionAccountProvider";
 import { usePermissions } from "@/providers/PermissionProvider";
 import { Loader2, CheckCircle } from "lucide-react";
 import Button from "@/components/Button";
+import { useChainId, useWalletClient } from "wagmi";
 
 export default function GrantPermissionsButton() {
   const { sessionAccount } = useSessionAccount();
   const { savePermission } = usePermissions();
+  const { data: walletClient } = useWalletClient();
+  const chainId = useChainId();
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isAdjustmentAllowed, setIsAdjustmentAllowed] = useState<boolean>(true);
 
   /**
    * Handles the permission granting process for native token periodic transfer.
@@ -36,40 +40,39 @@ export default function GrantPermissionsButton() {
       throw new Error("Session account not found");
     }
 
+    if (!walletClient) {
+      throw new Error("Wallet client not connected");
+    }
+
     setIsLoading(true);
 
     try {
-      const client = createClient({
-        transport: custom(window.ethereum),
-      }).extend(erc7715ProviderActions());
-
+      const client = walletClient.extend(erc7715ProviderActions());
       const currentTime = Math.floor(Date.now() / 1000);
-      const oneDayInSeconds = 24 * 60 * 60;
-      const expiry = currentTime + oneDayInSeconds;
+      // 30 days in seconds
+      const expiry = currentTime + 24 * 60 * 60 * 30;
 
-      const permissions = await client.requestExecutionPermissions([
-        {
-          chainId: sepolia.id,
-          expiry,
-          signer: {
-            type: "account",
-            data: {
-              address: sessionAccount.address,
-            },
-          },
-          isAdjustmentAllowed: false,
-          permission: {
-            type: "native-token-periodic",
-            data: {
-              // 0.001 ETH in WEI format.
-              periodAmount: parseEther("0.001"),
-              // 1 day in seconds
-              periodDuration: 86400,
-              justification: "Permission to transfer 0.001 ETH every day",
-            },
+      const permissions = await client.requestExecutionPermissions([{
+        chainId,
+        expiry,
+        signer: {
+          type: "account",
+          data: {
+            address: sessionAccount.address,
           },
         },
-      ]);
+        isAdjustmentAllowed,
+        permission: {
+          type: "native-token-periodic",
+          data: {
+            // 0.001 ETH in WEI format.
+            periodAmount: parseEther("0.001"),
+            // 1 day in seconds
+            periodDuration: 86400,
+            justification: "Permission to transfer 0.001 ETH every day",
+          },
+        },
+      }]);
       savePermission(permissions[0]);
     } catch (error) {
       console.error('Error granting permissions:', error);
@@ -80,17 +83,31 @@ export default function GrantPermissionsButton() {
 
   return (
     <div className="space-y-6">
+      <div className="flex items-center space-x-2">
+        <input
+          type="checkbox"
+          id="adjustment-allowed"
+          checked={isAdjustmentAllowed}
+          onChange={(e) => setIsAdjustmentAllowed(e.target.checked)}
+          className="w-4 h-4 rounded border-gray-300"
+        />
+        <label htmlFor="adjustment-allowed" className="text-sm font-medium">
+          Allow adjustment for requested permission.
+        </label>
+      </div>
       <Button
         className="w-full space-x-2"
         onClick={handleGrantPermissions}
         disabled={isLoading}
       >
         <span>
-          {isLoading ? "Granting Permissions..." : "Grant Permissions"}
+          {isLoading && "Granting Permissions..."}
+          {!isLoading && "Grant Permissions"}
         </span>
-        {isLoading ? (
+        {isLoading && (
           <Loader2 className="h-5 w-5 animate-spin" />
-        ) : (
+        )}
+        {!isLoading && (
           <CheckCircle className="h-5 w-5" />
         )}
       </Button>

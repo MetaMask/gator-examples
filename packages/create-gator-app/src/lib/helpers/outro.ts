@@ -15,33 +15,6 @@ export const displayOutro = (options: IBuilderOptions) => {
     );
   }
   
-  if (options.addLLMRules) {
-    console.log(chalk.cyan("\n🤖 LLM Context:"));
-    let ideMessage = "";
-    
-    if (options.ideType === "Cursor") {
-      ideMessage = "Cursor";
-    } else if (options.ideType === "Windsurf") {
-      ideMessage = "Windsurf";
-    } else if (options.ideType === "Both") {
-      ideMessage = "Cursor and Windsurf";
-    }
-    
-    if(options.template.areLLMRulesSupported) {
-      console.log(
-        chalk.white(
-          `  • LLM rules files for ${ideMessage} have been copied from the template for better context`
-        )
-      );
-    } else {
-      console.log(
-        chalk.yellow(
-          `  • LLM rules were not added for ${ideMessage} because they are not available for this template`
-        )
-      );
-    }
-  }
-
   if (options.addWeb3auth) {
     console.log(chalk.cyan("\n🛠 Web3Auth:"));
 
