@@ -1,12 +1,12 @@
 # Gator Examples
 
-A monorepo containing the example applications for building apps with [Metamask Delegation Tookit](https://docs.metamask.io/delegation-toolkit/)
+A monorepo containing the example applications for building apps with [Metamask Smart Accounts Kit](https://docs.metamask.io/smart-accounts-kit/).
 
 ## Overview
 
 This repository contains:
 
-**create-gator-app**: CLI tool to bootstrap new projects with delegation capabilities
+**create-gator-app**: CLI tool to bootstrap new projects for Smart Accounts Kit
 
 ## Repository Structure
 

@@ -1,10 +1,10 @@
 {
   "name": "@metamask/gator-examples",
   "type": "module",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "private": true,
   "license": "(MIT-0 OR Apache-2.0)",
-  "description": "CLI tool to create Gator examples",
+  "description": "CLI tool to create Smart Accounts Kit examples",
   "main": "dist/index.js",
   "repository": {
     "type": "git",
