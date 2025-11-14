@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.4]
+
+### Changed
+
+- Rename ERC-7715 template to Advanced Permissions template
+- Update templates to use `@metamask/smart-accounts-kit`
+
+### Fixed
+
+- Fix Farcaster template dependency issue
+
 ## [0.1.3]
 
 ### Changed
@@ -49,7 +60,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - ERC-7715 starter template for Next.js
 - Support for feature flags
 
-[Unreleased]: https://github.com/MetaMask/gator-examples/compare/create-gator-app@0.1.3...HEAD
+[Unreleased]: https://github.com/MetaMask/gator-examples/compare/create-gator-app@0.1.4...HEAD
+[0.1.4]: https://github.com/MetaMask/gator-examples/compare/create-gator-app@0.1.3...create-gator-app@0.1.4
 [0.1.3]: https://github.com/MetaMask/gator-examples/compare/create-gator-app@0.1.2...create-gator-app@0.1.3
 [0.1.2]: https://github.com/MetaMask/gator-examples/compare/create-gator-app@0.1.1...create-gator-app@0.1.2
 [0.1.1]: https://github.com/MetaMask/gator-examples/compare/create-gator-app@0.1.0...create-gator-app@0.1.1
