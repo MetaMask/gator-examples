@@ -7,13 +7,14 @@ import RedeemPermissionButton from "@/components/RedeemPermissionButton";
 import GrantPermissionsButton from "./GrantPermissionsButton";
 import { useSessionAccount } from "@/providers/SessionAccountProvider";
 import { usePermissions } from "@/providers/PermissionProvider";
-import { useAccount } from "wagmi";
+import { useAccount, useChainId } from "wagmi";
 
 export default function Steps() {
   const [step, setStep] = useState<number>(1);
   const { sessionAccount } = useSessionAccount();
   const { permission } = usePermissions();
-  const { isConnected } = useAccount();
+  const { isConnected, chainId: connectedChainId } = useAccount();
+  const currentChainId = useChainId();
 
   useEffect(() => {
     if (!isConnected) {
@@ -25,12 +26,12 @@ export default function Steps() {
       setStep(4);
     } else if (sessionAccount) {
       setStep(3);
-    } else if (isConnected) {
+    } else if (isConnected && connectedChainId === currentChainId) {
       setStep(2);
     } else {
       setStep(1);
     }
-  }, [sessionAccount, permission, isConnected]);
+  }, [sessionAccount, permission, isConnected, connectedChainId, currentChainId]);
 
   return (
     <div className="max-w-4xl mx-auto p-3 space-y-8">
@@ -83,7 +84,7 @@ export default function Steps() {
               key and save it in the session storage. In production explore all other
               signers supported by the
               <a
-                href="https://docs.metamask.io/smart-accounts-kit/guides/smart-accounts/create-smart-account/"
+                href="https://docs.metamask.io/delegation-toolkit/guides/smart-accounts/create-smart-account/"
                 className="text-blue-500 hover:text-blue-400 underline ml-1"
                 target="_blank"
                 rel="noopener noreferrer"
