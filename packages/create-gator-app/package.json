@@ -1,6 +1,6 @@
 {
   "name": "@metamask/create-gator-app",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "license": "(MIT-0 OR Apache-2.0)",
   "description": "CLI tool to create new MetaMask Smart Accounts Kit application",
   "main": "dist/src/index.js",
