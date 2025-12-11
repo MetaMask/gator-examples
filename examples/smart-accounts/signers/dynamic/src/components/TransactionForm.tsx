@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useMemo } from "react";
 import { parseEther, isAddress, Address } from "viem";
 import SendUserOperationButton from "@/components/SendUserOperationButton";
