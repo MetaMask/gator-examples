@@ -1,3 +1,5 @@
+"use client";
+
 import useSmartAccount from "@/hooks/useSmartAccount";
 import Button from "@/components/Button";
 import { usePimlicoServices } from "@/hooks/usePimlicoServices";

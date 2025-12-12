@@ -1,7 +1,7 @@
+"use client";
 
 import TransactionForm from "@/components/TransactionForm";
 import SmartAccountInfo from "@/components/SmartAccountInfo";
-import useSmartAccount from "@/hooks/useSmartAccount";
 import { useAccount } from "wagmi";
 
 export default function Steps() {
