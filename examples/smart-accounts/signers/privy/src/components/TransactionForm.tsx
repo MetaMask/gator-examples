@@ -63,7 +63,7 @@ export default function TransactionForm() {
         <div className="mt-8">
           <SendUserOperationButton
             to={address as Address}
-            value={parseEther(value)}
+            value={isValidValue ? parseEther(value) : 0n}
             isEnabled={isFormValid}
           />
         </div>

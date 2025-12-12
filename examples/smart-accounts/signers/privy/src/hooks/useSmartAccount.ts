@@ -19,9 +19,10 @@ export default function useSmartAccount(): {
   );
 
   useEffect(() => {
-    if (!address || !walletClient || !publicClient ) return;
-
-    console.log("Creating smart account");
+    if (!address || !walletClient || !publicClient) {
+      setSmartAccount(null);
+      return;
+    }
 
     toMetaMaskSmartAccount({
       client: publicClient,
