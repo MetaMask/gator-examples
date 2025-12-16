@@ -29,9 +29,8 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "15.4.8",
+    "eslint-config-next": "15.4.10",
     "tailwindcss": "^4",
     "typescript": "^5"
-  },
-  "packageManager": "yarn@1.2.2"
+  }
 }
