@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useMemo } from "react";
 import { parseEther, isAddress, Address } from "viem";
 import SendUserOperationButton from "@/components/SendUserOperationButton";
@@ -62,7 +64,7 @@ export default function TransactionForm() {
       <div className="mt-8">
         <SendUserOperationButton
           to={address as Address}
-          value={parseEther(value)}
+          value={isValidValue ? parseEther(value) : 0n}
           isEnabled={isFormValid}
         />
       </div>
