@@ -36,9 +36,9 @@ export const displayOutro = (options: IBuilderOptions) => {
   console.log(chalk.cyan("\n📚 Documentation:"));
   console.log(
     chalk.white(
-      "  • Learn more about Delegation toolkit: https://docs.metamask.io/delegation-toolkit"
+      "  • Learn more about MetaMask Smart Accounts Kit: https://docs.metamask.io/smart-accounts-kit"
     )
   );
   
-  console.log(chalk.green("\n🦊 Happy building with Delegation toolkit! 🦊"));
+  console.log(chalk.green("\n🦊 Happy building with MetaMask Smart Accounts Kit! 🦊"));
 };

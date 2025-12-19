@@ -32,20 +32,20 @@ export function displayIntro(): void {
          **%@@@@@@@@%%%%%%%@@@%%%%%@@@@%+=*                
                           %%%%%%     @                                                    
                                                               
-          MᴇᴛᴀMᴀsᴋ Dᴇʟᴇɢᴀᴛɪᴏɴ Tᴏᴏʟᴋɪᴛ
+          MetaMask Smart Accounts Kit
           
           
     `)
   );
 
-  console.log(chalk.cyan.bold("🦊 About MetaMask Delegation Toolkit:"));
+  console.log(chalk.cyan.bold("🦊 About MetaMask Smart Accounts Kit:"));
   console.log(
     chalk.cyan(`
 ┌─────────────────────────────────────────────────────────────┐
-│ The MetaMask Delegation Toolkit enables developers to       │
-│ create frictionless experiences with granular permission    │
-│ sharing. It provides instant onboarding, new web3           │
-│ experiences, and uninterrupted user journeys.               │
+│ The MetaMask Smart Accounts Kit enables developers to       │
+│ create and interact with MetaMask Smart Accounts, unlocking │
+│ new programmable account behaviors and granular permission  │
+│ sharing.                                                    │
 └─────────────────────────────────────────────────────────────┘`)
   );
 }
