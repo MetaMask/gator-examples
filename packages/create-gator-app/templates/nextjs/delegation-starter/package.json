@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@metamask/smart-accounts-kit": "^0.2.0",
+    "@metamask/smart-accounts-kit": "^0.3.0",
     "@tanstack/react-query": "^5.90.7",
     "next": "15.4.10",
     "permissionless": "^0.2.57",
