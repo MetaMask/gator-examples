@@ -93,11 +93,11 @@ export default function Steps() {
       {step === 2 && (
         <>
           <p className="text-gray-700 dark:text-white/70 max-w-4xl leading-relaxed">
-            The MetaMask smart contract account that grants authority. This will
+            The MetaMask smart account that grants authority. This will
             be deployed on-chain, just in time for redeeming the delegation.
           </p>
 
-          <LearnMoreButton href="https://docs.metamask.io/delegation-toolkit/how-to/create-smart-account" />
+          <LearnMoreButton href="https://docs.metamask.io/smart-accounts-kit/guides/smart-accounts/create-smart-account/" />
           <CreateDelegatorCodeBlock />
           <DeployDelegatorButton />
         </>
@@ -105,12 +105,12 @@ export default function Steps() {
       {step === 3 && (
         <>
           <p className="text-gray-700 dark:text-white/70 max-w-4xl leading-relaxed mb-6">
-            The MetaMask smart contract account that receives the delegation.
+            The MetaMask smart account that receives the delegation.
             Initially this will be counterfactual (not deployed on-chain), until
             it is deployed by submitting a user operation.
           </p>
 
-          <LearnMoreButton href="https://docs.metamask.io/delegation-toolkit/how-to/create-smart-account" />
+          <LearnMoreButton href="https://docs.metamask.io/smart-accounts-kit/guides/smart-accounts/create-smart-account/" />
           <CreateDelegateCodeBlock />
           <CreateDelegateButton />
         </>
@@ -124,20 +124,20 @@ export default function Steps() {
             delegation will be persisted in localStorage.
             <br />
             <br />
-            The delegator must specify sufficient caveats to limit the authority
+            The delegator must specify delegation scopes to limit the authority
             being granted to the delegate.{" "}
             <a
-              href="https://docs.metamask.io/delegation-toolkit/how-to/create-delegation/restrict-delegation"
+              href="https://docs.metamask.io/smart-accounts-kit/guides/delegation/use-delegation-scopes/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-cyan-600 dark:text-cyan-400 hover:text-cyan-700 dark:hover:text-cyan-300 underline italic"
             >
-              See how to restrict the delegation
+              See how to use delegation scopes
             </a>
             .
           </p>
 
-          <LearnMoreButton href="https://docs.metamask.io/delegation-toolkit/how-to/create-delegation" />
+          <LearnMoreButton href="https://docs.metamask.io/smart-accounts-kit/guides/delegation/execute-on-smart-accounts-behalf/#5-create-a-delegation" />
           <CreateDelegationCodeBlock />
           <CreateDelegationButton />
         </>
@@ -169,7 +169,7 @@ export default function Steps() {
             stored in localStorage to execute on behalf of the delegator.
           </p>
 
-          <LearnMoreButton href="https://docs.metamask.io/delegation-toolkit/how-to/redeem-delegation" />
+          <LearnMoreButton href="https://docs.metamask.io/smart-accounts-kit/guides/delegation/execute-on-smart-accounts-behalf/#7-redeem-the-delegation" />
           <RedeemDelegationCodeBlock />
           <RedeemDelegationButton />
         </>
