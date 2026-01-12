@@ -11,10 +11,13 @@
     "url": "https://github.com/MetaMask/gator-examples.git"
   },
   "workspaces": [
+    "examples/*",
     "packages/*"
   ],
   "scripts": {
     "dev": "turbo run dev",
+    "dev:invitation-link-example": "turbo run dev --filter=./examples/invitation-link-example",
+    "build:invitation-link-example": "turbo run build --filter=./examples/invitation-link-example",
     "build": "turbo run build --cache-dir=.turbo --filter=./packages/create-gator-app",
     "lint": "turbo lint",
     "clean": "turbo clean",
