@@ -11,7 +11,7 @@
   "dependencies": {
     "@metamask/smart-accounts-kit": "^0.3.0",
     "@tanstack/react-query": "^5.90.7",
-    "next": "15.4.10",
+    "next": "15.5.10",
     "permissionless": "^0.2.57",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
