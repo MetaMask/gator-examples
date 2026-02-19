@@ -27,7 +27,6 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "15.4.10",
-    "@eslint/eslintrc": "^3"
+    "eslint-config-next": "15.4.10"
   }
 }

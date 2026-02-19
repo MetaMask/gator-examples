@@ -38,7 +38,7 @@ export function displayIntro(): void {
     `),
   );
 
-  console.log(chalk.cyan.bold("🦊 About MetaMask Smart Accounts Kit:"));
+  console.log(chalk.cyan.bold('🦊 About MetaMask Smart Accounts Kit:'));
   console.log(
     chalk.cyan(`
 ┌─────────────────────────────────────────────────────────────┐
@@ -46,6 +46,6 @@ export function displayIntro(): void {
 │ create and interact with MetaMask Smart Accounts, unlocking │
 │ new programmable account behaviors and granular permission  │
 │ sharing.                                                    │
-└─────────────────────────────────────────────────────────────┘`)
+└─────────────────────────────────────────────────────────────┘`),
   );
 }
