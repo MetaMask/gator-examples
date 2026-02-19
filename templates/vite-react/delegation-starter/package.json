@@ -1,0 +1,39 @@
+{
+  "name": "metamask-smart-accounts-delegation-starter",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc -b && vite build",
+    "dev": "vite",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "@metamask/smart-accounts-kit": "^0.3.0",
+    "@tanstack/react-query": "^5.90.7",
+    "permissionless": "^0.2.57",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "viem": "^2.38.6",
+    "wagmi": "^2.19.2"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.21.0",
+    "@tailwindcss/postcss": "^4.1.7",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "@vitejs/plugin-react": "^4.3.4",
+    "eslint": "^9.21.0",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-react-refresh": "^0.4.19",
+    "globals": "^15.15.0",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^4.1.7",
+    "typescript": "~5.7.2",
+    "typescript-eslint": "^8.24.1",
+    "vite": "^6.2.0"
+  }
+}

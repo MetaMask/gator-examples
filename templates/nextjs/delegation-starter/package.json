@@ -1,0 +1,33 @@
+{
+  "name": "metamask-smart-accounts-delegation-starter",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "next build",
+    "dev": "next dev",
+    "lint": "next lint",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@metamask/smart-accounts-kit": "^0.3.0",
+    "@tanstack/react-query": "^5.90.7",
+    "next": "15.4.10",
+    "permissionless": "^0.2.57",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "viem": "^2.38.6",
+    "wagmi": "^2.19.2"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4.1.7",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "15.4.10",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^4.1.7",
+    "typescript": "^5"
+  }
+}
