@@ -30,14 +30,7 @@ export default function RedeemPermissionButton() {
     setLoading(true);
 
     try {
-      const { context, signerMeta } = permission;
-
-      if (!signerMeta) {
-        console.error("No signer meta found");
-        setLoading(false);
-        return;
-      }
-      const { delegationManager } = signerMeta;
+      const { context, delegationManager } = permission;
 
       // Validate required parameters
       if (!context || !delegationManager) {
