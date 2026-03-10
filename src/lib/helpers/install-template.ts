@@ -19,26 +19,31 @@ export const installTemplate = async (
     for (let file of templateFiles) {
       const origFilePath = `${templatePath}/${file}`;
 
-      const stats = fs.statSync(origFilePath);
+      const fd = fs.openSync(origFilePath, 'r');
+      try {
+        const stats = fs.fstatSync(fd);
 
-      if (stats.isFile()) {
-        let contents = fs.readFileSync(origFilePath, 'utf8');
+        if (stats.isFile()) {
+          let contents = fs.readFileSync(fd, 'utf8');
 
-        if (file === '.env.example') {
-          file = '.env';
-          contents = configureENV(contents, builderConfig);
+          if (file === '.env.example') {
+            file = '.env';
+            contents = configureENV(contents, builderConfig);
+          }
+
+          const writePath = `${targetDir}/${file}`;
+          fs.writeFileSync(writePath, contents, 'utf8');
+        } else if (stats.isDirectory()) {
+          fs.mkdirSync(`${targetDir}/${file}`);
+
+          await installTemplate(
+            `${templatePath}/${file}`,
+            `${targetDir}/${file}`,
+            builderConfig,
+          );
         }
-
-        const writePath = `${targetDir}/${file}`;
-        fs.writeFileSync(writePath, contents, 'utf8');
-      } else if (stats.isDirectory()) {
-        fs.mkdirSync(`${targetDir}/${file}`);
-
-        await installTemplate(
-          `${templatePath}/${file}`,
-          `${targetDir}/${file}`,
-          builderConfig,
-        );
+      } finally {
+        fs.closeSync(fd);
       }
     }
 

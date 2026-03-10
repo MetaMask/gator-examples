@@ -2,47 +2,112 @@ name: Build, Lint, and Test
 
 on:
   workflow_call:
-    inputs:
-      NPM_REGISTRY_NAME:
-        type: string
-        default: '@metamask'
-      NPM_REGISTRY_URL:
-        type: string
-        required: false
-        default: 'https://registry.npmjs.org'
-      NPM_CLIENT:
-        type: string
-        default: 'yarn'
 
 jobs:
-  pipeline:
-    name: Build, Lint, and Test
+  prepare:
+    name: Prepare
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [20.x, 22.x]
+        node-version: [20.x, 22.x, 24.x]
     steps:
       - name: Checkout and setup environment
-        uses: MetaMask/action-checkout-and-setup@v1
+        uses: MetaMask/action-checkout-and-setup@v2
         with:
           is-high-risk-environment: false
-          cache-node-modules: ${{ matrix.node-version == '22.x' }}
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
-        with:
           node-version: ${{ matrix.node-version }}
-          cache: 'yarn'
+          cache-node-modules: ${{ matrix.node-version == '24.x' }}
 
-      - name: Install npm dependencies
-        run: yarn install
+  build:
+    name: Build
+    needs: prepare
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [24.x]
+    steps:
+      - name: Checkout and setup environment
+        uses: MetaMask/action-checkout-and-setup@v2
+        with:
+          is-high-risk-environment: false
+          node-version: ${{ matrix.node-version }}
+      - run: yarn build
+      - name: Require clean working directory
+        shell: bash
+        run: |
+          if ! git diff --exit-code; then
+            echo "Working tree dirty at end of job"
+            exit 1
+          fi
 
-      - name: Run build
-        run: yarn build
+  lint:
+    name: Lint
+    needs: prepare
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [24.x]
+    steps:
+      - name: Checkout and setup environment
+        uses: MetaMask/action-checkout-and-setup@v2
+        with:
+          is-high-risk-environment: false
+          node-version: ${{ matrix.node-version }}
+      - run: yarn lint
+      - name: Validate RC changelog
+        if: ${{ startsWith(github.head_ref, 'release/') }}
+        run: yarn lint:changelog --rc
+      - name: Validate changelog
+        if: ${{ !startsWith(github.head_ref, 'release/') }}
+        run: yarn lint:changelog
+      - name: Require clean working directory
+        shell: bash
+        run: |
+          if ! git diff --exit-code; then
+            echo "Working tree dirty at end of job"
+            exit 1
+          fi
 
-      - name: Run lint
-        run: yarn lint
+  test:
+    name: Test
+    needs: prepare
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20.x, 22.x, 24.x]
+    steps:
+      - name: Checkout and setup environment
+        uses: MetaMask/action-checkout-and-setup@v2
+        with:
+          is-high-risk-environment: false
+          node-version: ${{ matrix.node-version }}
+      - run: yarn test
+      - name: Require clean working directory
+        shell: bash
+        run: |
+          if ! git diff --exit-code; then
+            echo "Working tree dirty at end of job"
+            exit 1
+          fi
 
+  compatibility-test:
+    name: Compatibility test
+    needs: prepare
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20.x, 22.x, 24.x]
+    steps:
+      - name: Checkout and setup environment
+        uses: MetaMask/action-checkout-and-setup@v2
+        with:
+          is-high-risk-environment: false
+          node-version: ${{ matrix.node-version }}
+      - name: Install dependencies via Yarn
+        run: rm yarn.lock && YARN_ENABLE_IMMUTABLE_INSTALLS=false yarn
+      - run: yarn test
+      - name: Restore lockfile
+        run: git restore yarn.lock
       - name: Require clean working directory
         shell: bash
         run: |
