@@ -9,14 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.1.5]
 
-### Uncategorized
+### Changed
 
-- migrate from monorepo to module template
-- Revert "Fix: remove signerMeta from the advanced permissions starter"
-- Refactor RedeemPermissionButton to remove signerMeta and streamline permission handling
-- Update templates
-- Update Dynamic example
-- Update templates
+- Update templates to use version v0.2.0 of `@metamask/smart-accounts-kit`.
+
+### Fixed
+
+- Bump Next.js version to resolve [Security Advisory: CVE-2025-66478](https://nextjs.org/blog/CVE-2025-66478).
+- Fix the chain issue in Advanced Permissions template.
 
 ## [0.1.4]
 
@@ -61,12 +61,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.1.0]
 
-### Uncategorized
+### Added
 
 - Initial release
-
-## Added
-
 - Starter templates for the Delegation Toolkit with Next.js and Vite (React)
 - ERC-7715 starter template for Next.js
 - Support for feature flags
