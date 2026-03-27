@@ -9,18 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.1.5]
 
-### Uncategorized
+### Changed
 
-- Revert "Release 0.1.5" ([#93](https://github.com/MetaMask/gator-examples/pull/93))
-- update vitest config
-- update changelog
-- 0.1.5
-- migrate from monorepo to module template
-- Revert "Fix: remove signerMeta from the advanced permissions starter"
-- Refactor RedeemPermissionButton to remove signerMeta and streamline permission handling
-- Update templates
-- Update Dynamic example
-- Update templates
+- Update templates to use version v0.2.0 of `@metamask/smart-accounts-kit`.
+
+### Fixed
+
+- Bump Next.js version to resolve [Security Advisory: CVE-2025-66478](https://nextjs.org/blog/CVE-2025-66478).
+- Fix the chain issue in Advanced Permissions template.
 
 ## [0.1.4]
 
