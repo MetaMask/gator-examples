@@ -9,13 +9,13 @@ Learn more about [ERC-7715](https://eips.ethereum.org/EIPS/eip-7715).
 
 ## Prerequisites
 
-1. **Pimlico API Key**: In this template, we use Pimlico's Bundler and Paymaster services to submit user 
-operations and sponsor transactions, respectively. You can retrieve the required API key 
-from the [Pimlico Dashboard](https://dashboard.pimlico.io/apikeys).
+1. **Pimlico API Key**: In this template, we use Pimlico's Bundler and Paymaster services to submit user
+   operations and sponsor transactions, respectively. You can retrieve the required API key
+   from the [Pimlico Dashboard](https://dashboard.pimlico.io/apikeys).
 
 2. **RPC URL** In this template, you’ll need an RPC URL for the Sepolia chain. You can use a public
-RPC or any provider of your choice, but we recommend using a paid RPC for better reliability 
-and to avoid rate-limiting issues.
+   RPC or any provider of your choice, but we recommend using a paid RPC for better reliability
+   and to avoid rate-limiting issues.
 
 ## Project structure
 

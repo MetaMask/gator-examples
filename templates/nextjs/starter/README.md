@@ -8,13 +8,13 @@ Learn more about [MetaMask Smart Accounts](https://docs.metamask.io/smart-accoun
 
 ## Prerequisites
 
-1. **Pimlico API Key**: In this template, we use Pimlico's Bundler and Paymaster services to submit 
-user operations and sponsor transactions, respectively. You can retrieve the required API key 
-from the [Pimlico Dashboard](https://dashboard.pimlico.io/apikeys).
+1. **Pimlico API Key**: In this template, we use Pimlico's Bundler and Paymaster services to submit
+   user operations and sponsor transactions, respectively. You can retrieve the required API key
+   from the [Pimlico Dashboard](https://dashboard.pimlico.io/apikeys).
 
 2. **Web3Auth Client ID**: During setup, if you used the `-add-web3auth` flag, you’ll need to create a
-new project on the Web3Auth Dashboard and get your Client ID. You can follow 
-the [Web3Auth documentation](https://web3auth.io/docs/dashboard-setup#getting-started).
+   new project on the Web3Auth Dashboard and get your Client ID. You can follow
+   the [Web3Auth documentation](https://web3auth.io/docs/dashboard-setup#getting-started).
 
 ## Project structure
 
