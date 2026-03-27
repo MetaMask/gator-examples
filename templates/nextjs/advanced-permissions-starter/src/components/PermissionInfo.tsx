@@ -27,7 +27,7 @@ export default function PermissionInfo() {
         </div>
         <div className="space-y-4">
           <pre className="bg-gray-200 dark:bg-gray-900 p-3 rounded text-xs max-h-80 text-gray-800 dark:text-gray-300 overflow-x-auto border border-gray-300 dark:border-gray-600">
-            {JSON.stringify(permission, null, 2)}
+            {JSON.stringify(permission, (_, v) => typeof v === "bigint" ? v.toString() : v, 2)}
           </pre>
         </div>
       </div>

@@ -4,12 +4,12 @@ import {
   toMetaMaskSmartAccount,
 } from "@metamask/smart-accounts-kit";
 import { useEffect, useState } from "react";
-import { useAccount, usePublicClient, useWalletClient } from "wagmi";
+import { useConnection, usePublicClient, useWalletClient } from "wagmi";
 
 export default function useDelegatorSmartAccount(): {
   smartAccount: MetaMaskSmartAccount | null;
 } {
-  const { address } = useAccount();
+  const { address } = useConnection();
   const publicClient = usePublicClient();
   const { data: walletClient } = useWalletClient();
   const [smartAccount, setSmartAccount] = useState<MetaMaskSmartAccount | null>(
@@ -18,8 +18,6 @@ export default function useDelegatorSmartAccount(): {
 
   useEffect(() => {
     if (!address || !walletClient || !publicClient) return;
-
-    console.log("Creating smart account");
 
     toMetaMaskSmartAccount({
       client: publicClient,

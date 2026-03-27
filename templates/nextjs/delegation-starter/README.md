@@ -2,19 +2,19 @@
 
 This is a NextJS MetaMask Smart Accounts & Delegation template created with [`@metamask/create-gator-app`](https://npmjs.com/package/@metamask/create-gator-app).
 
-This template is meant to help you bootstrap your own projects with Metamask Smart Acounts. It helps you build smart accounts with account abstraction, and powerful delegation features.
+This template is meant to help you bootstrap your own projects with MetaMask Smart Accounts. It helps you build smart accounts with account abstraction, and powerful delegation features.
 
-Learn more about [Metamask Smart Accounts](https://docs.metamask.io/smart-accounts-kit/concepts/smart-accounts/).
+Learn more about [MetaMask Smart Accounts](https://docs.metamask.io/smart-accounts-kit/concepts/smart-accounts/).
 
 ## Prerequisites
 
-1. **Pimlico API Key**: In this template, you’ll use Pimlico’s
-   bundler and paymaster services to submit user operations and
-   sponsor transactions. You can get your API key from [Pimlico’s dashboard](https://dashboard.pimlico.io/apikeys).
+1. **Pimlico API Key**: In this template, we use Pimlico's Bundler and Paymaster services to submit 
+user operations and sponsor transactions, respectively. You can retrieve the required API key from 
+the [Pimlico Dashboard](https://dashboard.pimlico.io/apikeys).
 
-2. **Web3Auth Client ID**: During setup, if you used the
-   `-add-web3auth` flag, you’ll need to create a new project on the
-   Web3Auth Dashboard and get your Client ID. You can follow the [Web3Auth documentation](https://web3auth.io/docs/dashboard-setup#getting-started).
+2. **Web3Auth Client ID**: During setup, if you used the `-add-web3auth` flag, you’ll need to create a new
+project on the Web3Auth Dashboard and get your Client ID. You can follow 
+the [Web3Auth documentation](https://web3auth.io/docs/dashboard-setup#getting-started).
 
 ## Project structure
 
@@ -33,7 +33,7 @@ template/
 └── tsconfig.json # TypeScript configuration
 ```
 
-## Setup environment variables
+## Setup Environment Variables
 
 Update the following environment variables in the `.env` file at
 the root of your project.
@@ -52,8 +52,7 @@ NEXT_PUBLIC_WEB3AUTH_NETWORK =
 
 ## Getting started
 
-First, start the development server using the package manager
-you chose during setup.
+First, start the development server using the package manager you chose during setup:
 
 ```bash
 npm run dev

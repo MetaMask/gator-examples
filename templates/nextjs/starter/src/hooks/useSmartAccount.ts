@@ -6,12 +6,12 @@ import {
   toMetaMaskSmartAccount,
 } from '@metamask/smart-accounts-kit';
 import { useEffect, useState } from 'react';
-import { useAccount, usePublicClient, useWalletClient } from 'wagmi';
+import { useConnection, usePublicClient, useWalletClient } from 'wagmi';
 
 export default function useSmartAccount(): {
   smartAccount: MetaMaskSmartAccount | null;
 } {
-  const { address } = useAccount();
+  const { address } = useConnection();
   const publicClient = usePublicClient();
   const { data: walletClient } = useWalletClient();
   const [smartAccount, setSmartAccount] = useState<MetaMaskSmartAccount | null>(

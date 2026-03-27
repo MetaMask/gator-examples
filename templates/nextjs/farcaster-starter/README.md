@@ -1,18 +1,16 @@
-# MetaMask Smart Acccounts Kit Farcaster Mini App Template
+# MetaMask Smart Accounts Kit Farcaster Mini App Template
 
-This is a NextJS MetaMask Smart Acccounts Kit Farcaster Mini App template created with [`@metamask/create-gator-app`](https://npmjs.com/package/@metamask/create-gator-app)..
+This is a NextJS MetaMask Smart Accounts Kit Farcaster Mini App template created with [`@metamask/create-gator-app`](https://npmjs.com/package/@metamask/create-gator-app).
 
 This template helps you quickly bootstrap your project with a Farcaster mini app with MetaMask Smart Accounts. It
 provides a foundation for building mini apps that leverage account abstraction and powerful delegation features to
 deliver seamless, secure, and flexible user experiences.
 
-Learn more about [Metamask Smart Accounts](https://docs.metamask.io/smart-accounts-kit/concepts/smart-accounts/).
+Learn more about [MetaMask Smart Accounts](https://docs.metamask.io/smart-accounts-kit/concepts/smart-accounts/).
 
 ## Prerequisites
 
-1. **Pimlico API Key**: In this template, you’ll use Pimlico’s bundler and paymaster
-   services to submit user operations and sponsor transactions. You can get
-   your API key from [Pimlico’s dashboard](https://dashboard.pimlico.io/apikeys).
+**Pimlico API Key**: In this template, we use Pimlico's Bundler and Paymaster services to submit user operations and sponsor transactions, respectively. You can retrieve the required API key from the [Pimlico Dashboard](https://dashboard.pimlico.io/apikeys).
 
 ## Project structure
 
@@ -31,7 +29,7 @@ template/
 └── tsconfig.json # TypeScript configuration
 ```
 
-## Setup environment variables
+## Setup Environment Variables
 
 Update the following environment variables in the `.env` file at the root of your project.
 
@@ -41,7 +39,7 @@ NEXT_PUBLIC_PIMLICO_API_KEY =
 
 ## Getting started
 
-First, start the development server using the package manager you chose during setup.
+First, start the development server using the package manager you chose during setup:
 
 ```bash
 npm run dev
@@ -59,7 +57,7 @@ Farcaster offers a handy [Embed tool](https://farcaster.xyz/~/developers/mini-ap
 works only with hosted URLs. To make your local project accessible remotely, you can create a tunnel using tools like
 ngrok or cloudflared.
 
-In this guide, we’re using cloudflared, but you’re free to choose whichever tool you prefer.
+In this guide, we're using cloudflared, but you're free to choose whichever tool you prefer.
 
 ### Create a tunnel
 

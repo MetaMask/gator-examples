@@ -8,7 +8,7 @@ import { useSessionAccount } from "@/providers/SessionAccountProvider";
 import { usePermissions } from "@/providers/PermissionProvider";
 import { Loader2, CheckCircle, ExternalLink } from "lucide-react";
 import Button from "@/components/Button";
-import { useAccount, usePublicClient } from "wagmi";
+import { useConnection, usePublicClient } from "wagmi";
 
 export default function RedeemPermissionButton() {
   const [loading, setLoading] = useState(false);
@@ -17,7 +17,7 @@ export default function RedeemPermissionButton() {
   const { sessionAccount } = useSessionAccount();
   const { permission } = usePermissions();
   const publicClient = usePublicClient();
-  const { chain } = useAccount();
+  const { chain } = useConnection();
 
   /**
    * Handles the redemption of delegation permissions.
@@ -30,18 +30,11 @@ export default function RedeemPermissionButton() {
     setLoading(true);
 
     try {
-      const { context, signerMeta } = permission;
-
-      if (!signerMeta) {
-        console.error("No signer meta found");
-        setLoading(false);
-        return;
-      }
-      const { delegationManager } = signerMeta;
+      const { context, delegationManager } = permission;
 
       // Validate required parameters
       if (!context || !delegationManager) {
-        console.error("Missing required parameters for delegation");
+        console.error("Missing required parameters for redeem permission");
         setLoading(false);
         return;
       }
@@ -67,7 +60,7 @@ export default function RedeemPermissionButton() {
             to: sessionAccount.address,
             data: '0x',
             value: 1n,
-            permissionsContext: context,
+            permissionContext: context,
             delegationManager,
           },
         ],
@@ -79,8 +72,6 @@ export default function RedeemPermissionButton() {
       });
 
       setTxHash(receipt.transactionHash);
-
-      console.log(receipt);
     } catch (error) {
       console.error(error);
     } finally {

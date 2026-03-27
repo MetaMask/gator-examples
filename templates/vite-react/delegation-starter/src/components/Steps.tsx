@@ -11,7 +11,7 @@ import DeployDelegatorButton from "@/components/DeployDelegatorButton";
 import LearnMoreButton from "@/components/LearnMoreButton";
 import RedeemDelegationButton from "@/components/RedeemDelegationButton";
 import RedeemDelegationCodeBlock from "@/components/RedeemDelegationCodeBlock";
-import { useAccount } from "wagmi";
+import { useConnection } from "wagmi";
 import useDelegateSmartAccount from "@/hooks/useDelegateSmartAccount";
 import useDelegatorSmartAccount from "@/hooks/useDelegatorSmartAccount";
 import { useStepContext } from "@/hooks/useStepContext";
@@ -19,7 +19,7 @@ import useStorageClient from "@/hooks/useStorageClient";
 
 export default function Steps() {
   const { step, changeStep } = useStepContext();
-  const { address } = useAccount();
+  const { address } = useConnection();
   const { smartAccount } = useDelegatorSmartAccount();
   const { smartAccount: delegateSmartAccount } = useDelegateSmartAccount();
   const { getDelegation } = useStorageClient();

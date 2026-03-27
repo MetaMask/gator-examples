@@ -51,17 +51,10 @@ export default function GrantPermissionsButton() {
       const currentTime = Math.floor(Date.now() / 1000);
       // 30 days in seconds
       const expiry = currentTime + 24 * 60 * 60 * 30;
-
       const permissions = await client.requestExecutionPermissions([{
         chainId,
         expiry,
-        signer: {
-          type: "account",
-          data: {
-            address: sessionAccount.address,
-          },
-        },
-        isAdjustmentAllowed,
+        to: sessionAccount.address,
         permission: {
           type: "native-token-periodic",
           data: {
@@ -71,6 +64,7 @@ export default function GrantPermissionsButton() {
             periodDuration: 86400,
             justification: "Permission to transfer 0.001 ETH every day",
           },
+          isAdjustmentAllowed
         },
       }]);
       savePermission(permissions[0]);

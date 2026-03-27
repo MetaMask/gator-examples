@@ -2,7 +2,7 @@
 
 import { Address, formatEther } from "viem";
 import { ExternalLink } from "lucide-react";
-import { useAccount, useBalance } from "wagmi";
+import { useConnection, useBalance } from "wagmi";
 
 interface WalletInfoProps {
   address: Address;
@@ -11,7 +11,7 @@ interface WalletInfoProps {
 
 export default function WalletInfo({ address, label }: WalletInfoProps) {
   const { data: balance, isLoading } = useBalance({ address });
-  const { chain } = useAccount();
+  const { chain } = useConnection();
 
   const viewOnEtherscan = () => {
     window.open(`${chain?.blockExplorers?.default?.url}/address/${address}`, "_blank");
