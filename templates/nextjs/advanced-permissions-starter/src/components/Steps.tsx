@@ -7,13 +7,13 @@ import RedeemPermissionButton from "@/components/RedeemPermissionButton";
 import GrantPermissionsButton from "./GrantPermissionsButton";
 import { useSessionAccount } from "@/providers/SessionAccountProvider";
 import { usePermissions } from "@/providers/PermissionProvider";
-import { useAccount, useChainId } from "wagmi";
+import { useConnection, useChainId } from "wagmi";
 
 export default function Steps() {
   const [step, setStep] = useState<number>(1);
   const { sessionAccount } = useSessionAccount();
   const { permission } = usePermissions();
-  const { isConnected, chainId: connectedChainId } = useAccount();
+  const { isConnected, chainId: connectedChainId } = useConnection();
   const currentChainId = useChainId();
 
   useEffect(() => {

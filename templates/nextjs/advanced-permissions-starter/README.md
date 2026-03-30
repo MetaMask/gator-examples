@@ -1,6 +1,6 @@
 # MetaMask Advanced Permissions (ERC-7715) Starter
 
-This is a NextJS MetaMask Advanced Permissions (ERC-7715) starter created with [@metamask/create-gator-app](https://www.npmjs.com/package/@metamask/create-gator-app).
+This is a NextJS MetaMask Advanced Permissions (ERC-7715) starter created with [`@metamask/create-gator-app`](https://www.npmjs.com/package/@metamask/create-gator-app).
 
 This template is meant to help you bootstrap your own projects with [Advanced Permissions (ERC-7715)](https://docs.metamask.io/smart-accounts-kit/guides/advanced-permissions/execute-on-metamask-users-behalf/). It helps you build
 a dApp with ERC-7715 support to request permissions and redeem them.
@@ -9,13 +9,13 @@ Learn more about [ERC-7715](https://eips.ethereum.org/EIPS/eip-7715).
 
 ## Prerequisites
 
-1. **Pimlico API Key**: In this template, you’ll use Pimlico’s
-   bundler and paymaster services to submit user operations and
-   sponsor transactions. You can get your API key from [Pimlico’s dashboard](https://dashboard.pimlico.io/apikeys).
+1. **Pimlico API Key**: In this template, we use Pimlico's Bundler and Paymaster services to submit user
+   operations and sponsor transactions, respectively. You can retrieve the required API key
+   from the [Pimlico Dashboard](https://dashboard.pimlico.io/apikeys).
 
 2. **RPC URL** In this template, you’ll need an RPC URL for the Sepolia chain. You can use a public
-   RPC or any provider of your choice, but we recommend using a paid RPC for better reliability and to
-   avoid rate-limiting issues.
+   RPC or any provider of your choice, but we recommend using a paid RPC for better reliability
+   and to avoid rate-limiting issues.
 
 ## Project structure
 
@@ -63,7 +63,7 @@ NEXT_PUBLIC_RPC_URL =
 
 ## Getting started
 
-First, start the development server using the package manager you chose during setup.
+First, start the development server:
 
 ```bash
 npm run dev
@@ -87,5 +87,5 @@ This template demonstrates a complete Advanced Permissions (ERC-7715) flow:
 
 To learn more about Smart Accounts Kit, take a look at the following resources:
 
-- [Advanced Permissions (ERC-7715) guide](https://docs.metamask.io/smart-accounts-kit/guides/advanced-permissions/execute-on-metamask-users-behalf/) - Learn how to use ERC-7715 permissions.
+- [Advanced Permissions (ERC-7715) guide](https://docs.metamask.io/smart-accounts-kit/guides/advanced-permissions/execute-on-metamask-users-behalf/) - Learn how to use MetaMask Advanced Permissions.
 - [Smart Accounts Kit Documentation](https://docs.metamask.io/smart-accounts-kit/) - Learn more about Smart Accounts Kit features and API.

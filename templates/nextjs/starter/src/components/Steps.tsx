@@ -1,9 +1,9 @@
 import ConnectButton from "@/components/ConnectButton";
 import TransactionForm from "@/components/TransactionForm";
-import { useAccount } from "wagmi";
+import { useConnection } from "wagmi";
 
 export default function Steps() {
-  const { isConnected } = useAccount();
+  const { isConnected } = useConnection();
 
   if (!isConnected) {
     return (

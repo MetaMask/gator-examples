@@ -2,11 +2,11 @@
 
 import { useSessionAccount } from "@/providers/SessionAccountProvider";
 import WalletInfo from "@/components/WalletInfo";
-import { useAccount } from "wagmi";
+import { useConnection } from "wagmi";
 
 export default function WalletInfoContainer() {
   const { sessionAccount } = useSessionAccount();
-  const { address } = useAccount();
+  const { address } = useConnection();
 
   return (
     <div className="w-full max-w-4xl mx-auto p-3 space-y-2">

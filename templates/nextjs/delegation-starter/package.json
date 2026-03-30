@@ -9,14 +9,15 @@
     "start": "next start"
   },
   "dependencies": {
-    "@metamask/smart-accounts-kit": "^0.3.0",
-    "@tanstack/react-query": "^5.90.7",
+    "@metamask/sdk": "~0.33.1",
+    "@metamask/smart-accounts-kit": "^1.0.0",
+    "@tanstack/react-query": "^5.90.21",
     "next": "15.4.10",
-    "permissionless": "^0.2.57",
+    "permissionless": "^0.3.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "viem": "^2.38.6",
-    "wagmi": "^2.19.2"
+    "viem": "^2.46.1",
+    "wagmi": "3.4.4"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

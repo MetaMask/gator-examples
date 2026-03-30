@@ -11,14 +11,15 @@
   "dependencies": {
     "@farcaster/miniapp-sdk": "^0.2.1",
     "@farcaster/miniapp-wagmi-connector": "^1.1.0",
-    "@metamask/smart-accounts-kit": "^0.3.0",
-    "@tanstack/react-query": "^5.76.1",
+    "@metamask/sdk": "~0.33.1",
+    "@metamask/smart-accounts-kit": "^1.0.0",
+    "@tanstack/react-query": "^5.90.21",
     "next": "15.4.10",
-    "permissionless": "^0.2.57",
+    "permissionless": "^0.3.4",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "viem": "^2.38.4",
-    "wagmi": "^2.18.2"
+    "viem": "^2.46.1",
+    "wagmi": "3.4.4"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

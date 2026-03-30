@@ -1,15 +1,16 @@
 "use client";
 
-import { useConnect } from "wagmi";
+import { useConnect, useConnectors } from "wagmi";
 import Button from "@/components/Button";
 
 export default function ConnectButton() {
-  const { connect, connectors } = useConnect();
+  const connect = useConnect();
+  const connectors = useConnectors();
 
   return (
     <div className="flex gap-2">
       {connectors.map((connector) => (
-        <Button onClick={() => connect({ connector })} key={connector.id}>
+        <Button onClick={() => connect.mutate({ connector })} key={connector.id}>
           Connect with {connector.name}
         </Button>
       ))}

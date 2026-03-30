@@ -17,10 +17,8 @@ export default function useDelegateSmartAccount() {
   );
 
   useEffect(() => {
-    console.log(delegateWallet);
     if (delegateWallet === "0x" || !publicClient) return;
 
-    console.log("Creating smart account");
     const account = privateKeyToAccount(delegateWallet as `0x${string}`);
 
     toMetaMaskSmartAccount({

@@ -48,8 +48,6 @@ export default function RedeemDelegationButton() {
       });
 
       setTransactionHash(receipt.transactionHash);
-
-      console.log(receipt);
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
       console.error(`Error redeeming delegation: ${errorMessage}`);
