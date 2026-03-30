@@ -9,9 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.2.0]
 
-### Uncategorized
+### Changed
 
-- update template deps
+- Update templates to use v1.0.0 of `@metamask/smart-accounts-kit`.
+- Migrate Wagmi dependencies to v3.x.x. 
 
 ## [0.1.5]
 
