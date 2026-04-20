@@ -28,7 +28,7 @@ jobs:
           fetch-depth: 0
           ref: ${{ github.event.inputs.base-branch }}
 
-      - uses: MetaMask/action-create-release-pr@v4
+      - uses: MetaMask/action-create-release-pr@v5
         with:
           release-type: ${{ github.event.inputs.release-type }}
           release-version: ${{ github.event.inputs.release-version }}
