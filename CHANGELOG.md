@@ -9,9 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.3.0]
 
-### Uncategorized
+### Changed
 
-- update the smart accounts kit version
+- Update the Smart Accounts Kit version.
 
 ## [0.2.0]
 
