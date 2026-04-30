@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.0]
+
+### Uncategorized
+
+- update the smart accounts kit version
+
 ## [0.2.0]
 
 ### Changed
@@ -78,11 +84,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - ERC-7715 starter template for Next.js
 - Support for feature flags
 
-[Unreleased]: https://github.com/MetaMask/gator-examples/compare/v0.2.0...HEAD
-[0.2.0]: https://github.com/MetaMask/gator-examples/compare/v0.1.5...v0.2.0
-[0.1.5]: https://github.com/MetaMask/gator-examples/compare/v0.1.4...v0.1.5
-[0.1.4]: https://github.com/MetaMask/gator-examples/compare/v0.1.3...v0.1.4
-[0.1.3]: https://github.com/MetaMask/gator-examples/compare/v0.1.2...v0.1.3
-[0.1.2]: https://github.com/MetaMask/gator-examples/compare/v0.1.1...v0.1.2
-[0.1.1]: https://github.com/MetaMask/gator-examples/compare/v0.1.0...v0.1.1
-[0.1.0]: https://github.com/MetaMask/gator-examples/releases/tag/v0.1.0
+[Unreleased]: https://github.com/MetaMask/create-gator-app/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/MetaMask/create-gator-app/compare/v0.2.0...v0.3.0
+[0.2.0]: https://github.com/MetaMask/create-gator-app/compare/v0.1.5...v0.2.0
+[0.1.5]: https://github.com/MetaMask/create-gator-app/compare/v0.1.4...v0.1.5
+[0.1.4]: https://github.com/MetaMask/create-gator-app/compare/v0.1.3...v0.1.4
+[0.1.3]: https://github.com/MetaMask/create-gator-app/compare/v0.1.2...v0.1.3
+[0.1.2]: https://github.com/MetaMask/create-gator-app/compare/v0.1.1...v0.1.2
+[0.1.1]: https://github.com/MetaMask/create-gator-app/compare/v0.1.0...v0.1.1
+[0.1.0]: https://github.com/MetaMask/create-gator-app/releases/tag/v0.1.0
