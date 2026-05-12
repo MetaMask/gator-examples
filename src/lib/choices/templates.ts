@@ -53,7 +53,8 @@ const NODE_TEMPLATE_OPTIONS: ITemplate[] = [
   {
     name: 'x402 Server (ERC-7710)',
     value: 'x402-server',
-    description: 'A Node.js Express server with x402 payment middleware and ERC-7710 support',
+    description:
+      'A Node.js Express server with x402 payment middleware and ERC-7710 support',
     framework: 'node',
     isWeb3AuthSupported: false,
   },
