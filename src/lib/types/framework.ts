@@ -1,1 +1,1 @@
-export type Framework = 'nextjs' | 'vite-react';
+export type Framework = 'nextjs' | 'vite-react' | 'node';

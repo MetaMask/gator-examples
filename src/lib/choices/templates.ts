@@ -49,7 +49,18 @@ const VITE_REACT_TEMPLATE_OPTIONS: ITemplate[] = [
   },
 ];
 
+const NODE_TEMPLATE_OPTIONS: ITemplate[] = [
+  {
+    name: 'x402 Server (ERC-7710)',
+    value: 'x402-server',
+    description: 'A Node.js Express server with x402 payment middleware and ERC-7710 support',
+    framework: 'node',
+    isWeb3AuthSupported: false,
+  },
+];
+
 export const TEMPLATE_OPTIONS: ITemplate[] = [
   ...NEXTJS_TEMPLATE_OPTIONS,
   ...VITE_REACT_TEMPLATE_OPTIONS,
+  ...NODE_TEMPLATE_OPTIONS,
 ];
