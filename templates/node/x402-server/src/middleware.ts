@@ -1,4 +1,5 @@
 import type { Request, Response, NextFunction } from "express";
+import type { Address } from "viem";
 import {
   USDC_ADDRESS,
   NETWORK_ID,
@@ -16,42 +17,41 @@ export interface PaymentMiddlewareOptions {
   amount: string;
   description?: string;
   mimeType?: string;
+  getFacilitatorAddress?: () => Promise<Address | null>;
 }
 
-async function verifyPayment(
+async function facilitatorPost<T>(endpoint: string, body: object): Promise<T> {
+  const res = await fetch(`${FACILITATOR_URL}/platform/v2/x402/${endpoint}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+  if (!res.ok) {
+    const error = await res
+      .json()
+      .catch(() => ({ error: `HTTP ${res.status}` }));
+    throw new Error(error.error || `Facilitator ${endpoint} failed: ${res.status}`);
+  }
+  return res.json();
+}
+
+function verifyPayment(
   paymentPayload: PaymentPayload,
   paymentRequirements: PaymentRequirements
 ): Promise<VerifyResult> {
-  const res = await fetch(`${FACILITATOR_URL}/platform/v2/x402/verify`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ paymentPayload, paymentRequirements }),
-  });
-  if (!res.ok) {
-    const error = await res.json().catch(() => ({ error: `HTTP ${res.status}` }));
-    throw new Error(error.error || `Facilitator verify failed: ${res.status}`);
-  }
-  return res.json();
+  return facilitatorPost("verify", { paymentPayload, paymentRequirements });
 }
 
-async function settlePayment(
+function settlePayment(
   paymentPayload: PaymentPayload,
   paymentRequirements: PaymentRequirements
 ): Promise<SettleResult> {
-  const res = await fetch(`${FACILITATOR_URL}/platform/v2/x402/settle`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ paymentPayload, paymentRequirements }),
-  });
-  if (!res.ok) {
-    const error = await res.json().catch(() => ({ error: `HTTP ${res.status}` }));
-    throw new Error(error.error || `Facilitator settle failed: ${res.status}`);
-  }
-  return res.json();
+  return facilitatorPost("settle", { paymentPayload, paymentRequirements });
 }
 
 export function createPaymentMiddleware(options: PaymentMiddlewareOptions) {
   return async (req: Request, res: Response, next: NextFunction) => {
+    const facilitatorAddress = await options.getFacilitatorAddress?.();
     const paymentRequirements: PaymentRequirements = {
       scheme: "exact",
       network: NETWORK_ID,
@@ -61,6 +61,7 @@ export function createPaymentMiddleware(options: PaymentMiddlewareOptions) {
       maxTimeoutSeconds: 60,
       extra: {
         assetTransferMethod: "erc7710",
+        ...(facilitatorAddress ? { facilitators: [facilitatorAddress] } : {}),
       },
     };
 
@@ -74,7 +75,7 @@ export function createPaymentMiddleware(options: PaymentMiddlewareOptions) {
         accepts: [paymentRequirements],
         description:
           options.description || "Payment required to access this resource",
-        mimeType: options.mimeType || "text/plain",
+        mimeType: options.mimeType || "application/json",
       };
 
       const encoded = Buffer.from(JSON.stringify(paymentRequired)).toString(
@@ -98,23 +99,6 @@ export function createPaymentMiddleware(options: PaymentMiddlewareOptions) {
       return;
     }
 
-    // Fail fast before hitting the facilitator
-    if (
-      paymentPayload.accepted.payTo.toLowerCase() !==
-      PAY_TO_ADDRESS.toLowerCase()
-    ) {
-      res.status(402).json({ error: "Payment payTo address mismatch" });
-      return;
-    }
-    if (paymentPayload.accepted.network !== NETWORK_ID) {
-      res.status(402).json({ error: "Payment network mismatch" });
-      return;
-    }
-    if (paymentPayload.accepted.extra?.assetTransferMethod !== "erc7710") {
-      res.status(402).json({ error: "Only erc7710 asset transfer method is supported" });
-      return;
-    }
-
     let verifyResult: VerifyResult;
     try {
       verifyResult = await verifyPayment(paymentPayload, paymentRequirements);
@@ -133,11 +117,9 @@ export function createPaymentMiddleware(options: PaymentMiddlewareOptions) {
       return;
     }
 
-    res.locals.paymentPayload = paymentPayload;
-    res.locals.paymentRequirements = paymentRequirements;
-
-    function attachPaymentResponse() {
-      settlePayment(res.locals.paymentPayload, res.locals.paymentRequirements)
+    const originalJson = res.json.bind(res);
+    res.json = function (body: unknown) {
+      settlePayment(paymentPayload, paymentRequirements)
         .then((settleResult) => {
           console.log(
             "[x402] Settlement:",
@@ -160,20 +142,8 @@ export function createPaymentMiddleware(options: PaymentMiddlewareOptions) {
         JSON.stringify(paymentResponse)
       ).toString("base64");
       res.setHeader("PAYMENT-RESPONSE", encodedResponse);
-    }
 
-    const originalJson = res.json.bind(res);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    res.json = function (body?: any) {
-      attachPaymentResponse();
       return originalJson(body);
-    };
-
-    const originalSend = res.send.bind(res);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    res.send = function (body?: any) {
-      attachPaymentResponse();
-      return originalSend(body);
     };
 
     next();

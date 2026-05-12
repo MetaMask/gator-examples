@@ -11,9 +11,6 @@ if (!PAY_TO_ADDRESS) {
   throw new Error("PAY_TO_ADDRESS environment variable is required");
 }
 
-export const FACILITATOR_URL = process.env.FACILITATOR_URL as string;
-if (!FACILITATOR_URL) {
-  throw new Error("FACILITATOR_URL environment variable is required");
-}
+export const FACILITATOR_URL = process.env.FACILITATOR_URL!;
 
-export const PORT = parseInt(process.env.PORT || "4402", 10);
+export const PORT = 4402;
