@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Update the Smart Accounts Kit version.
+- Update the Smart Accounts Kit version [#99](https://github.com/MetaMask/create-gator-app/pull/99)
 
 ## [0.2.0]
 
