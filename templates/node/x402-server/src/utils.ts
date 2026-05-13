@@ -30,18 +30,10 @@ export async function getFacilitatorAddresses(): Promise<Address[]> {
   }
 
   const data = (await res.json()) as SupportedResponse;
-  const signers = data.signers?.[NETWORK_ID] ?? data.signers?.["eip155:*"] ?? [];
+  const signers = data.signers?.["eip155:*"] ?? [];
   if (!signers.length) {
     throw new Error("Facilitator signers not found in /supported response");
   }
 
   return [...new Set(signers)];
-}
-
-export async function getFacilitatorAddress(): Promise<Address> {
-  const [address] = await getFacilitatorAddresses();
-  if (!address) {
-    throw new Error("Facilitator address not found in /supported response");
-  }
-  return address;
 }
