@@ -1,10 +1,8 @@
 import type { Request, Response, NextFunction } from "express";
-import type { Address } from "viem";
 import {
   USDC_ADDRESS,
   NETWORK_ID,
   PAY_TO_ADDRESS,
-  FACILITATOR_URL,
 } from "./config.js";
 import type {
   PaymentPayload,
@@ -12,27 +10,12 @@ import type {
   VerifyResult,
   SettleResult,
 } from "./types.js";
+import { facilitatorPost, getFacilitatorAddresses } from "./utils.js";
 
 export interface PaymentMiddlewareOptions {
   amount: string;
   description?: string;
   mimeType?: string;
-  getFacilitatorAddress?: () => Promise<Address | null>;
-}
-
-async function facilitatorPost<T>(endpoint: string, body: object): Promise<T> {
-  const res = await fetch(`${FACILITATOR_URL}/platform/v2/x402/${endpoint}`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(body),
-  });
-  if (!res.ok) {
-    const error = await res
-      .json()
-      .catch(() => ({ error: `HTTP ${res.status}` }));
-    throw new Error(error.error || `Facilitator ${endpoint} failed: ${res.status}`);
-  }
-  return res.json();
 }
 
 function verifyPayment(
@@ -51,7 +34,7 @@ function settlePayment(
 
 export function createPaymentMiddleware(options: PaymentMiddlewareOptions) {
   return async (req: Request, res: Response, next: NextFunction) => {
-    const facilitatorAddress = await options.getFacilitatorAddress?.();
+    const facilitatorAddresses = await getFacilitatorAddresses().catch(() => []);
     const paymentRequirements: PaymentRequirements = {
       scheme: "exact",
       network: NETWORK_ID,
@@ -61,7 +44,9 @@ export function createPaymentMiddleware(options: PaymentMiddlewareOptions) {
       maxTimeoutSeconds: 60,
       extra: {
         assetTransferMethod: "erc7710",
-        ...(facilitatorAddress ? { facilitators: [facilitatorAddress] } : {}),
+        // The facilitator addresses are used by clients to create the
+        // ERC-7710 payment payload.
+        facilitators: facilitatorAddresses,
       },
     };
 
@@ -117,34 +102,35 @@ export function createPaymentMiddleware(options: PaymentMiddlewareOptions) {
       return;
     }
 
-    const originalJson = res.json.bind(res);
-    res.json = function (body: unknown) {
-      settlePayment(paymentPayload, paymentRequirements)
-        .then((settleResult) => {
-          console.log(
-            "[x402] Settlement:",
-            settleResult.success
-              ? `tx ${settleResult.transaction}`
-              : `failed: ${settleResult.errorMessage}`
-          );
-        })
-        .catch((err) => {
-          console.error("[x402] Settlement error:", err);
-        });
+    let settleResult: SettleResult;
+    try {
+      settleResult = await settlePayment(paymentPayload, paymentRequirements);
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "Settlement failed";
+      res.status(502).json({ error: message });
+      return;
+    }
 
-      const paymentResponse = {
-        x402Version: 2,
-        scheme: paymentRequirements.scheme,
-        network: NETWORK_ID,
-        payer: verifyResult.payer,
-      };
-      const encodedResponse = Buffer.from(
-        JSON.stringify(paymentResponse)
-      ).toString("base64");
-      res.setHeader("PAYMENT-RESPONSE", encodedResponse);
+    if (!settleResult.success) {
+      res.status(402).json({
+        error: "Payment settlement failed",
+        reason: settleResult.errorReason,
+        message: settleResult.errorMessage,
+      });
+      return;
+    }
 
-      return originalJson(body);
+    console.log("[x402] Settlement:", `tx ${settleResult.transaction}`);
+    const paymentResponse = {
+      x402Version: 2,
+      scheme: paymentRequirements.scheme,
+      network: NETWORK_ID,
+      payer: verifyResult.payer,
     };
+    const encodedResponse = Buffer.from(JSON.stringify(paymentResponse)).toString(
+      "base64"
+    );
+    res.setHeader("PAYMENT-RESPONSE", encodedResponse);
 
     next();
   };

@@ -11,6 +11,7 @@ export interface PaymentPayload {
     maxTimeoutSeconds: number;
     extra: {
       assetTransferMethod: string;
+      facilitators?: Address[];
       [key: string]: unknown;
     };
   };
@@ -30,6 +31,7 @@ export interface PaymentRequirements {
   maxTimeoutSeconds: number;
   extra: {
     assetTransferMethod: string;
+    facilitators?: Address[];
     [key: string]: unknown;
   };
 }
