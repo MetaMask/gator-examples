@@ -1,5 +1,5 @@
 import type { Address } from "viem";
-import { FACILITATOR_URL, NETWORK_ID } from "./config.js";
+import { FACILITATOR_URL } from "./config.js";
 
 interface SupportedResponse {
   signers?: Record<string, Address[] | undefined>;
