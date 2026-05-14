@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@metamask/sdk": "~0.33.1",
-    "@metamask/smart-accounts-kit": "1.5",
+    "@metamask/smart-accounts-kit": "^1.5.0",
     "@tanstack/react-query": "^5.90.21",
     "next": "15.4.10",
     "permissionless": "^0.3.4",
