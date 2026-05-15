@@ -22,10 +22,10 @@ export class Erc7710ExactEvmScheme extends ExactEvmScheme {
     );
 
     const supported = await this.facilitatorClient.getSupported();
-    const facilitators =
-      supported.signers[paymentRequirements.network] ??
-      supported.signers["eip155:*"] ??
-      [];
+    const facilitators = [
+      ...(supported.signers[paymentRequirements.network] ?? []),
+      ...(supported.signers["eip155:*"] ?? [])
+    ];
 
     return {
       ...enhanced,
