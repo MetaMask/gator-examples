@@ -9,12 +9,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.4.0]
 
-### Uncategorized
-
-- 0.4.0
-- add x402 server template
-- Update smart accounts kit version
-
 ### Added
 
 - Add x402 server template [#103](https://github.com/MetaMask/create-gator-app/pull/103)
