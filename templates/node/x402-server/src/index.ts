@@ -3,7 +3,7 @@ import express, { type Request, type Response } from "express";
 import cors from "cors";
 import { paymentMiddleware } from "@x402/express";
 import { x402ResourceServer, HTTPFacilitatorClient } from "@x402/core/server";
-import { Erc7710EvmScheme } from "./scheme.js";
+import { Erc7710ExactEvmScheme } from "./scheme.js";
 
 config();
 
@@ -45,7 +45,7 @@ app.use(
     },
     new x402ResourceServer(facilitatorClient).register(
       NETWORK_ID,
-      new Erc7710EvmScheme(facilitatorClient),
+      new Erc7710ExactEvmScheme(facilitatorClient),
     ),
   ),
 );
