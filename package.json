@@ -2,13 +2,13 @@
   "name": "@metamask/create-gator-app",
   "version": "0.4.0",
   "description": "CLI tool to create new MetaMask Smart Accounts Kit application",
-  "homepage": "https://github.com/MetaMask/gator-examples#readme",
+  "homepage": "https://github.com/MetaMask/create-gator-app#readme",
   "bugs": {
-    "url": "https://github.com/MetaMask/gator-examples/issues"
+    "url": "https://github.com/MetaMask/create-gator-app/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/MetaMask/gator-examples.git"
+    "url": "https://github.com/MetaMask/create-gator-app.git"
   },
   "license": "(MIT-0 OR Apache-2.0)",
   "sideEffects": false,
