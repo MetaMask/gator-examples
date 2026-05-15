@@ -10,7 +10,7 @@ config();
 const NETWORK_ID = "eip155:8453";
 const PORT = 4402;
 
-const payToAddress = process.env.PAY_TO_ADDRESS as `0x${string}`;
+const payToAddress = process.env.PAY_TO_ADDRESS as string;
 if (!payToAddress) {
   console.error("PAY_TO_ADDRESS environment variable is required");
   process.exit(1);
