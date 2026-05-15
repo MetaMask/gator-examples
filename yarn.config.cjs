@@ -230,7 +230,7 @@ module.exports = defineConfig({
   async constraints({ Yarn }) {
     const workspace = Yarn.workspace();
     const workspaceName = getWorkspaceName(workspace);
-    const workspaceRepository = `${BASE_URL}gator-examples`;
+    const workspaceRepository = `${BASE_URL}create-gator-app`;
 
     expectWorkspaceField(workspace, 'name', `@metamask/${workspaceName}`);
     expectWorkspaceField(workspace, 'version');
